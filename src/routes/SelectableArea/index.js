@@ -2,6 +2,7 @@ import React from 'react'
 import * as scale from 'd3-scale'
 import * as arr from 'd3-array'
 import * as shape from 'd3-shape'
+import * as select from 'd3-selection'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
@@ -17,8 +18,7 @@ const SelectableArea = () => {
 	//connect the brush to the g wrapper?!
 	React.useEffect(() => {
 		if(brushRef.current){
-			console.log('brushRef.current')
-			console.log(brushRef.current)
+			let brushBox = select.select(brushRef)
 		}
 	}, [srcData])
 
