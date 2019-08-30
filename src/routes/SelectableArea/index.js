@@ -1,6 +1,7 @@
 import React from 'react'
 import * as scale from 'd3-scale'
 import * as arr from 'd3-array'
+import * as shape from 'd3-shape'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
@@ -21,7 +22,13 @@ const SelectableArea = () => {
 
 	let yScale = scale.scaleLinear()
 		.domain([0, arr.max(srcData, d => d.y)])
-		.range([100, 0])	
+		.range([100, 0])
+
+	//build areaFn
+	let areaFn = shape.area()
+		.x((d, i) => xScale(i + 1))
+		.y0(100)
+		.y1((d) => yScale(d.y))
 
 	return(
 		<svg id="selectable" style={{
@@ -30,6 +37,9 @@ const SelectableArea = () => {
 			border: '1px solid green'
 		}}>
 			<g className="gWrapper">
+				<path d={areaFn(srcData)}
+					fill={'#ccc'}
+				/>
 			</g>
 		</svg>
 	)
