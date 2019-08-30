@@ -1,6 +1,17 @@
 import React from 'react'
 
 const SelectableArea = () => {
+	let [srcData, setSrcData] = React.useState(null)
+	React.useEffect(() => {
+		fetch('../../data/areaData.json')
+			.then(res => res.json())
+			.then(setSrcData)
+	}, [])
+	
+	if(!srcData){
+		return (<p>Loading data...</p>)
+	}
+	
 	return(
 		<div id="selectable" style={{
 			width: '700px',
