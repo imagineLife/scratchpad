@@ -18,7 +18,10 @@ const SelectableArea = () => {
 			width: '700px',
 			height: '100px',
 			border: '1px solid green'
-		}}></svg>
+		}}>
+			<g className="gWrapper">
+			</g>
+		</svg>
 	)
 }
 
