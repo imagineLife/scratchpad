@@ -1,4 +1,5 @@
 import React from 'react'
+import * as scale from 'd3-scale'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
@@ -12,6 +13,10 @@ const SelectableArea = () => {
 		return (<p>Loading data...</p>)
 	}
 	
+	//Set Scales
+	let xScale = scale.scaleLinear()
+		.domain([1, srcData.length])
+		.range([0, 700])
 
 	return(
 		<svg id="selectable" style={{
