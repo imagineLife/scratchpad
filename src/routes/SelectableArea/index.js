@@ -5,12 +5,23 @@ import * as shape from 'd3-shape'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
+	let brushRef = React.useRef()
+	
+	//load the data
 	React.useEffect(() => {
 		fetch('../../data/areaData.json')
 			.then(res => res.json())
 			.then(setSrcData)
 	}, [])
 	
+	//connect the brush to the g wrapper?!
+	React.useEffect(() => {
+		if(brushRef.current){
+			console.log('brushRef.current')
+			console.log(brushRef.current)
+		}
+	}, [srcData])
+
 	if(!srcData){
 		return (<p>Loading data...</p>)
 	}
@@ -36,10 +47,11 @@ const SelectableArea = () => {
 			height: '100px',
 			border: '1px solid green'
 		}}>
-			<g className="gWrapper">
+			<g className="g-wrapper">
 				<path d={areaFn(srcData)}
 					fill={'#ccc'}
 				/>
+				<g className="brush-g-window" ref={brushRef}></g>
 			</g>
 		</svg>
 	)
