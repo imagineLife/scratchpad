@@ -1,5 +1,6 @@
 import React from 'react'
 import * as scale from 'd3-scale'
+import * as arr from 'd3-array'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
@@ -17,6 +18,10 @@ const SelectableArea = () => {
 	let xScale = scale.scaleLinear()
 		.domain([1, srcData.length])
 		.range([0, 700])
+
+	let yScale = scale.scaleLinear()
+		.domain([0, arr.max(srcData, d => d.y)])
+		.range([100, 0])	
 
 	return(
 		<svg id="selectable" style={{
