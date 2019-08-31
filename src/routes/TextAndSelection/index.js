@@ -1,5 +1,6 @@
 import React from 'react'
 import WordList from '../../components/WordList'
+import TextDisplay from '../../components/TextDisplay'
 
 const TextAndSelection = () => {
 	
@@ -24,7 +25,11 @@ const TextAndSelection = () => {
 	return(
 		<React.Fragment>
 			<h2>Text And Selection</h2>
-			<WordList words={words} selectWord={selectWord} selectedWord={word}/>
+			<WordList 
+				words={words} 
+				selectWord={selectWord} 
+				selectedWord={word}/>
+			<TextDisplay txt={srcText}/>
 		</React.Fragment>
 	)
 }
