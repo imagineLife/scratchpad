@@ -1,13 +1,20 @@
 import React from 'react'
 import * as scale from 'd3-scale'
-import * as arr from 'd3-array'
-import * as shape from 'd3-shape'
-import * as select from 'd3-selection'
+import * as d3Arr from 'd3-array'
+import * as d3Shape from 'd3-shape'
+import * as d3Select from 'd3-selection'
+import * as brush from 'd3-brush'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
+	let [brushFn, setBrushFn] = React.useState(null)
 	let brushRef = React.useRef()
 	
+	function brushedFn(){
+		var selectedPixels = d3Select.event.selection; //|| timeline.x.range()
+		console.log('selectedPixels')
+		console.log(selectedPixels)
+	}
 	//load the data
 	React.useEffect(() => {
 		fetch('../../data/areaData.json')
@@ -18,7 +25,15 @@ const SelectableArea = () => {
 	//connect the brush to the g wrapper?!
 	React.useEffect(() => {
 		if(brushRef.current){
-			let brushBox = select.select(brushRef)
+			let brushBox = d3Select.select(brushRef.current)
+			let brushFn = brush.brushX()
+				.handleSize(10)
+				.on('start', () => brushedFn());
+				// .extent([ [0,0], [700, 100] ]);
+
+				brushBox.call(brushFn)
+
+				// setBrushFn(brushFn)
 		}
 	}, [srcData])
 
@@ -32,11 +47,11 @@ const SelectableArea = () => {
 		.range([0, 700])
 
 	let yScale = scale.scaleLinear()
-		.domain([0, arr.max(srcData, d => d.y)])
+		.domain([0, d3Arr.max(srcData, d => d.y)])
 		.range([100, 0])
 
 	//build areaFn
-	let areaFn = shape.area()
+	let areaFn = d3Shape.area()
 		.x((d, i) => xScale(i + 1))
 		.y0(100)
 		.y1((d) => yScale(d.y))
@@ -103,5 +118,31 @@ export default SelectableArea
 	UPDATING TIMELINE
 		a fn passing data && yVariable?!
 		it updates other things on the screen, for later...
+
+
+UPDATES
+	tooltip - word-list content, displaying/revealing sentence
+	TExtBlock - add some selected references
+		underlines
+		font-changes
+
+MVP INTERACTIVE SPEECH-TEXT
+
+WRAPPER
+
+	useEffect
+		triggered when selected-list updates
+
+	CHILD: word-list
+		Li 
+			onClick, 
+				updates 'state', selected word(s)
+
+
+	CHILD: speech-text
+		
+		<div>
+			<p></p>
+		</div>
 
 */
