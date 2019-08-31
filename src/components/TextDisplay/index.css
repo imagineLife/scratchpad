@@ -1,0 +1,10 @@
+#text-display{
+	line-height: 36px;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+
+.selected-text{
+	font-size: 2em;
+	font-weight: bold;
+}
