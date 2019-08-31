@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css'
 
 const WordList = ({words, selectWord, selectedWord}) => {
 
@@ -8,8 +9,10 @@ const WordList = ({words, selectWord, selectedWord}) => {
 				key={`${w}$i`} 
 				style={{
 					textDecoration: (selectedWord === w) ? 'underline' : 'none',
-					listStyleType: 'none'
+					listStyleType: 'none',
+					cursor: 'pointer'
 				}}
+				className={'word'}
 				onClick={() => selectWord(w)}>
 				{w}
 			</li>
