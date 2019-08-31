@@ -13,6 +13,10 @@ const TextAndSelection = () => {
 			.then(setSrcText)
 	}, [])
 
+	const selectWord = (w) => {
+		setWord(w)
+	}
+
 	if(!srcText){
 		return(<p>loading...</p>)
 	}
@@ -20,7 +24,7 @@ const TextAndSelection = () => {
 	return(
 		<React.Fragment>
 			<h2>Text And Selection</h2>
-			<WordList words={words}/>
+			<WordList words={words} selectWord={selectWord} selectedWord={word}/>
 		</React.Fragment>
 	)
 }
