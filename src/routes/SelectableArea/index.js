@@ -39,6 +39,9 @@ const SelectableArea = () => {
 			brushBox.call(brushFn);
 
 			//set the initial overlay to 1/4 width
+			/*
+				How Do I get this to ANIMATE 'onLoad'
+			*/
 			brushFn.move(brushBox, [0,175])
 		}
 	}, [srcData])
