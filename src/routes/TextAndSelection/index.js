@@ -1,10 +1,12 @@
 import React from 'react'
+import WordList from '../../components/WordList'
 
 const TextAndSelection = () => {
 	
 	let [srcText, setSrcText] = React.useState(null);
-
-	//load the text from textFile?!
+	let [word, setWord] = React.useState(null);
+	let [words] = React.useState(['president', 'the', 'we', 'to'])
+	//load the text from textFile on load
 	React.useEffect(() => {
 		fetch('../../data/demo.txt')
 			.then(res => res.text())
@@ -14,9 +16,11 @@ const TextAndSelection = () => {
 	if(!srcText){
 		return(<p>loading...</p>)
 	}
+	
 	return(
 		<React.Fragment>
 			<h2>Text And Selection</h2>
+			<WordList words={words}/>
 		</React.Fragment>
 	)
 }
