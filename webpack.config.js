@@ -20,7 +20,7 @@ module.exports = {
           }
         ]
       },
-            {
+      {
         test: /\.css$/,
         use: [MiniCss.loader, "css-loader"]
       },
@@ -38,6 +38,10 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
+    }),
+    new MiniCss({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   devServer: {
