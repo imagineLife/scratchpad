@@ -1,9 +1,15 @@
 import React from 'react';
 
-const WordList = ({words}) => {
+const WordList = ({words, selectWord, selectedWord}) => {
+
 	return(<ul>
 		{words.map((w,i) => (
-			<li key={`${w}$i`}>{w}</li>
+			<li 
+				key={`${w}$i`} 
+				style={{textDecoration: (selectedWord === w) ? 'underline' : 'none'}}
+				onClick={() => selectWord(w)}>
+				{w}
+			</li>
 		))}
 	</ul>)
 }
