@@ -6,7 +6,10 @@ const WordList = ({words, selectWord, selectedWord}) => {
 		{words.map((w,i) => (
 			<li 
 				key={`${w}$i`} 
-				style={{textDecoration: (selectedWord === w) ? 'underline' : 'none'}}
+				style={{
+					textDecoration: (selectedWord === w) ? 'underline' : 'none',
+					listStyleType: 'none'
+				}}
 				onClick={() => selectWord(w)}>
 				{w}
 			</li>
