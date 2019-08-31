@@ -25,15 +25,21 @@ const SelectableArea = () => {
 	//connect the brush to the g wrapper?!
 	React.useEffect(() => {
 		if(brushRef.current){
+
+			//select the brushBox
 			let brushBox = d3Select.select(brushRef.current)
+			
+			//build the brushFn
 			let brushFn = brush.brushX()
 				.handleSize(10)
-				.on('start', () => brushedFn());
-				// .extent([ [0,0], [700, 100] ]);
+				.on('brush', () => brushedFn())
 
-				brushBox.call(brushFn)
+			// set the brushFn to the burshBox, 'instantiating'
+			// the brush UI element(s)
+			brushBox.call(brushFn);
 
-				// setBrushFn(brushFn)
+			//set the initial overlay to 1/4 width
+			brushFn.move(brushBox, [0,175])
 		}
 	}, [srcData])
 
