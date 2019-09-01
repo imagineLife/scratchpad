@@ -77,7 +77,7 @@ const SelectableArea = () => {
 		.y1((d) => yScale(d.y))
 
 
-	// console.log('%c SCALED VALUES', 'background-color: orange; color: white;')
+	console.log('%c SCALED sentence indexes', 'background-color: orange; color: white;')
 	// console.log('srcData.length')
 	// console.log(srcData.length)
 	
@@ -85,10 +85,10 @@ const SelectableArea = () => {
 	// console.log(hoverArr)
 	
 	// console.log('translateScale(hoverArr[0])')
-	// console.log()
+	console.log(Math.floor(translateScale(hoverArr[0])))
 	// console.log('translateScale(hoverArr[1])')		
-	// console.log(translateScale(hoverArr[1]))
-	// console.log('%c  - - - - ', 'background-color: orange; color: white;')
+	console.log(Math.floor(translateScale(hoverArr[1])))
+	console.log('%c  - - - - ', 'background-color: orange; color: white;')
 	
 	// let resText = srcData.map((d, i) => {
 	// 	if(i >= translateScale(hoverArr[0]) && i <= translateScale(hoverArr[1])){
