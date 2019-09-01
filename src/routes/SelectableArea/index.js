@@ -11,6 +11,7 @@ const SelectableArea = () => {
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [fullText, setFullText] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
+	let [brushBox,setBrushBox] = React.useState(null)
 	let brushRef = React.useRef()
 	
 	function brushedFn(){
@@ -27,13 +28,15 @@ const SelectableArea = () => {
 			.then(res => res.text())
 			.then(setFullText)
 	}, [])
+
+	//select && save the brushBox to state
+	React.useEffect(() => {
+		setBrushBox(d3Select.select(brushRef.current))
+	}, [srcData, fullText])
 	
 	//connect the brush to the g wrapper?!
 	React.useEffect(() => {
 		if(brushRef.current){
-
-			//select the brushBox
-			let brushBox = d3Select.select(brushRef.current)
 			
 			//build the brushFn
 			let brushFn = brush.brushX()
@@ -47,9 +50,9 @@ const SelectableArea = () => {
 			//set the initial overlay to 1/4 width
 			brushFn.move(brushBox, hoverArr)
 		}
-	}, [fullText])
+	}, [brushBox])
 
-	if(!srcData || !fullText){
+	if(!srcData || !fullText || !brushBox){
 		return (<p>Loading data...</p>)
 	}
 	
