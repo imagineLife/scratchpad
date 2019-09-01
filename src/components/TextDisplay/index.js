@@ -1,11 +1,16 @@
 import React from 'react';
 import './index.css'
 
-const getHighlightedText = (text, higlight) => {
-    // Split on higlight term and include term into parts, ignore case
-    let parts = text.split(new RegExp(`(${higlight})`, 'gi'));
+const getHighlightedText = (text, hlText) => {
+    // Split on hlText term and include term into parts, ignore case
+    let rxStr = `(${hlText})`//`(${hlText})`
+
+    let highlitRegex = new RegExp(rxStr, 'gi')
+    
+    let parts = text.split(highlitRegex);
+    
     return <span> { parts.map((part, i) => 
-        <span key={i} style={part.toLowerCase() === higlight.toLowerCase() ? { fontWeight: 'bold', fontSize: '22px' } : {} }>
+        <span key={i} style={part.toLowerCase() === hlText.toLowerCase() ? { fontWeight: 'bold', fontSize: '22px' } : {} }>
             { part }
         </span>)
     } </span>;
