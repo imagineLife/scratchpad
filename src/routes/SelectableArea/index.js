@@ -78,25 +78,9 @@ const SelectableArea = () => {
 
 
 	console.log('%c SCALED sentence indexes', 'background-color: orange; color: white;')
-	// console.log('srcData.length')
-	// console.log(srcData.length)
-	
-	// console.log('hoverArr')
-	// console.log(hoverArr)
-	
-	// console.log('translateScale(hoverArr[0])')
 	console.log(Math.floor(translateScale(hoverArr[0])))
-	// console.log('translateScale(hoverArr[1])')		
 	console.log(Math.floor(translateScale(hoverArr[1])))
 	console.log('%c  - - - - ', 'background-color: orange; color: white;')
-	
-	// let resText = srcData.map((d, i) => {
-	// 	if(i >= translateScale(hoverArr[0]) && i <= translateScale(hoverArr[1])){
-	// 		return d
-	// 	}else return
-	// }).filter(d => d)
-	// console.log('resText')
-	// console.log(resText)
 	
 	return(
 		<React.Fragment>
