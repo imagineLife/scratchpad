@@ -5,6 +5,7 @@ import * as d3Shape from 'd3-shape'
 import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay'
+import './index.css'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
@@ -101,8 +102,7 @@ const SelectableArea = () => {
 		<React.Fragment>
 			<svg id="selectable" style={{
 				width: '700px',
-				height: '100px',
-				border: '1px solid green'
+				height: '100px'
 			}}>
 				<g className="g-wrapper">
 					<path d={areaFn(srcData)}
