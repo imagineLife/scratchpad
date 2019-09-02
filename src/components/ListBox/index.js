@@ -9,6 +9,8 @@ const ListBox = ({lists, selectedList, selectItem}) => {
 
 	return <div id="list-box">
 		<h3>List Box Title</h3>
+
+		{/*List-Picker*/}
 		<section id="titles">
 			<h4>List Types</h4>
 			<ul>
@@ -22,16 +24,15 @@ const ListBox = ({lists, selectedList, selectItem}) => {
 				}
 			</ul>
 		</section>
+
+	{/*List-Words*/}
 		<section id="words">
 			<h4>Words</h4>
 			<ul>
 				{
-					Object.keys(lists).map((k, ind) => {
-						let thisList = lists[k]
-						return thisList.map((listItem, k) => {
-							return <li key={`${listItem}-${ind}`}>{listItem}</li>			
-						})
-					})
+					lists[selectedList].map((k, ind) => (
+						<li key={`${k}-${ind}`}>{k}</li>)
+					)
 				}
 			</ul>
 		</section>
