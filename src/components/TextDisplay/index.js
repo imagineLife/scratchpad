@@ -2,18 +2,16 @@ import React from 'react';
 import './index.css'
 
 const getHighlightedText = (text, hlText) => {
-    // Split on hlText term and include term into parts, ignore case
-    let rxStr = `(${hlText})`//`(${hlText})`
 
-    let highlitRegex = new RegExp(rxStr, 'gi')
+    let removeRegex = /.\w*\s\w*=\"selected-text\".(\w*)<\/\w*>/g;
+    // let newStyleRegex = new RegExp(`\W(${hlText})\W`, 'gi');
+    let newStyleRegex = new RegExp(`(${hlText})`, 'gi');
     
-    let parts = text.split(highlitRegex);
-    
-    return <span> { parts.map((part, i) => 
-        <span key={i} style={part.toLowerCase() === hlText.toLowerCase() ? { fontWeight: 'bold', fontSize: '22px' } : {} }>
-            { part }
-        </span>)
-    } </span>;
+    //update the text body
+    let resText = text.replace(removeRegex,"$1").replace(newStyleRegex, `<span class="selected-text">$1</span>`)
+
+    return <p dangerouslySetInnerHTML={{__html: resText}}></p>
+
 }
 
 const TextDisplay = ({txt ,selectedWord}) => {
