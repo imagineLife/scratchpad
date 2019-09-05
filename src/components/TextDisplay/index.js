@@ -5,7 +5,7 @@ const getHighlightedText = (text, hlText) => {
 
     let removeRegex = /.\w*\s\w*=\"selected-text\".(\w*)<\/\w*>/g;
     // let newStyleRegex = new RegExp(`\W(${hlText})\W`, 'gi');
-    let newStyleRegex = new RegExp(`(${hlText})`, 'gi');
+    let newStyleRegex = new RegExp(`\\b(${hlText})\\b`, 'gi');
     
     //update the text body
     let resText = text.replace(removeRegex,"$1").replace(newStyleRegex, `<span class="selected-text">$1</span>`)
@@ -13,6 +13,7 @@ const getHighlightedText = (text, hlText) => {
     return <p dangerouslySetInnerHTML={{__html: resText}}></p>
 
 }
+
 
 const TextDisplay = ({txt ,selectedWord}) => {
 
