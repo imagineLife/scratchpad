@@ -24,7 +24,7 @@ const getQueriedWord = (text, hlText) => {
 
 const TextDisplay = ({txt ,commonWord}) => {
 
-	let resText = (commonWord) ? getQueriedWord(txt, commonWord, themeType) : txt;
+	let resText = (commonWord) ? getQueriedWord(txt, commonWord) : txt;
     // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
 
     resText = !resText ? 'placeholder...' : resText;
