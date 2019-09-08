@@ -1,5 +1,5 @@
 import React from 'react';
-import TextDisplay from './index'
+import TextDisplay from './UsingContext'
 import {TextProvider} from '../../TextContext'
 const WrappedComponent = () => {
 	return(
