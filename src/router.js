@@ -4,7 +4,7 @@ import { Router, Link } from "@reach/router"
 import SelectableArea from './routes/SelectableArea'
 import TextAndSelection from './routes/TextAndSelection'
 import WordLists from './routes/WordLists'
-
+import Combine from './routes/Combine'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
 
@@ -18,7 +18,8 @@ const ThisRouter = () => {
       	h: 100
       }}/>
       <TextAndSelection path="text"/>  
-      <WordLists path="wordLists" />  
+      <WordLists path="wordLists" />
+      <Combine path="combine"/>  
     </Router>
   )
 } 
