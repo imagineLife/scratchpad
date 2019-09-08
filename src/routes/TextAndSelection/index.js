@@ -29,7 +29,7 @@ const TextAndSelection = () => {
 				words={words} 
 				selectWord={selectWord} 
 				selectedWord={word}/>
-			<TextDisplay txt={srcText} selectedWord={word}/>
+			<TextDisplay txt={srcText} commonWord={word}/>
 		</React.Fragment>
 	)
 }
