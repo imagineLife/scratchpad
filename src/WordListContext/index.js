@@ -5,16 +5,43 @@ const {Provider, Consumer} = WordListContext
 
 const WordListProvider = (props) => {
 
-	let [text, setText] = React.useState(null)
+	let [selectedList, setSelectedList] = React.useState(null)
 
-	//load the text from textFile on load
+	let [listData] = React.useState({
+		"Common Words": ["our", "we", "the", "them"],
+		"Longest Words": [
+			"Administration",
+			"Infrastructure",
+			"Understanding",
+			"Neighborhoods",
+			"Redistributed",
+			"Disagreements",
+			"Establishment",
+			"Transferring",
+			"Technologies",
+			"Celebration",
+			"Politicians",
+			"Importantly"
+		],
+		"Action Words": [
+			"Walking",
+			"Running",
+			"Singing",
+			"Dancing"
+		]
+	})
+
+	//set initial 'chosen' list
 	React.useEffect(() => {
-		fetch('../../data/demo.txt')
-			.then(res => res.text())
-			.then(setText)
+		setSelectedList(Object.keys(listData)[0])
 	}, [])
 
-	return(<Provider value={text}>
+
+	return(<Provider value={{
+		listData,
+		selectedList,
+		setSelectedList
+	}}>
 		{props.children}
 	</Provider>)
 }
