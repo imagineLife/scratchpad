@@ -6,6 +6,7 @@ const {Provider, Consumer} = WordListContext
 const WordListProvider = (props) => {
 
 	let [selectedList, setSelectedList] = React.useState(null)
+	let [selectedWord, setSelectedWord] = React.useState(null);
 	let [commonWords] = React.useState(['president', 'the', 'we', 'to'])
 	let [listData] = React.useState({
 		"Common Words": ["our", "we", "the", "them"],
@@ -39,7 +40,8 @@ const WordListProvider = (props) => {
 
 	return(<Provider value={{
 		listData,
-		selectedList,
+		selectedWord,
+		setSelectedWord,
 		setSelectedList,
 		commonWords
 	}}>
