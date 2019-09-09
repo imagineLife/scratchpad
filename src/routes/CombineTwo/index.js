@@ -9,15 +9,19 @@ import TextDisplay from '../../components/TextDisplay'
 
 const SelectableArea = () => {
 	let [srcData, setSrcData] = React.useState(null)
-	let [brushFn, setBrushFn] = React.useState(null)
+	let [brushFn] = React.useState(null)
 	let [fullText, setFullText] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
+	let [sentenceNumbers, setSentenceNumbers] = React.useState([])
 	let [brushBox,setBrushBox] = React.useState(null)
 	let brushRef = React.useRef()
 	
 	function brushedFn(){
 		var selectedPixels = d3Select.event.selection; //|| timeline.x.range()
+		let sentStart = Math.floor(translateScale(hoverArr[0]))
+		let sentEnd = Math.floor(translateScale(hoverArr[1]))
 		setHoverArr(selectedPixels)
+		setSentenceNumbers([sentStart, sentEnd])
 	}
 
 	//load the data
@@ -76,13 +80,12 @@ const SelectableArea = () => {
 		.x((d, i) => xScale(i + 1))
 		.y0(100)
 		.y1((d) => yScale(d.y))
-
-
-	console.log('%c SCALED sentence indexes', 'background-color: orange; color: white;')
-	console.log(Math.floor(translateScale(hoverArr[0])))
-	console.log(Math.floor(translateScale(hoverArr[1])))
-	console.log('%c  - - - - ', 'background-color: orange; color: white;')
 	
+	console.log('%c ----', 'background-color: blue; color: white;')
+	
+	console.log('sentenceNumbers')
+	console.log(sentenceNumbers)
+	console.log('%c ----', 'background-color: blue; color: white;')
 	return(
 		<React.Fragment>
 			<svg id="selectable" style={{
@@ -96,7 +99,7 @@ const SelectableArea = () => {
 					<g className="brush-g-window" ref={brushRef}></g>
 				</g>
 			</svg>
-			<TextDisplay txt={fullText}/>
+			<TextDisplay txt={fullText} selectedRange={sentenceNumbers}/>
 		</React.Fragment>
 	)
 }
