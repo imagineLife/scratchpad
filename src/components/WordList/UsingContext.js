@@ -4,8 +4,10 @@ import { WordListContext } from '../../WordListContext'
 
 const WordList = () => {
 
+	let {commonWords, selectedWord, setSelectedWord} = React.useContext(WordListContext);
+	
 	return(<ul>
-		{words.map((w,i) => (
+		{commonWords.map((w,i) => (
 			<li 
 				key={`${w}$i`} 
 				style={{
@@ -14,7 +16,7 @@ const WordList = () => {
 					cursor: 'pointer'
 				}}
 				className={'word'}
-				onClick={() => selectWord(w)}>
+				onClick={() => setSelectedWord(w)}>
 				{w}
 			</li>
 		))}
