@@ -1,10 +1,14 @@
 import React from 'react';
-import TextDisplay from './UsingContext'
 import {TextProvider} from '../../TextContext'
+import {WordListProvider} from '../../WordListContext'
+import TextDisplay from './UsingContext'
+
 const WrappedComponent = () => {
 	return(
 		<TextProvider>
-			<TextDisplay />
+			<WordListProvider>
+				<TextDisplay />
+			</WordListProvider>
 		</TextProvider>
 	)
 }
