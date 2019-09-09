@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TextContext = React.createContext(); 
-const {Provider, Consumer} = TextContext
+let TextContext = React.createContext(); 
+let {Provider, Consumer} = TextContext
 
-const TextProvider = (props) => {
+let TextProvider = (props) => {
 
 	let [text, setText] = React.useState(null)
 
@@ -25,9 +25,3 @@ export {
 	Consumer as TextConsumer, 
 	TextContext
 }
-
-/*
-	Contains 
-		Context.Consumer, 
-		Context.Provider
-*/
