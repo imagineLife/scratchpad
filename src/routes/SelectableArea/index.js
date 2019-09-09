@@ -5,9 +5,10 @@ import * as d3Shape from 'd3-shape'
 import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay'
+import SelectableArea from '../../components/SelectableArea'
 import './index.css'
 
-const SelectableArea = () => {
+const SelectableAreaRoute = () => {
 	let [srcData, setSrcData] = React.useState(null)
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [fullText, setFullText] = React.useState(null)
@@ -30,7 +31,7 @@ const SelectableArea = () => {
 			.then(setFullText)
 	}, [])
 
-	//select && save the brushBox to state
+	//select && save the 'brushBox' to state
 	React.useEffect(() => {
 		setBrushBox(d3Select.select(brushRef.current))
 	}, [srcData, fullText])
@@ -53,7 +54,7 @@ const SelectableArea = () => {
 		}
 	}, [brushBox])
 
-	if(!srcData || !fullText || !brushBox){
+	if(!srcData || !fullText){
 		return (<p>Loading data...</p>)
 	}
 	
@@ -83,94 +84,15 @@ const SelectableArea = () => {
 	console.log('%c  - - - - ', 'background-color: orange; color: white;')
 	
 	return(
-		<React.Fragment>
-			<svg id="selectable" style={{
+		<SelectableArea 
+			dims={{
 				width: '700px',
 				height: '100px'
-			}}>
-				<g className="g-wrapper">
-					<path d={areaFn(srcData)}
-						fill={'#ccc'}
-					/>
-					<g className="brush-g-window" ref={brushRef}></g>
-				</g>
-			</svg>
-			<TextDisplay />
-		</React.Fragment>
+			}}
+			pathD={areaFn(srcData)}
+			areaRef={brushRef}
+		/>
 	)
 }
 
-export default SelectableArea
-
-/*
-	Notes
-
- 	- UPDATES state
- 	- only responds to initial state && itself,
- 		no other inputs besided user mouse/click
-	
-	
-
-	ELEMENTS
-		svg
-		gWrapper
-		
-	DATA
-		xScale
-		yScale
-
-	xAxisG
-		trans 0, height
-
-	areaPath
-		fill #ccc
-
-	brushWindow
-		gObj.append(g)
-		class brushGWindow
-		.call brushFn
-
-	brushFn
-		let brushFn = d3.brushX()
-			.handleSize(10)
-			.extent([ [0,0], [state.timeline.w, state.timeline.h] ])
-			.on('brush', brushedFn)
-
-	brushedFn
-		var selectedPixels = d3.event.selection || timeline.x.range();
-    var newValues = selectedPixels.map(state.timeline.xScale.invert)
-
-    updateLine(state.filteredData[state.activeCoin], newValues)
-
-
-	UPDATING TIMELINE
-		a fn passing data && yVariable?!
-		it updates other things on the screen, for later...
-
-
-UPDATES
-	tooltip - word-list content, displaying/revealing sentence
-	TExtBlock - add some selected references
-		underlines
-		font-changes
-
-MVP INTERACTIVE SPEECH-TEXT
-
-WRAPPER
-
-	useEffect
-		triggered when selected-list updates
-
-	CHILD: word-list
-		Li 
-			onClick, 
-				updates 'state', selected word(s)
-
-
-	CHILD: speech-text
-		
-		<div>
-			<p></p>
-		</div>
-
-*/
+export default SelectableAreaRoute
