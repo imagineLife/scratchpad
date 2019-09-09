@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css'
 import { TextContext } from '../../TextContext'
+import { WordListContext } from '../../WordListContext'
 
 const getQueriedWord = (text, hlText) => {
 
@@ -25,12 +26,20 @@ const getQueriedWord = (text, hlText) => {
 
 const TextDisplay = () => {
 
+    //hook into the needed context(s)
     let resText = React.useContext(TextContext)
+    let WordListContextVals = React.useContext(WordListContext)
 
-	// let resText = (commonWord) ? getQueriedWord(srcText, commonWord, themeType) : txt;
+    console.log('%c <TextDisplay/>, WordListContextVals from context ===>', 'background-color: steelblue; color: white;')
+    console.log(WordListContextVals)
+    
+    //get calculated display-able text, including the selectedWord from context
+	resText = (WordListContextVals.selectedWord) ? getQueriedWord(resText, WordListContextVals.selectedWord) : resText;
     // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
 
+    //PLACEHOLDER
     resText = !resText ? 'placeholder...' : resText;
+    
 	return(
 		<div id="text-display">{resText}</div>
 	)
