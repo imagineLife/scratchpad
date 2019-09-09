@@ -1,7 +1,6 @@
 import React from 'react'
-import WordList from '../../components/WordList'
-import WrappedTextDisplay from '../../components/TextDisplay/TextContextWrapper'
 import WrappedWordList from '../../components/WordList/ContextWrapper'
+import WrappedTextDisplay from '../../components/TextDisplay/ContextWrapper'
 const Combined = () => {
 	
 	return(
