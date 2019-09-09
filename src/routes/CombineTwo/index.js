@@ -19,6 +19,7 @@ const SelectableArea = () => {
 		var selectedPixels = d3Select.event.selection; //|| timeline.x.range()
 		setHoverArr(selectedPixels)
 	}
+
 	//load the data
 	React.useEffect(() => {
 		fetch('../../data/areaData.json')
@@ -95,7 +96,7 @@ const SelectableArea = () => {
 					<g className="brush-g-window" ref={brushRef}></g>
 				</g>
 			</svg>
-			<TextDisplay />
+			<TextDisplay txt={fullText}/>
 		</React.Fragment>
 	)
 }
