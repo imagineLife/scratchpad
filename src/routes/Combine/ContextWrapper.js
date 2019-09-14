@@ -1,8 +1,17 @@
 import React from 'react';
 import Combined from './'
+import {TextProvider} from '../../TextContext'
+import {WordListProvider} from '../../WordListContext'
+
 const Wrapped = () => {
 	console.log('Wrapper');
-	return <Combined />
+	return (
+		<TextProvider>
+			<WordListProvider>
+				<Combined />
+			</WordListProvider>
+		</TextProvider>
+	)
 }
 
 export default Wrapped
