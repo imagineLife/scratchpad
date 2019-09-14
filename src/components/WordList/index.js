@@ -4,7 +4,7 @@ import './index.css'
 const WordList = ({words, selectWord, selectedWord}) => {
 
 	return(<ul>
-		{words.map((w,i) => (
+		{words && words.map((w,i) => (
 			<li 
 				key={`${w}$i`} 
 				style={{
@@ -17,6 +17,7 @@ const WordList = ({words, selectWord, selectedWord}) => {
 				{w}
 			</li>
 		))}
+		{!words && <li>Empty Word List Here</li>}
 	</ul>)
 }
 
