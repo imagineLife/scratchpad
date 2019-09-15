@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css'
+
 import { TextContext } from '../../TextContext'
-import { WordListContext } from '../../WordListContext'
 
 const getQueriedWord = (text, hlText) => {
 
@@ -10,7 +10,7 @@ const getQueriedWord = (text, hlText) => {
     
     /*
         let newStyleRegex = new RegExp(`\W(${hlText})\W`, 'gi');
-        IN JS the '\' has to be escaped, a-la \\b 
+        IN JS th '\' has to be escaped, a-la \\b 
     */ 
     
     // add tags associated with this selection
@@ -26,23 +26,15 @@ const getQueriedWord = (text, hlText) => {
 
 const TextDisplay = () => {
 
-    //hook into the needed context(s)
-    let resText = React.useContext(TextContext)
-    let WordListContextVals = React.useContext(WordListContext)
+    const txtContextVals = React.useContext(TextContext);
 
-    console.log('%c <TextDisplay/>, WordListContextVals from context ===>', 'background-color: steelblue; color: white;')
-    console.log(WordListContextVals)
+    // let resText = (commonWord) ? getQueriedWord(txtContextVals.text, commonWord) : txtContextVals.text;
+    let resText = txtContextVals.text;
     
-    //get calculated display-able text, including the selectedWord from context
-	resText = (WordListContextVals.selectedWord) ? getQueriedWord(resText, WordListContextVals.selectedWord) : resText;
-    // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
-
-    //PLACEHOLDER
     resText = !resText ? 'placeholder...' : resText;
-    
-	return(
-		<div id="text-display">{resText}</div>
-	)
+    return(
+        <div id="text-display">{resText}</div>
+    )
 }
 
 export default TextDisplay;
