@@ -22,9 +22,13 @@ const getQueriedWord = (text, hlText) => {
 
 }
 
-const TextDisplay = ({txt ,commonWord}) => {
+const TextDisplay = (props) => {
 
-	let resText = (commonWord) ? getQueriedWord(txt, commonWord) : txt;
+    console.log('TextDisplay props')
+    console.log(props)
+    
+
+	let resText = (props.commonWord) ? getQueriedWord(props.text, props.commonWord) : props.text;
     // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
 
     resText = !resText ? 'placeholder...' : resText;
