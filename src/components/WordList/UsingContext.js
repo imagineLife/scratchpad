@@ -1,11 +1,13 @@
 import React from 'react';
 import './index.css'
 import { WordListContext } from '../../WordListContext'
+import { TextContext } from '../../TextContext'
 
 const WordList = () => {
 
-	let {commonWords, selectedWord, setSelectedWord} = React.useContext(WordListContext);
-	
+	let {commonWords, selectedWord, updateSelectedWord} = React.useContext(WordListContext);
+	let txtVals = React.useContext(TextContext)
+
 	return(<ul>
 		{commonWords.map((w,i) => (
 			<li 
@@ -16,7 +18,12 @@ const WordList = () => {
 					cursor: 'pointer'
 				}}
 				className={'word'}
-				onClick={() => setSelectedWord(w)}>
+				onClick={() => {
+					console.log('txtVals')
+					console.log(txtVals)
+					
+					updateSelectedWord(w)
+				}}>
 				{w}
 			</li>
 		))}
