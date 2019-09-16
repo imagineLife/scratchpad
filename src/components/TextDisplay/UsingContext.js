@@ -2,16 +2,12 @@ import React from 'react';
 import './index.css'
 
 import { TextContext } from '../../TextContext'
+import { WordListContext } from '../../WordListContext'
 
 const getQueriedWord = (text, hlText) => {
 
     //remove existing tags associated with this selection
     let removeRegex = /.\w*\s\w*=\"selected-text\".(\w*)<\/\w*>/g;
-    
-    /*
-        let newStyleRegex = new RegExp(`\W(${hlText})\W`, 'gi');
-        IN JS th '\' has to be escaped, a-la \\b 
-    */ 
     
     // add tags associated with this selection
     let newStyleRegex = new RegExp(`\\b(${hlText})\\b`, 'gi');
@@ -26,12 +22,11 @@ const getQueriedWord = (text, hlText) => {
 
 const TextDisplay = () => {
 
-    const txtContextVals = React.useContext(TextContext);
-
-    // let resText = (commonWord) ? getQueriedWord(txtContextVals.text, commonWord) : txtContextVals.text;
-    let resText = txtContextVals.text;
+    const {text} = React.useContext(TextContext);
     
-    resText = !resText ? 'placeholder...' : resText;
+    // let resText = (commonWord) ? getQueriedWord(txtContextVals.text, commonWord) : txtContextVals.text;
+    
+    let resText = !text ? 'placeholder...' : text;
     return(
         <div id="text-display">{resText}</div>
     )
