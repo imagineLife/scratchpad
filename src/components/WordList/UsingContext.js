@@ -18,12 +18,7 @@ const WordList = () => {
 					cursor: 'pointer'
 				}}
 				className={'word'}
-				onClick={() => {
-					console.log('txtVals')
-					console.log(txtVals)
-					
-					updateSelectedWord(w)
-				}}>
+				onClick={() => updateSelectedWord(w)}>
 				{w}
 			</li>
 		))}
