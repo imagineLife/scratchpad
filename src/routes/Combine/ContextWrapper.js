@@ -15,7 +15,11 @@ import {WordListProvider} from '../../WordListContext'
 const Wrapped = () => {
 	console.log('%c WRAPPER', 'background-color: steelblue; color: white;')
 	return (
-		<Combined />
+		<TextProvider>
+			<WordListProvider>
+				<Combined />
+			</WordListProvider>
+		</TextProvider>
 	)
 }
 
