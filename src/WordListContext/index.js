@@ -1,12 +1,12 @@
 import React from 'react';
-
 const WordListContext = React.createContext(); 
 const {Provider, Consumer} = WordListContext;
+import { TextContext } from '../TextContext'
 
 const WordListProvider = (props) => {
 
-	let [selectedList, setSelectedList] = React.useState(null)
 	let [selectedWord, setSelectedWord] = React.useState(null);
+	const { textDispatch } = React.useContext(TextContext)
 	let [commonWords] = React.useState(['president', 'the', 'we', 'to'])
 	let [listData] = React.useState({
 		"Common Words": ['president', 'the', 'we', 'to'],
@@ -32,42 +32,40 @@ const WordListProvider = (props) => {
 		]
 	})
 
-	//set initial 'chosen' list
-	React.useEffect(() => {
-		setSelectedList(Object.keys(listData)[0])
-	}, [])
+	const updateSelectedWord = (word) => {
+		console.log('%c updateSelectedWord!!', 'background-color: darkblue; color: white;')
+		
+		setSelectedWord(word);
+		textDispatch({type: "COMMON_WORD", payload:word})
+	}
 
-
-	console.log('%c WORD LIST CONTEXT', 'background-color: orange; color: white;')
-	
-	/*
-		es6, commented for sanity-purpose, 
-		debigging the non=updating-text-blob
-
-		let contextVal = {
-			listData,
-			selectedWord,
-			setSelectedWord,
-			setSelectedList,
-			commonWords
-		}
-	*/
+	let [selectedList, setSelectedList] = React.useState(Object.keys(listData)[0])
 
 	let contextVal = {
 		listData:listData,
 		selectedWord:selectedWord,
-		setSelectedWord:setSelectedWord,
+		updateSelectedWord,
+		setSelectedWord,
 		setSelectedList:setSelectedList,
 		commonWords:commonWords
-	}
-
-	console.log('contextVal.selectedWord')
-	console.log(contextVal.selectedWord)	
+	}	
 	
 	return(<Provider value={contextVal}>
 		{props.children}
 	</Provider>)
 }
+
+// function withSelectedListItem(Component){
+// 	return function PassedListItem(props){
+// 		return(
+// 		  <Consumer>
+// 		    { ( {selectedWord} )  => (
+// 		    	<Component {...props} selectedWord={selectedWord} />
+// 		    )}
+// 		  </Consumer>
+// 		)
+// 	}
+// }
 
 // export default Provider;
 export {
