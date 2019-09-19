@@ -1,12 +1,12 @@
 import React from 'react'
-import WordListContexted from '../../components/WordList/ContextWrapper'
-import TextDisplayContexted from '../../components/TextDisplay/ContextWrapper'
+import WordList from '../../components/WordList/UsingContext'
+import TextDisplay from '../../components/TextDisplay/UsingContext'
 const Combined = () => {
 	
 	return(
 		<React.Fragment>
-			<WordListContexted />
-			<TextDisplayContexted />
+			<WordList />
+			<TextDisplay />
 		</React.Fragment>
 	)
 }
