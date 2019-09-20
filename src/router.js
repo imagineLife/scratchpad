@@ -6,6 +6,7 @@ import TextAndSelection from './routes/TextAndSelection'
 import WordLists from './routes/WordLists'
 import CombineContexted from './routes/Combine/ContextWrapper'
 import CombineTwo from './routes/CombineTwo'
+import Circles from './routes/Circles'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
 
@@ -22,6 +23,7 @@ const ThisRouter = () => {
       <WordLists path="wordLists" />
       <CombineContexted path="combine"/>  
       <CombineTwo path="combineTwo"/>  
+      <Circles path="circles"/>  
     </Router>
   )
 } 
