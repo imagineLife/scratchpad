@@ -3,33 +3,21 @@ import './index.css'
 
 import { TextContext } from '../../TextContext'
 import { WordListContext } from '../../WordListContext'
+import { getQueriedWord } from '../../lib/getQueriedWord'
 
-const getQueriedWord = (text, hlText) => {
-
-    //remove existing tags associated with this selection
-    let removeRegex = /.\w*\s\w*=\"selected-text\".(\w*)<\/\w*>/g;
+const TextDisplay = React.memo(function TextDisplay(){
+	console.log('%c TextDisplay Render', 'background-color: orange; color: white;')
+	
+    const {textStore, textDispatch} = React.useContext(TextContext);
+    const { selectedWord } = React.useContext(WordListContext);
     
-    // add tags associated with this selection
-    let newStyleRegex = new RegExp(`\\b(${hlText})\\b`, 'gi');
-    
-    //update the text body
-    let resText = text.replace(removeRegex,"$1").replace(newStyleRegex, `<span class="selected-text">$1</span>`)
+    let resText = (selectedWord) ? getQueriedWord(textStore.text, selectedWord) : textStore.text;
+    // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
 
-    
-    return <p dangerouslySetInnerHTML={{__html: resText}}></p>
-
-}
-
-const TextDisplay = () => {
-
-    const {text} = React.useContext(TextContext);
-    
-    // let resText = (commonWord) ? getQueriedWord(txtContextVals.text, commonWord) : txtContextVals.text;
-    
-    let resText = !text ? 'placeholder...' : text;
-    return(
-        <div id="text-display">{resText}</div>
-    )
-}
+    // resText = !resText ? 'placeholder...' : resText;
+	return(
+		<div id="text-display">{resText || 'placeholder...'}</div>
+	)
+})
 
 export default TextDisplay;
