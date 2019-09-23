@@ -6,9 +6,8 @@ import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import './index.css'
 
-const SelectableArea = ({dims, onMove}) => {
+const SelectableArea = ({dims, onMove, data}) => {
 	console.log('SelectableArea fn');
-	let [areaData, setAreaData] = React.useState(null)
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
 	let [brushBox,setBrushBox] = React.useState(null)
@@ -30,26 +29,19 @@ const SelectableArea = ({dims, onMove}) => {
 	}
 
 	/*
-		load the data
-	*/
-	React.useEffect(() => {
-		fetch('../../data/areaData.json')
-			.then(res => res.json())
-			.then(setAreaData)
-	}, [])
-
-	/*
 		select && save the 'brushBox' to state
 	*/
 	React.useEffect(() => {
-		setBrushBox(d3Select.select(brushRef.current))
-	}, [areaData])
+		if(data){
+			setBrushBox(d3Select.select(brushRef.current))
+		}
+	}, [data])
 	
 	/*
 		connect the brush to the g wrapper?!
 	*/
 	React.useEffect(() => {
-		if(brushRef.current){
+		if(brushRef.current && brushBox){
 			
 			//build the brushFn
 			brushFn = brush.brushX()
@@ -68,7 +60,7 @@ const SelectableArea = ({dims, onMove}) => {
 	//////////////////////////// /////
 	//// default loading return /////
 	//////////////////////////// /////
-	if(!areaData){
+	if(!data){
 		return (<p>Loading data...</p>)
 	}
 	
@@ -78,16 +70,16 @@ const SelectableArea = ({dims, onMove}) => {
 	//////////////////////////// /////
 	//Set Scales
 	let xScale = scale.scaleLinear()
-		.domain([0, areaData.length - 1])
+		.domain([0, data.length - 1])
 		.range([0, 700])
 
 	let yScale = scale.scaleLinear()
-		.domain([0, d3Arr.max(areaData, d => d.y)])
+		.domain([0, d3Arr.max(data, d => d.y)])
 		.range([100, 0])
 
 	let translateScale = scale.scaleLinear()
 		.domain([0, 700])
-		.range([0, areaData.length - 1])
+		.range([0, data.length - 1])
 
 	//build areaFn
 	let areaFn = d3Shape.area()
@@ -101,7 +93,7 @@ const SelectableArea = ({dims, onMove}) => {
 	// console.log(Math.floor(translateScale(hoverArr[1])))
 	// console.log('%c  - - - - ', 'background-color: orange; color: white;')
 
-	const pathD = areaFn(areaData)
+	const pathD = areaFn(data)
 
 	return(
 		<svg id="selectable" style={dims}>
