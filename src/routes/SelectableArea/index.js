@@ -12,15 +12,32 @@ const SelectableAreaRoute = () => {
 	const moved = (d) => {
 		console.log('%c MOVED!!', 'background-color: darkblue; color: white;')
 		console.log('d')
-		console.log(d)
-		
+		console.log(d)	
 	}
+
+	//Area Data
+	let [areaData, setAreaData] = React.useState(null)
+
+	/*
+		load area data
+	*/
+	React.useEffect(() => {
+		fetch('../../data/areaData.json')
+			.then(res => res.json())
+			.then(setAreaData)
+	}, [])
+
+	if(!areaData){
+		return <p>loading area data...</p>
+	}
+
 	return(
 		<SelectableArea 
 			dims={{
 				width: '700px',
 				height: '100px'
 			}}
+			data={areaData}
 			onMove={moved}
 		/>
 	)
