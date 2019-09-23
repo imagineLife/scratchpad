@@ -8,9 +8,9 @@ const TextDisplay = React.memo(function TextDisplay(){
 	console.log('%c TextDisplay Render', 'background-color: orange; color: white;')
 	
     // const {textStore, textDispatch} = React.useContext(TextContext);
-    const txCtx = React.useContext(TextContext);
-    console.log('txCtx')
-    console.log(txCtx)
+    const { textStore } = React.useContext(TextContext);
+    console.log('{ textStore }')
+    console.log(textStore)
     
     
  //    let resText = (selectedWord) ? getQueriedWord(textStore.text, selectedWord) : textStore.text;
@@ -18,7 +18,12 @@ const TextDisplay = React.memo(function TextDisplay(){
 	// return(
 	// 	<div id="text-display">{resText || 'placeholder...'}</div>
 	// )
-	return(<p>Test</p>)
+	if(!textStore || !textStore.text){
+		return(<p>ONLY Text with Context</p>)
+	}
+
+	return(
+		<p>{textStore.text}</p>)
 })
 
 export default TextDisplay;
