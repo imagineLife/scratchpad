@@ -1,11 +1,11 @@
 import React from "react"
 import { render } from "react-dom"
-import { Router, Link } from "@reach/router"
+import { Router, Link, Redirect } from "@reach/router"
 import SelectableArea from './routes/SelectableArea'
-import TextAndSelection from './routes/TextAndSelection'
+import TextWithComplexState from './routes/TextWithComplexState'
 import WordLists from './routes/WordLists'
 import CombineContexted from './routes/Combine/ContextWrapper'
-import CombineTwo from './routes/CombineTwo'
+import CombineTwoContexted from './routes/CombineTwo/ContextWrapper'
 import Circles from './routes/Circles'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
@@ -19,11 +19,12 @@ const ThisRouter = () => {
       	w: 700,
       	h: 100
       }}/>
-      <TextAndSelection path="text"/>  
+      <TextWithComplexState path="complexText"/>  
       <WordLists path="wordLists" />
       <CombineContexted path="combine"/>  
-      <CombineTwo path="combineTwo"/>  
+      <CombineTwoContexted path="combineTwo"/>  
       <Circles path="circles"/>  
+      <Redirect from="/*" to="/combine"/>
     </Router>
   )
 } 
