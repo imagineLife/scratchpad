@@ -25,7 +25,7 @@ let TextProvider = (props) => {
 	*/
 	React.useEffect(() => {
 		console.log('LOADING TEXT in textProvider');
-		fetch('../../data/demo.txt')
+		fetch('../../data/fullText.txt')
 			.then(res => res.text().then(textRes => {
 				console.log('Fetched Data');
 					textDispatch({type: "TEXT", payload: textRes})
