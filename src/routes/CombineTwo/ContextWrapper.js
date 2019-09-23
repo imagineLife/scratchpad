@@ -2,7 +2,7 @@ import React from 'react';
 import CombineTwo from './'
 
 import {TextProvider, TextProviderWithSelectedWord} from '../../TextContext'
-import {WordListProvider} from '../../WordListContext'
+import {AreaProvider} from '../../AreaContext'
 
 /*
 	Add more providers per UI selectable element...
