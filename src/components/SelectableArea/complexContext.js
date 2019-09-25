@@ -22,20 +22,25 @@ const SelectableArea = ({dims, onMove}) => {
 	
 	let areaData = React.useContext(AreaContext)
 	
+	/*
+		called 'onBrush'
+	*/
 	function brushedFn(){
-		// console.log('%c brushed fn', 'background-color: steelblue; color: black;')
-		
 		var selectedPixels = d3Select.event.selection;
-		
 		let scaledBegin = Math.floor(translateScale(selectedPixels[0]))
 		let scaledEnd = Math.floor(translateScale(selectedPixels[1]))
-
 		setHoverArr(selectedPixels)
 		onMove([scaledBegin, scaledEnd])
-
-		// console.log('%c - - - - -', 'background-color: steelblue; color: black;')
-		
 	}
+
+	React.useEffect(()=>{
+		console.log('%c HERE ', 'background-color: pink; color: white;')
+		if(textStore.sentences){
+			console.log('textStore.sentences')
+			console.log(textStore.sentences)
+		}
+		
+	},[textStore.sentences])
 
 	/*
 		select && save the 'brushBox' to state
@@ -47,7 +52,7 @@ const SelectableArea = ({dims, onMove}) => {
 	}, [areaData])
 	
 	/*
-		connect the brush to the g wrapper?!
+		connect the brush to the g wrapper
 	*/
 	React.useEffect(() => {
 		if(brushRef.current && brushBox){
