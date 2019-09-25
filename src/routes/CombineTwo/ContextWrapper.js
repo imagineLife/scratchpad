@@ -1,7 +1,7 @@
 import React from 'react';
 import CombineTwo from './'
 
-import {TextProvider, TextProviderWithSelectedWord} from '../../TextContext'
+import {TextProvider} from '../../TextContext/complex'
 import {AreaProvider} from '../../AreaContext'
 
 /*
