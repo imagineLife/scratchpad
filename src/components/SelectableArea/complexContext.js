@@ -20,7 +20,7 @@ const SelectableArea = ({dims, onMove}) => {
 	let [brushBox,setBrushBox] = React.useState(null)
 	let brushRef = React.useRef()
 	
-	let areaData = React.useContext(AreaContext)
+	let {areaData, setAreaData} = React.useContext(AreaContext)
 	
 	/*
 		called 'onBrush'
@@ -33,13 +33,18 @@ const SelectableArea = ({dims, onMove}) => {
 		onMove([scaledBegin, scaledEnd])
 	}
 
+	/*
+		Set Area Context data 'initially', 
+			from textStore sentences array
+	*/
 	React.useEffect(()=>{
-		console.log('%c HERE ', 'background-color: pink; color: white;')
-		if(textStore.sentences){
-			console.log('textStore.sentences')
-			console.log(textStore.sentences)
+		if(textStore.sentences && !areaData){
+			let preppedAreaData = []
+			textStore.sentences.forEach((s,ind) => {
+				preppedAreaData.push({y: s.wordCount})
+			})
+			setAreaData(preppedAreaData)
 		}
-		
 	},[textStore.sentences])
 
 	/*
@@ -75,8 +80,6 @@ const SelectableArea = ({dims, onMove}) => {
 	//// default loading return /////
 	//////////////////////////// /////
 	if(!areaData || !textStore.sentences){
-		console.log('%c blah', 'background-color: black; color: white;')
-		
 		return (<p>Loading areaData...</p>)
 	}
 	
