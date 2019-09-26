@@ -5,7 +5,7 @@ import * as d3Shape from 'd3-shape'
 import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
-import SelectableArea from '../../components/SelectableArea/UsingContext'
+import SelectableArea from '../../components/SelectableArea/complexContext'
 // import './index.css'
 
 const CombineTwo = () => {
