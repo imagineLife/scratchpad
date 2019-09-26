@@ -1,8 +1,7 @@
 import React from 'react';
 import CombineTwo from './'
 
-import {TextProvider} from '../../TextContext/complex'
-import {AreaProvider} from '../../AreaContext'
+import {TextAreaProvider} from '../../Contexts/TextArea'
 
 /*
 	Add more providers per UI selectable element...
@@ -12,11 +11,9 @@ import {AreaProvider} from '../../AreaContext'
 const Wrapped = () => {
 	console.log('%c WRAPPER', 'background-color: steelblue; color: white;')
 	return (
-		<TextProvider>
-			<AreaProvider>
+		<TextAreaProvider>
 				<CombineTwo />
-			</AreaProvider>
-		</TextProvider>
+		</TextAreaProvider>
 	)
 }
 
