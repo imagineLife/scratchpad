@@ -6,21 +6,19 @@ import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import './index.css'
 
-import {AreaContext} from '../../AreaContext'
-import {TextContext} from '../../TextContext/complex'
+import {TextAreaContext} from '../../Contexts/TextArea'
 
 const SelectableArea = ({dims, onMove}) => {
 
-	let {textStore} = React.useContext(TextContext)
-	console.log('%c SelectableArea txtVals - - -', 'background-color: darkgreen; color: white;')
-	console.log(textStore)
+	let {textStore} = React.useContext(TextAreaContext)
+	console.log('%c - - Selectable Area - -', 'background-color: darkgreen; color: white;')
 	
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
 	let [brushBox,setBrushBox] = React.useState(null)
 	let brushRef = React.useRef()
 	
-	let {areaData, setAreaData} = React.useContext(AreaContext)
+	let {areaData, setAreaData} = React.useContext(TextAreaContext)
 	
 	/*
 		called 'onBrush'
