@@ -6,6 +6,7 @@ import TextWithComplexState from './routes/TextWithComplexState'
 import WordLists from './routes/WordLists'
 import CombineContexted from './routes/Combine/ContextWrapper'
 import CombineTwoContexted from './routes/CombineTwo/ContextWrapper'
+import CombineThreeContexted from './routes/CombineThree/ContextWrapper'
 import Circles from './routes/Circles'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
@@ -23,6 +24,7 @@ const ThisRouter = () => {
       <WordLists path="wordLists" />
       <CombineContexted path="combine"/>  
       <CombineTwoContexted path="combineTwo"/>  
+      <CombineThreeContexted path="combineThree"/>  
       <Circles path="circles"/>  
       <Redirect from="/*" to="/combine"/>
     </Router>
