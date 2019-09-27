@@ -6,18 +6,14 @@ import { getQueriedWord } from '../../lib/getQueriedWord'
 
 const TextDisplay = React.memo(function TextDisplay(){
 	console.log('%c TextDisplay Render', 'background-color: orange; color: white;')
-	
-    // const {textStore, textDispatch} = React.useContext(TextContext);
-    const { textStore } = React.useContext(TextAreaContext);
-    console.log('{ textStore }')
-    console.log(textStore)
+  const { textStore } = React.useContext(TextAreaContext);
 
-	if(!textStore || !textStore.text){
+	if(!textStore || !textStore.displayText){
 		return(<p>ONLY Text with Context</p>)
 	}
 
 	return(
-		<p>{textStore.text}</p>)
+		<p>{textStore.displayText}</p>)
 })
 
 export default TextDisplay;
