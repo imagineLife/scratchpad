@@ -3,7 +3,7 @@ const WordListContext = React.createContext();
 const {Provider, Consumer} = WordListContext;
 // import { TextContext } from '../TextContext'
 
-const WordListProvider = (props) => {
+const CommonWordsProvider = (props) => {
 
 	let [selectedWord, setSelectedWord] = React.useState(null);
 	let [commonWords] = React.useState(['president', 'the', 'we', 'to'])
@@ -21,7 +21,7 @@ const WordListProvider = (props) => {
 
 // export default Provider;
 export {
-	WordListProvider, 
+	CommonWordsProvider, 
 	Consumer as WordListConsumer, 
 	WordListContext
 }
