@@ -10,7 +10,7 @@ import {TextAreaContext} from '../../Contexts/TextArea'
 
 const SelectableArea = ({dims, onMove}) => {
 
-	let {textStore} = React.useContext(TextAreaContext)
+	let {textStore, textAreaDispatch} = React.useContext(TextAreaContext)
 	console.log('%c - - Selectable Area - -', 'background-color: darkgreen; color: white;')
 	
 	let [brushFn, setBrushFn] = React.useState(null)
@@ -28,6 +28,10 @@ const SelectableArea = ({dims, onMove}) => {
 		let scaledBegin = Math.floor(translateScale(selectedPixels[0]))
 		let scaledEnd = Math.floor(translateScale(selectedPixels[1]))
 		setHoverArr(selectedPixels)
+
+		//dispatch Context-updater
+		textAreaDispatch({type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', payload: [scaledBegin, scaledEnd]})
+
 		onMove([scaledBegin, scaledEnd])
 	}
 
