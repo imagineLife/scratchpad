@@ -2,7 +2,7 @@ import React from 'react';
 let TextAreaContext = React.createContext(); 
 let {Provider, Consumer} = TextAreaContext;
 import {getQueriedWord} from '../../lib/getQueriedWord'
-import { getSentences, getWordsByCount } from '../../lib/stats'
+import { getSentences } from '../../lib/stats'
 
 const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
 	let resString = '';
@@ -45,12 +45,12 @@ let TextAreaProvider = (props) => {
 					displayText: updateDisplayText(state.sentences, action.payload)	// [0, 23]
 				}
 				break;
-			case "COMMON_WORDS": 
-				return {
-					...state,
-					commonWords: action.payload
-				}
-				break;
+			// case "COMMON_WORDS": 
+			// 	return {
+			// 		...state,
+			// 		commonWords: action.payload
+			// 	}
+			// 	break;
 			default:
 				return {...state, text: action.payload}	
 				break;
@@ -65,10 +65,10 @@ let TextAreaProvider = (props) => {
 		load the text from textFile 'on load'
 	*/
 	React.useEffect(() => {
-		console.log('LOADING TEXT in textAreaProvider');
+		// console.log('LOADING TEXT in textAreaProvider');
 		fetch('../../data/fullText.txt')
 			.then(res => res.text().then(textRes => {
-				console.log('Fetched Data');
+				// console.log('Fetched Data');
 
 					/*
 						regex Prep 
@@ -95,14 +95,17 @@ let TextAreaProvider = (props) => {
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
 					textAreaDispatch({type: "SENTENCES", payload: getSentences(textRes)})
-					textAreaDispatch({type: "COMMON_WORDS", payload: getWordsByCount(arrOfText).slice(0,9)})
+					// textAreaDispatch({type: "COMMON_WORDS", payload: getWordsByCount(arrOfText).slice(0,9)})
 				}))
 	}, [])
 
 	//build provider value, CONST
-	const providerVal = {textStore, textAreaDispatch, areaData, setAreaData}
+	// const providerVal = {textStore, textAreaDispatch, areaData, setAreaData}
 	
-	return(<Provider value={providerVal}>
+	// console.log('textStore')
+	// console.log(textStore)
+	
+	return(<Provider value={{textStore, textAreaDispatch, areaData, setAreaData}}>
 		{props.children}
 	</Provider>)
 }
