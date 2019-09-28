@@ -163,17 +163,18 @@ function getSentences(srcTxt){
   */
   
   // updated RegEx, stop breaking D.C., into 3 arrays
-  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([^.!?].[^.!?]|[^.!?])/g;
+  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
+  // let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([^.!?].[^.!?]|[^.!?])/g;
   // let sentRegex = /([^\.!\?]+[\.!\?]+)|([^\.!\?]+$)/g;
 
-  let sentences = srcTxt.replace(twoWhiteSpaces, "").replace(standarizeWS, ". $2").match(sentRegex);
-  
-  // let sentences = srcTxt.replace(standarizeWS, ".~x~$2").match(sentRegex);
+  let sentences = srcTxt.replace(twoWhiteSpaces, " ")
+    .replace(standarizeWS, ". $2")
+    .match(sentRegex);
 
   sentences = sentences.map(s => {
     return {
-      text: s.trim(),
-      wordCount: s.trim().split(' ').length
+      text: s.trim(), //'three word sentence'
+      wordCount: s.trim().split(' ').length //3
     }
   })
   return sentences
