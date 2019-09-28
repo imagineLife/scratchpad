@@ -11,8 +11,8 @@ import SelectableArea from '../../components/SelectableArea/complexContext'
 const CombineTwo = () => {
 
 	const moved = (d) => {
-		console.log('d')
-		console.log(d)
+		// console.log('d')
+		// console.log(d)
 	}
 
 	return(
