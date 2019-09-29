@@ -5,15 +5,14 @@ import { TextAreaContext } from '../../Contexts/TextArea'
 import { getQueriedWord } from '../../lib/getQueriedWord'
 
 const TextDisplay = React.memo(function TextDisplay(){
-	console.log('%c TextDisplay Render', 'background-color: orange; color: white;')
-  const { textStore } = React.useContext(TextAreaContext);
+  const { displayText } = React.useContext(TextAreaContext);
 
-	if(!textStore || !textStore.displayText){
-		return(<p>ONLY Text with Context</p>)
+	if(!displayText){
+		return(<p>Text Display Using Complex Context</p>)
 	}
 
 	return(
-		<p>{textStore.displayText}</p>)
+		<p>{displayText}</p>)
 })
 
 export default TextDisplay;
