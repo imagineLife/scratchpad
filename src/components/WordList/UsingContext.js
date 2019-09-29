@@ -1,28 +1,45 @@
 import React from 'react';
 import './index.css'
-import { WordListContext } from '../../WordListContext'
-import { TextContext } from '../../TextContext'
+import { TextAreaContext } from '../../Contexts/TextArea'
+import { WordListContext } from '../../Contexts/CommonWords'
+import { getWordsByCount } from '../../lib/stats'
 
-const WordList = () => {
 
-	let {commonWords, selectedWord, updateSelectedWord} = React.useContext(WordListContext);
-	let txtVals = React.useContext(TextContext)
+const CommonWords = () => {
+	let {displayText} = React.useContext(TextAreaContext)
+	let { commonWords, makeCommonWords } = React.useContext(WordListContext);
 
-	return(<ul>
-		{commonWords.map((w,i) => (
-			<li 
-				key={`${w}$i`} 
-				style={{
-					textDecoration: (selectedWord === w) ? 'underline' : 'none',
-					listStyleType: 'none',
-					cursor: 'pointer'
-				}}
-				className={'word'}
-				onClick={() => updateSelectedWord(w)}>
-				{w}
-			</li>
-		))}
-	</ul>)
+	React.useEffect(() => { //look into useLayoutEffect
+		if(displayText){
+			makeCommonWords(displayText)
+		}
+	}, [displayText])
+
+	if(!displayText && commonWords.length < 1){
+		return(<p>loading Common words...</p>)
+	}
+	
+	return(
+		<ul>
+			{commonWords.map((w,i) => (
+					<li 
+						key={`${w.word}${i}`} 
+						style={{
+							// textDecoration: (selectedWord === w) ? 'underline' : 'none',
+							listStyleType: 'none',
+							cursor: 'pointer'
+						}}
+						className={'word'}
+						onClick={() => {
+							updateSelectedWord(w.word)
+							// textDispatch({type:"COMMON_WORD",payload: w})
+						}}>
+						{w.word}
+					</li>
+				)
+			)}		
+		</ul>
+	)
 }
 
-export default WordList
+export default CommonWords
