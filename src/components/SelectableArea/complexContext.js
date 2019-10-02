@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import * as scale from 'd3-scale'
 import * as d3Arr from 'd3-array'
 import * as d3Shape from 'd3-shape'
@@ -10,15 +10,18 @@ import {TextAreaContext} from '../../Contexts/TextArea'
 
 const SelectableArea = ({dims, onMove}) => {
 
-	let {textStore, textAreaDispatch} = React.useContext(TextAreaContext)
-	console.log('%c - - Selectable Area - -', 'background-color: darkgreen; color: white;')
-	
+	let {
+		sentences, 
+		textAreaDispatch, 
+		areaData, 
+		setAreaData
+	} = React.useContext(TextAreaContext)
+
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
-	let [brushBox,setBrushBox] = React.useState(null)
+	let [brushBoxG,setBrushBoxG] = React.useState(null)
+	let [brushed, setBrushed] = React.useState(false)
 	let brushRef = React.useRef()
-	
-	let {areaData, setAreaData} = React.useContext(TextAreaContext)
 	
 	/*
 		called 'onBrush'
@@ -40,51 +43,53 @@ const SelectableArea = ({dims, onMove}) => {
 			from textStore sentences array
 	*/
 	React.useEffect(()=>{
-		if(textStore.sentences && !areaData){
+		if(sentences && !areaData){
 			let preppedAreaData = []
-			textStore.sentences.forEach((s,ind) => {
+			sentences.forEach((s,ind) => {
 				preppedAreaData.push({y: s.wordCount})
 			})
 			setAreaData(preppedAreaData)
 		}
-	},[textStore.sentences])
+	},[sentences])
 
-	/*
-		select && save the 'brushBox' to state
-	*/
-	React.useEffect(() => {
-		if(areaData){
-			setBrushBox(d3Select.select(brushRef.current))
-		}
-	}, [areaData])
+	////    //////////////////////// /////
+	//	select && save the 'brushBoxG' to state
+	////    //////////////////////// /////
+	// React.useEffect(() => {
+	// 	if(areaData){
+	// 		setBrushBoxG(d3Select.select(brushRef.current))
+	// 	}
+	// }, [areaData])
+
 	
-	/*
-		connect the brush to the g wrapper
-	*/
+	////    //////////////////////// /////
+	//	connect the brush to the g wrapper
+	////    //////////////////////// /////
 	React.useEffect(() => {
-		if(brushRef.current && brushBox){
+		if(brushRef && brushRef.current && areaData){
 			
 			//build the brushFn
-			brushFn = brush.brushX()
+			let thisBrushFN = brush.brushX()
+				// .extent([0,0], [[700, 100]])
 				.handleSize(10)
 				.on('brush', brushedFn)
 
 			// set the brushFn to the burshBox, 'instantiating'
 			// the brush UI element(s)
-			brushBox.call(brushFn);
+			let thisBrushBox = d3Select.select(brushRef.current);
+			thisBrushBox.call(thisBrushFN);
 
 			//set the initial overlay to 1/4 width
-			brushFn.move(brushBox, hoverArr)
+			thisBrushFN.move(thisBrushBox, hoverArr)
 		}
-	}, [brushBox])
+	}, [brushRef, areaData])
 
 	//////////////////////////// /////
 	//// default loading return /////
 	//////////////////////////// /////
-	if(!areaData || !textStore.sentences){
+	if(!areaData || !sentences){
 		return (<p>Loading areaData...</p>)
 	}
-	
 
 	////////////////////////// /////
 	// 			If SourceData		   /////
@@ -110,15 +115,22 @@ const SelectableArea = ({dims, onMove}) => {
 
 	const pathD = areaFn(areaData)
 
+	if(!pathD || !xScale || !yScale || !areaFn || !translateScale){
+		return(<p>loading...</p>)
+	}
+
 	return(
-		<svg id="selectable" style={dims}>
+		<Fragment>
+			<svg id="selectable" style={dims}>
 		  <g className="g-wrapper">
 		    <path 
 		      d={pathD}
 					fill={'#ccc'} />
 				<g className="brush-g-window" ref={brushRef} />
 			</g>
-		</svg>)
+		</svg>
+		</Fragment>
+		)
 }
 
 export default SelectableArea
