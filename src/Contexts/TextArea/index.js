@@ -42,6 +42,7 @@ let TextAreaProvider = (props) => {
 			case "UPDATE_DISPLAY_TEXT_FROM_AREA":
 				return {
 					...state,
+					selectedAreaArr: action.payload,
 					displayText: updateDisplayText(state.sentences, action.payload)	// [0, 23]
 				}
 				break;
@@ -98,14 +99,8 @@ let TextAreaProvider = (props) => {
 					// textAreaDispatch({type: "COMMON_WORDS", payload: getWordsByCount(arrOfText).slice(0,9)})
 				}))
 	}, [])
-
-	//build provider value, CONST
-	// const providerVal = {textStore, textAreaDispatch, areaData, setAreaData}
 	
-	// console.log('textStore')
-	// console.log(textStore)
-	
-	return(<Provider value={{textStore, textAreaDispatch, areaData, setAreaData}}>
+	return(<Provider value={{textAreaDispatch, areaData, setAreaData, ...textStore}}>
 		{props.children}
 	</Provider>)
 }
