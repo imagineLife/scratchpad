@@ -7,8 +7,10 @@ import { getWordsByCount } from '../../lib/stats'
 
 const CommonWords = () => {
 	let {displayText} = React.useContext(TextAreaContext)
-	let { commonWords, makeCommonWords } = React.useContext(WordListContext);
-
+	let { commonWords, makeCommonWords, selectedWord, setSelectedWord } = React.useContext(WordListContext);
+	console.log('selectedWord')
+	console.log(selectedWord)
+	
 	React.useEffect(() => { //look into useLayoutEffect
 		if(displayText){
 			makeCommonWords(displayText)
@@ -25,13 +27,13 @@ const CommonWords = () => {
 					<li 
 						key={`${w.word}${i}`} 
 						style={{
-							// textDecoration: (selectedWord === w) ? 'underline' : 'none',
+							textDecoration: (selectedWord === w.word) ? 'underline' : 'none',
 							listStyleType: 'none',
 							cursor: 'pointer'
 						}}
 						className={'word'}
 						onClick={() => {
-							updateSelectedWord(w.word)
+							setSelectedWord(w.word)
 							// textDispatch({type:"COMMON_WORD",payload: w})
 						}}>
 						{w.word}
