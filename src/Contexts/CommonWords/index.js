@@ -2,11 +2,14 @@ import React from 'react';
 const WordListContext = React.createContext(); 
 const {Provider, Consumer} = WordListContext;
 import { getWordsByCount } from '../../lib/stats'
-// import { TextAreaProvider } from '../TextArea/'
+import { TextAreaContext } from '../TextArea/'
 
 const CommonWordsProvider = (props) => {
 
-	// let tpvals = React.useContext(TextAreaProvider)	
+	let txtVals = React.useContext(TextAreaContext)	
+	console.log('txtVals')
+	console.log(txtVals)
+	
 	let [selectedWord, setSelectedWord] = React.useState(null);
 	let [commonWords, setCommonWords] = React.useState([])
 
@@ -16,7 +19,7 @@ const CommonWordsProvider = (props) => {
 	// let contextVal = { selectedWord, setSelectedWord }	
 
 // console.log('%c C o m o n words context', 'background-color: pink; color: white;')
-	return(<Provider value={{ selectedWord, setSelectedWord, makeCommonWords }}>
+	return(<Provider value={{ selectedWord, setSelectedWord, makeCommonWords, commonWords }}>
 		{props.children}
 	</Provider>)
 }
