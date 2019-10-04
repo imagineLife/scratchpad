@@ -8,7 +8,7 @@ import './index.css'
 
 import {TextAreaContext} from '../../Contexts/TextArea'
 
-const SelectableArea = ({dims, onMove}) => {
+const SelectableArea = ({onMove}) => {
 
 	let {
 		sentences, 
@@ -21,6 +21,8 @@ const SelectableArea = ({dims, onMove}) => {
 	let [hoverArr, setHoverArr] = React.useState([0,175])
 	let [brushBoxG,setBrushBoxG] = React.useState(null)
 	let [brushed, setBrushed] = React.useState(false)
+	let [dims, setDims] = React.useState({width: '700px', height: '130px'})
+	let [set, setSet] = React.useState(false)
 	let brushRef = React.useRef()
 	
 	/*
@@ -51,16 +53,6 @@ const SelectableArea = ({dims, onMove}) => {
 			setAreaData(preppedAreaData)
 		}
 	},[sentences])
-
-	////    //////////////////////// /////
-	//	select && save the 'brushBoxG' to state
-	////    //////////////////////// /////
-	// React.useEffect(() => {
-	// 	if(areaData){
-	// 		setBrushBoxG(d3Select.select(brushRef.current))
-	// 	}
-	// }, [areaData])
-
 	
 	////    //////////////////////// /////
 	//	connect the brush to the g wrapper
@@ -77,10 +69,12 @@ const SelectableArea = ({dims, onMove}) => {
 			// set the brushFn to the burshBox, 'instantiating'
 			// the brush UI element(s)
 			let thisBrushBox = d3Select.select(brushRef.current);
-			thisBrushBox.call(thisBrushFN);
+			setTimeout(() => {
+				thisBrushBox.call(thisBrushFN);
 
-			//set the initial overlay to 1/4 width
-			thisBrushFN.move(thisBrushBox, hoverArr)
+				//set the initial overlay to 1/4 width
+				thisBrushFN.move(thisBrushBox, hoverArr)
+			}, 10)
 		}
 	}, [brushRef, areaData])
 
@@ -122,12 +116,17 @@ const SelectableArea = ({dims, onMove}) => {
 	return(
 		<Fragment>
 			<svg id="selectable" style={dims}>
-		  <g className="g-wrapper">
-		    <path 
-		      d={pathD}
-					fill={'#ccc'} />
-				<g className="brush-g-window" ref={brushRef} />
-			</g>
+			  <g className="g-wrapper">
+			    
+			    {/*Area Path*/}
+			    <path 
+			      d={pathD}
+						fill={'#ccc'} />
+					
+					{/*Brush Handle*/}
+					<g className="brush-g-window" ref={brushRef} />
+
+				</g>
 		</svg>
 		</Fragment>
 		)
