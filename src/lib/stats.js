@@ -1,6 +1,25 @@
+const convertStrToWordArr = str => {
+  //gets rid of line-break or whatever
+  let newReg = /(^)?\s*$/gm;
+
+  let uniqueWordRegex = /([a-z]\w+)(?![\s\S]*\1)/gi
+
+  //remove some punc
+  let puncRegEx = /[.,-]/g
+
+  //apply regex
+  const regexTxt = str.replace(newReg," ").replace(puncRegEx, "")
+  const uniqueWordCount = str.match(uniqueWordRegex).length
+  
+  //split txt into arr of words
+  return regexTxt.split(" ")
+}
+
 // creates an object of the most-frequent words occuring
 function getWordsByCount(srcWordArr) {
 
+  let startingArr = (typeof srcWordArr == 'string') ? convertStrToWordArr(srcWordArr) : srcWordArr;
+  
   // https://en.wikipedia.org/wiki/Most_common_words_in_English
   let topThirty = ['the', 'be', 'to', 'of', 'and', 
   'a', 'in', 'that', 'have', 'i',
@@ -10,7 +29,7 @@ function getWordsByCount(srcWordArr) {
   'they', 'we', 'say', 'her', 'she' ]
   let freqUsedWords = [];
 
-  srcWordArr.forEach(function(singleWord){
+  startingArr.forEach(function(singleWord){
       let lowerCaseWord = singleWord.toLowerCase()
       let thisIndex = null
       // check if this word is already in array
@@ -38,9 +57,12 @@ function getWordsByCount(srcWordArr) {
 }
 
 function getWordsByLength(srcWordArr){
+
+  let startingArr = (typeof srcWordArr == 'string') ? convertStrToWordArr(srcWordArr) : srcWordArr;
+  
   let wordsByLength = [];
 
-  srcWordArr.forEach(function(singleWord){
+  startingArr.forEach(function(singleWord){
       let thisIndex = null
       // check if this word is already in array
       let thisWordLength = singleWord.length
