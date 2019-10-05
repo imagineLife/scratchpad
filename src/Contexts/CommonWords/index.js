@@ -5,9 +5,27 @@ import { getWordsByCount, getLongestThirty, convertStrToWordArr } from '../../li
 import { TextAreaContext } from '../TextArea/'
 
 const CommonWordsProvider = (props) => {
+ 
+ 	const initialState = {
+ 		"Common Words": [],
+ 		"Words By Length": [],
+ 		"Longest Words": []
+ 	};
 
+ 	const reducer = (state, action) => {
+		let resText;
+		switch(action.type){
+			default:
+				return {...state}	
+				break;
+		}
+	}
+
+
+	let [textStore, textAreaDispatch] = React.useReducer(reducer, initialState)
+ 
 	let txtVals = React.useContext(TextAreaContext)	
-	
+
 	let [selectedWord, setSelectedWord] = React.useState(null);
 	let [commonWords, setCommonWords] = React.useState([])
 	let [longestNine, setLongestNine] = React.useState([])
