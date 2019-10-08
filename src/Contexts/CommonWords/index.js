@@ -1,20 +1,21 @@
 import React from 'react';
 const WordListContext = React.createContext(); 
 const {Provider, Consumer} = WordListContext;
-import { getWordsByCount, getLongestThirty, convertStrToWordArr } from '../../lib/stats'
+import { getWordsByCount, getLongestThirty, convertStrToWordArr, ingWords } from '../../lib/stats'
 import { TextAreaContext } from '../TextArea/'
 
 const CommonWordsProvider = (props) => {
  
  	const initialState = {
  		"Common Words": [],
- 		"Longest Words": []
+ 		"Longest Words": [],
+ 		"Action Words": []
  	};
 
  	const reducer = (state, action) => {
 		let resText;
 		switch(action.type){
-			case "LONGEST_WORD":
+			case "LONGEST_WORDS":
 				return {
 					...state,
 					"Longest Words" : action.payload
@@ -25,6 +26,13 @@ const CommonWordsProvider = (props) => {
 				return {
 					...state,
 					"Common Words" : action.payload
+				}
+				break;
+
+			case "ACTION_WORDS":
+				return {
+					...state,
+					"Action Words" : action.payload
 				}
 				break;
 			
@@ -48,7 +56,11 @@ const CommonWordsProvider = (props) => {
 		setCommonWords(getWordsByCount(arrayOfWords).slice(0,10))
 		setLongestNine(getLongestThirty(arrayOfWords).slice(0,10))
 		setWordLists({type: "COMMON_WORDS", payload: getWordsByCount(arrayOfWords).slice(0,10)})
-		setWordLists({type: "LONGEST_WORD", payload: getLongestThirty(arrayOfWords).slice(0,10)})
+		setWordLists({type: "LONGEST_WORDS", payload: getLongestThirty(arrayOfWords).slice(0,10)})
+		setWordLists({type: "ACTION_WORDS", payload: (function getINGWords(){
+			let words = ingWords(sentencesString)
+			return words.filter((itm,idx) => words.indexOf(itm) === idx)
+		})()})
 	}
 
 	console.log('%c ---wordLists---', 'background-color: steelblue; color: white;')
