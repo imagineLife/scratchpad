@@ -84,8 +84,10 @@ function getWordsByLength(srcWordArr){
 
 function getLongestThirty(arr){
  
+  let startingArr = (typeof arr == 'string') ? convertStrToWordArr(arr) : arr;
+
   //make NO REPEATS
-  let uniqueWords = arr.reduce(function(acc,val){
+  let uniqueWords = startingArr.reduce(function(acc,val){
     if (acc.indexOf(val.toLowerCase()) < 0 ) acc.push(val.toLowerCase());
     return acc;
   },[]);
@@ -124,71 +126,11 @@ function ingWordsAndNextWord(str){
 
 function getSentences(srcTxt){
 
-  /*gets rid of line-break or \n etc.
-    \s => space-character (tab, new-line, carraige return etc)
-    * =>  0x or more (two line-breaks & a space, two-line-breaks etc)
-    $ => at end of line
-    ()? => optional, was (^)?\s*$/gm but the m makes this redundant
-
-   /\s*m/gm
-
-  /*removes double \n 
-   OR
-  \n @ beginng
-   OR 
-   \n at end
-  
-    \s{2} == \n\n
-    ^\s   == beginning with whitespace
-
-    m flag == multi-line, each line is a new instance to treat separately
-
-   ([?!.]\s.)
-    ==> find a ?!. if it has a space behind it, thats ok :)
-    MATCH 
-
-
-  */  
   let twoWhiteSpaces = /(\s{2})/gm;
-  let standarizeWS = /([?!.]\s)(.)/gm;
-  /*
-    needs updating to deal with  ==> "blah blah blah D.C.,"
-    maybe convert * to + (+ at least 1 exists), converting OPTIONAL spae to REQUIRED space
-    * = 0 or more
-    + = 1 or more
-
-  */
-
-  //Was in use?
-  // let standarizeWS = /([?!.]\s+)(.)/gm;
-
-  //
-  /*
-
-    1. @ beginning
-      anything accept ., !, or ?
-    2. [find-anything-in-here]
-      2b. [^find-anything-ACCEPT-these-chars]
-    3.+ mean make the match at least 1x
-    4. overall 1-3 - find 2 chars in a row that aren't . ! ?
-    5.| OR
-    6. find one char that is NOT a . ! ? @ the end
-      6b. +$ that is right before the end of the line
-    () => are capture groups
-
-    ^ means...
-      INSIDE a [^etc...] DONT FIND
-      /^etc... start @ beginning of the line (the first character)
-
-
-  when character-counting sentences, remove whitespaces!
-  */
-  
-  // updated RegEx, stop breaking D.C., into 3 arrays
+  let standarizeWS = /([?!.]\s)(.)/gm;  
   let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
-  // let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([^.!?].[^.!?]|[^.!?])/g;
-  // let sentRegex = /([^\.!\?]+[\.!\?]+)|([^\.!\?]+$)/g;
 
+  //arr of sentences
   let sentences = srcTxt.replace(twoWhiteSpaces, " ")
     .replace(standarizeWS, ". $2")
     .match(sentRegex);
@@ -203,6 +145,7 @@ function getSentences(srcTxt){
 }
 
 module.exports = { 
+  convertStrToWordArr,
   getLongestThirty, 
   getWordsByCount, 
   getWordsByLength, 
