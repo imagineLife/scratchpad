@@ -31,7 +31,7 @@ let TextAreaProvider = (props) => {
 	*/
 	const reducer = (state, action) => {
 		let resText;
-			
+								
 		switch(action.type){
 			case "SENTENCES": 
 				return {
@@ -96,7 +96,7 @@ let TextAreaProvider = (props) => {
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
 					textAreaDispatch({type: "SENTENCES", payload: getSentences(textRes)})
-					// textAreaDispatch({type: "COMMON_WORDS", payload: getWordsByCount(arrOfText).slice(0,9)})
+
 				}))
 	}, [])
 	
