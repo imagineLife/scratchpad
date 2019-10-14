@@ -1,5 +1,6 @@
 import React from 'react';
 
+    //(text: source text blob, hlText: selectedWord-to-hightlight)
 const getQueriedWord = (text, hlText) => {
 
     //remove existing tags associated with this selection
@@ -16,8 +17,7 @@ const getQueriedWord = (text, hlText) => {
     //update the text body
     let resText = text.replace(removeRegex,"$1").replace(newStyleRegex, `<span class="selected-text">$1</span>`)
 
-    
-    return <p dangerouslySetInnerHTML={{__html: resText}}></p>
+    return resText
 
 }
 
