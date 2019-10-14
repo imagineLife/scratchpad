@@ -46,12 +46,6 @@ let TextAreaProvider = (props) => {
 					displayText: updateDisplayText(state.sentences, action.payload)	// [0, 23]
 				}
 				break;
-			// case "COMMON_WORDS": 
-			// 	return {
-			// 		...state,
-			// 		commonWords: action.payload
-			// 	}
-			// 	break;
 			default:
 				return {...state, text: action.payload}	
 				break;
