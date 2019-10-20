@@ -5,11 +5,19 @@ import { WordListContext } from '../../Contexts/CommonWords'
 
 const CommonWords = () => {
 	let {displayText} = React.useContext(TextAreaContext)
-	let { commonWords, makeCommonWords, selectedWord, setSelectedWord, longestNine, wordLists } = React.useContext(WordListContext);
+	let { 
+		makeCommonWords, 
+		wordLists, 
+		selectWordList, 
+		wordListFocus 
+	} = React.useContext(WordListContext);
 	
 	console.log('%c Word-List-Picker', 'background-color: darkblue; color: white;')
 	console.log('wordLists')
 	console.log(wordLists)
+	console.log('wordListFocus')
+	console.log(wordListFocus)
+	
 	
 	
 	React.useEffect(() => { //look into useLayoutEffect
@@ -32,7 +40,12 @@ const CommonWords = () => {
 			{/* List of List-Titles */}
 			<ul id="word-lists">
 				{lists.map((l, idx) => (
-					<li>{l}</li>
+					<li 
+						key={`${l}-${idx}`} 
+						className={`word-list-name ${wordListFocus === l ? 'selected' : ''}`}
+						onClick={() => {
+						selectWordList((l))
+					}}>{l}</li>
 				))}
 			</ul>
 		</section>
