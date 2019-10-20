@@ -49,15 +49,14 @@ const TextDisplay = React.memo(function TextDisplay(){
     .match(sentRegex);
 
 
-  let columnCount = Math.ceil(inViewSentences.length / 10)
-  console.log('columnCount')
-  console.log(columnCount)
-  
+  let columnCount = Math.ceil(inViewSentences.length / 15)
+  columnCount = Math.min(columnCount, 4)
+
   let columnStyle = {
 		columns: columnCount, //10-sentence-columns,
 		overflowX: 'scroll',
 		columnRuleStyle: 'solid',
-		maxHeight: '350px'
+		height: '450px'
 	}
 
 	/* apply theme to theme-d sentence*/
