@@ -14,6 +14,8 @@ const TextDisplay = React.memo(function TextDisplay(){
 		}
 	}
 
+
+
 	//1. load txt string
   const { displayText, selectedAreaArr, sentences } = React.useContext(TextAreaContext);
 
@@ -34,6 +36,30 @@ const TextDisplay = React.memo(function TextDisplay(){
 		resText = getQueriedWord(displayText, selectedWord)
 	}
 
+	/*TODO: 
+		Convert to use 'sentences' array from textAReaContext?! [ {text: 'sentenceOne...'...etc}]
+		&& area-selection array [0, 24] 
+	*/
+	let twoWhiteSpaces = /(\s{2})/gm;
+  let standarizeWS = /([?!.]\s)(.)/gm;  
+  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
+	
+  let inViewSentences = resText.replace(twoWhiteSpaces, " ")
+    .replace(standarizeWS, ". $2")
+    .match(sentRegex);
+
+
+  let columnCount = Math.ceil(inViewSentences.length / 10)
+  console.log('columnCount')
+  console.log(columnCount)
+  
+  let columnStyle = {
+		columns: columnCount, //10-sentence-columns,
+		overflowX: 'scroll',
+		columnRuleStyle: 'solid',
+		maxHeight: '350px'
+	}
+
 	/* apply theme to theme-d sentence*/
 	if(selectedTheme){
 
@@ -41,18 +67,6 @@ const TextDisplay = React.memo(function TextDisplay(){
 		let firstSentenceIndex = selectedAreaArr[0]
 		//[0]
 		
-		/*TODO: 
-			Convert to use 'sentences' array from textAReaContext?! [ {text: 'sentenceOne...'...etc}]
-			&& area-selection array [0, 24] 
-		*/
-		let twoWhiteSpaces = /(\s{2})/gm;
-	  let standarizeWS = /([?!.]\s)(.)/gm;  
-	  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
-		
-	  let inViewSentences = resText.replace(twoWhiteSpaces, " ")
-	    .replace(standarizeWS, ". $2")
-	    .match(sentRegex);
-
 	  /*
 			TODO:
 			Figure out best way to store & work with themes...
@@ -60,7 +74,7 @@ const TextDisplay = React.memo(function TextDisplay(){
 		let themesArray = Object.keys(selectedTheme) //['unity']
 		let curThemeKeyWords = selectedTheme[themesArray] // ['we', together]
 
-		//
+		//loop through theme words
 	  for(let k in curThemeKeyWords){ //k = we, k= together
 	  	
 	  	//Apply theme html to each sentence
@@ -68,23 +82,25 @@ const TextDisplay = React.memo(function TextDisplay(){
 		  curThemeKeyWords[k].forEach((sentenceNumber, idx) => {
 
 		  		//sentence offset magic
-		  		let sentenceOffset = sentenceNumber - firstSentenceIndex - 1 // deal with 0-based arr indexing
+		  		// deal with 0-based arr indexing
+		  		let sentenceOffset = sentenceNumber - firstSentenceIndex - 1 
 		  		
-		  		const matchedThemeRegex = new RegExp(k, 'gi')
-		  		//italicize theme-key-word
-		  		let matchedThemeTxt = inViewSentences[sentenceOffset]
-		  			.replace(matchedThemeRegex, `<i>${k}</i>`) //figure-out the capitalization
+		  		if(inViewSentences[sentenceOffset]){
+		  			const matchedThemeRegex = new RegExp(k, 'gi')
+			  		//italicize theme-key-word
+			  		let matchedThemeTxt = inViewSentences[sentenceOffset]
+			  			.replace(matchedThemeRegex, `<i>${k}</i>`) //figure-out the capitalization
 
-		  		//apply theme
-		  		inViewSentences[sentenceOffset] = `<span class="themed theme-${k}">${matchedThemeTxt}</span>` //inViewSentences[sentenceOffset]
+			  		//apply theme
+			  		inViewSentences[sentenceOffset] = `<span class="themed theme-${k}">${matchedThemeTxt}</span>` //inViewSentences[sentenceOffset]
+		  		}
 		  })
 	  }
 
 	  //re-join sentences
 	  resText = inViewSentences.join("")
-
 	}
-	return <p className="display-text" dangerouslySetInnerHTML={{__html: resText}}></p>
+	return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{__html: resText}}></p>
 })
 
 export default TextDisplay;
