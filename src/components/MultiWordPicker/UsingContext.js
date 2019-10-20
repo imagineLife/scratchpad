@@ -2,12 +2,15 @@ import React from 'react';
 import './index.css'
 import { TextAreaContext } from '../../Contexts/TextArea'
 import { WordListContext } from '../../Contexts/CommonWords'
-import { getWordsByCount } from '../../lib/stats'
-
 
 const CommonWords = () => {
 	let {displayText} = React.useContext(TextAreaContext)
-	let { commonWords, makeCommonWords, selectedWord, setSelectedWord, longestNine } = React.useContext(WordListContext);
+	let { commonWords, makeCommonWords, selectedWord, setSelectedWord, longestNine, wordLists } = React.useContext(WordListContext);
+	
+	console.log('%c Word-List-Picker', 'background-color: darkblue; color: white;')
+	console.log('wordLists')
+	console.log(wordLists)
+	
 	
 	React.useEffect(() => { //look into useLayoutEffect
 		if(displayText){
@@ -15,10 +18,31 @@ const CommonWords = () => {
 		}
 	}, [displayText])
 
-	if(!displayText && commonWords.length < 1){
-		return(<p>loading Common words...</p>)
+	if(!wordLists){
+		return <p>Missing Word Lists</p>
 	}
 	
+	let lists = Object.keys(wordLists)
+	console.log('lists')
+	console.log(lists)
+	console.log('%c // - - - - - //', 'background-color: orange; color: white;')
+	return(
+		<section id="words-of-interest">
+			<h2>Words Of Interest</h2>
+			{/* List of List-Titles */}
+			<ul id="word-lists">
+				{lists.map((l, idx) => (
+					<li>{l}</li>
+				))}
+			</ul>
+		</section>
+	)
+
+}
+
+export default CommonWords
+
+/*
 	return(
 		<ul>
 			{commonWords.map((w,i) => (
@@ -40,6 +64,4 @@ const CommonWords = () => {
 			)}		
 		</ul>
 	)
-}
-
-export default CommonWords
+*/
