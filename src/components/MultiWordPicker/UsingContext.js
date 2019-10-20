@@ -12,7 +12,7 @@ const CommonWords = () => {
 		wordListFocus 
 	} = React.useContext(WordListContext);
 	
-	console.log('%c Word-List-Picker', 'background-color: darkblue; color: white;')
+	console.log('%c - - - Word-List-Picker - - -', 'background-color: darkblue; color: white;')
 	console.log('wordLists')
 	console.log(wordLists)
 	console.log('wordListFocus')
@@ -33,48 +33,47 @@ const CommonWords = () => {
 	let lists = Object.keys(wordLists)
 	console.log('lists')
 	console.log(lists)
-	console.log('%c // - - - - - //', 'background-color: orange; color: white;')
+	console.log('%c // - - - - - //', 'background-color: darkblue; color: white;')
 	return(
 		<section id="words-of-interest">
 			<h2>Words Of Interest</h2>
+
 			{/* List of List-Titles */}
-			<ul id="word-lists">
-				{lists.map((l, idx) => (
-					<li 
-						key={`${l}-${idx}`} 
-						className={`word-list-name ${wordListFocus === l ? 'selected' : ''}`}
-						onClick={() => {
-						selectWordList((l))
-					}}>{l}</li>
-				))}
-			</ul>
+			<section id="word-lists">
+				<ul id="word-lists">
+					{lists.map((l, idx) => (
+						<li 
+							key={`${l}-${idx}`} 
+							className={`word-list-name${wordListFocus === l ? ' selected' : ''}`}
+							onClick={() => {
+							selectWordList((l))
+						}}>{l}</li>
+					))}
+				</ul>
+			</section>
+
+		{/* Words from selected word-list */}
+			<section id="words">
+				{wordListFocus && 
+					<ul id="word-lists">
+					{wordLists[wordListFocus].map((l, idx) => {
+
+						let thisWord = wordListFocus == 'Common Words' ? l.word : l
+						return (
+							<li 
+								key={`${thisWord}-${idx}`} 
+								className={`focus-word`}
+								onClick={() => {
+								selectWordList((l))
+							}}>{thisWord}</li>
+						)
+					})}
+				</ul>
+				}
+			</section>
 		</section>
 	)
 
 }
 
 export default CommonWords
-
-/*
-	return(
-		<ul>
-			{commonWords.map((w,i) => (
-					<li 
-						key={`${w.word}${i}`} 
-						style={{
-							textDecoration: (selectedWord === w.word) ? 'underline' : 'none',
-							listStyleType: 'none',
-							cursor: 'pointer'
-						}}
-						className={'word'}
-						onClick={() => {
-							setSelectedWord(w.word)
-							// textDispatch({type:"COMMON_WORD",payload: w})
-						}}>
-						{w.word}
-					</li>
-				)
-			)}		
-		</ul>
-	)
-*/
