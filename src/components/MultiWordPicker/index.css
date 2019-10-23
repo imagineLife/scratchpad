@@ -1,12 +1,29 @@
-.word-list-name, .focus-word{
+#words-of-interest{
+	border: 1px solid gray;
+	max-width: 300px;
+  max-height: 275px;
+}
+
+#word-list, #focus-words{
+	max-width: 150px;
+	min-height: 300px;
+	display: inline-block;
+}
+
+#word-picker-title{
+	display: inline-block;
+}
+
+
+.word-list-option, .focus-word-option{
 	list-style-type: none;
 	cursor: pointer;
 }
 
-.word-list-name:hover, .focus-word:hover{
+.word-list-option:hover, .focus-word-option:hover{
 	text-decoration: underline;
 }
 
-.word-list-name.selected, .focus-word.selected{
+.word-list-option.selected, .focus-word-option.selected{
 	font-weight: bold;
 }
