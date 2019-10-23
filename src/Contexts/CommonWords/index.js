@@ -50,7 +50,7 @@ const CommonWordsProvider = (props) => {
 	let [selectedWord, setSelectedWord] = React.useState(null);
 	let [commonWords, setCommonWords] = React.useState([])
 	let [longestNine, setLongestNine] = React.useState([])
-
+	let [wordListFocus,selectWordList] = React.useState(null)
 	const makeCommonWords = (sentencesString)=> {
 		let arrayOfWords = convertStrToWordArr(sentencesString)		
 		setCommonWords(getWordsByCount(arrayOfWords).slice(0,10))
@@ -59,17 +59,23 @@ const CommonWordsProvider = (props) => {
 		setWordLists({type: "LONGEST_WORDS", payload: getLongestThirty(arrayOfWords).slice(0,10)})
 		setWordLists({type: "ACTION_WORDS", payload: (function getINGWords(){
 			let words = ingWords(sentencesString)
+			if(!words) {
+				return []
+			}
 			return words.filter((itm,idx) => words.indexOf(itm) === idx)
 		})()})
 	}
 
-	console.log('%c ---wordLists---', 'background-color: steelblue; color: white;')
-	console.log(wordLists)
-	console.log('// - - - - - //')
-	
-	
-
-	return(<Provider value={{ selectedWord, setSelectedWord, makeCommonWords, commonWords, longestNine}}>
+	return(<Provider value={{ 
+		selectedWord, 
+		setSelectedWord, 
+		makeCommonWords, 
+		commonWords, 
+		longestNine, 
+		wordLists,
+		selectWordList,
+		wordListFocus
+	}}>
 		{props.children}
 	</Provider>)
 }
