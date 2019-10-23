@@ -14,14 +14,6 @@ const CommonWords = () => {
 		wordListFocus 
 	} = React.useContext(WordListContext);
 	
-	console.log('%c - - - Word-List-Picker - - -', 'background-color: darkblue; color: white;')
-	console.log('wordLists')
-	console.log(wordLists)
-	console.log('wordListFocus')
-	console.log(wordListFocus)
-	
-	
-	
 	React.useEffect(() => { //look into useLayoutEffect
 		if(displayText){
 			makeCommonWords(displayText)
@@ -33,20 +25,18 @@ const CommonWords = () => {
 	}
 	
 	let lists = Object.keys(wordLists)
-	console.log('lists')
-	console.log(lists)
-	console.log('%c // - - - - - //', 'background-color: darkblue; color: white;')
+
 	return(
 		<section id="words-of-interest">
-			<h2>Words Of Interest</h2>
+			<h2 id="word-picker-title">Words Of Interest</h2>
 
 			{/* List of List-Titles */}
-			<section id="word-lists">
+			<section id="word-list">
 				<ul id="word-lists">
 					{lists.map((l, idx) => (
 						<li 
 							key={`${l}-${idx}`} 
-							className={`word-list-name${wordListFocus === l ? ' selected' : ''}`}
+							className={`word-list-option${wordListFocus === l ? ' selected' : ''}`}
 							onClick={() => {
 							selectWordList((l))
 						}}>{l}</li>
@@ -55,16 +45,16 @@ const CommonWords = () => {
 			</section>
 
 		{/* Words from selected word-list */}
-			<section id="words">
+			<section id="focus-words">
 				{wordListFocus && 
-					<ul id="word-lists">
+					<ul id="focus-word-list">
 					{wordLists[wordListFocus].map((l, idx) => {
 
 						let thisWord = wordListFocus == 'Common Words' ? l.word : l
 						return (
 							<li 
 								key={`${thisWord}-${idx}`} 
-								className={`focus-word${ selectedWord && selectedWord === thisWord ? ' selected' : ''}`}
+								className={`focus-word-option ${ selectedWord && selectedWord === thisWord ? ' selected' : ''}`}
 								onClick={() => {
 								setSelectedWord((thisWord))
 							}}>{thisWord}</li>
