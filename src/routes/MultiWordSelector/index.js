@@ -6,7 +6,7 @@ import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
 import SelectableArea from '../../components/SelectableArea/complexContext'
-import CommonWords from '../../components/WordList/UsingContext'
+import WordListPicker from '../../components/MultiWordPicker/UsingContext'
 
 const CombineTwo = () => {
 
@@ -24,7 +24,7 @@ const CombineTwo = () => {
 				}}
 				onMove={moved}
 			/>
-			<CommonWords />
+			<WordListPicker />
 			<TextDisplay />
 		</React.Fragment>
 	)
