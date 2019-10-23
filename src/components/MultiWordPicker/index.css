@@ -1,12 +1,12 @@
-.word-list-name{
+.word-list-name, .focus-word{
 	list-style-type: none;
 	cursor: pointer;
 }
 
-.word-list-name:hover{
+.word-list-name:hover, .focus-word:hover{
 	text-decoration: underline;
 }
 
-.word-list-name.selected{
+.word-list-name.selected, .focus-word.selected{
 	font-weight: bold;
 }

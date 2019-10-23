@@ -9,6 +9,8 @@ const CommonWords = () => {
 		makeCommonWords, 
 		wordLists, 
 		selectWordList, 
+		setSelectedWord,
+		selectedWord,
 		wordListFocus 
 	} = React.useContext(WordListContext);
 	
@@ -62,9 +64,9 @@ const CommonWords = () => {
 						return (
 							<li 
 								key={`${thisWord}-${idx}`} 
-								className={`focus-word`}
+								className={`focus-word${ selectedWord && selectedWord === thisWord ? ' selected' : ''}`}
 								onClick={() => {
-								selectWordList((l))
+								setSelectedWord((thisWord))
 							}}>{thisWord}</li>
 						)
 					})}
