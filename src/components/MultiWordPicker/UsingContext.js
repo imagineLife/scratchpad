@@ -32,6 +32,7 @@ const CommonWords = () => {
 
 			{/* List of List-Titles */}
 			<section id="word-list">
+				<h3 className="word-list-title">Word Lists</h3>
 				<ul id="word-lists">
 					{lists.map((l, idx) => (
 						<li 
@@ -46,6 +47,7 @@ const CommonWords = () => {
 
 		{/* Words from selected word-list */}
 			<section id="focus-words">
+				<h3 className="word-list-title">List Results</h3>
 				{wordListFocus && 
 					<ul id="focus-word-list">
 					{wordLists[wordListFocus].map((l, idx) => {
