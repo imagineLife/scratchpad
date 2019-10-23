@@ -1,5 +1,5 @@
 import React from 'react';
-import CombineThree from './'
+import MultiWordSelector from './'
 
 import {TextAreaProvider} from '../../Contexts/TextArea'
 import {CommonWordsProvider} from '../../Contexts/CommonWords'
@@ -14,7 +14,7 @@ const Wrapped = () => {
 	return (
 		<TextAreaProvider>
 			<CommonWordsProvider>
-				<CombineThree />
+				<MultiWordSelector />
 			</CommonWordsProvider>
 		</TextAreaProvider>
 	)
