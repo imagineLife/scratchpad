@@ -31,6 +31,9 @@ const TextDisplay = React.memo(function TextDisplay(){
 	//if no selected word && no 
 	let resText = displayText
 
+	console.log('selectedWord')
+	console.log(selectedWord)
+	
 	//apply selected word to text display
 	if(selectedWord){
 		resText = getQueriedWord(displayText, selectedWord)
@@ -63,35 +66,33 @@ const TextDisplay = React.memo(function TextDisplay(){
 	if(selectedTheme){
 
 		//first sentence index from text-area box
-		let firstSentenceIndex = selectedAreaArr[0]
-		//[0]
+		let viewableFirstSentenceIndex = selectedAreaArr[0]
+
+		// array of selected-theme words ['unity']
+		let themesArray = Object.keys(selectedTheme)
 		
-	  /*
-			TODO:
-			Figure out best way to store & work with themes...
-	  */
-		let themesArray = Object.keys(selectedTheme) //['unity']
-		let curThemeKeyWords = selectedTheme[themesArray] // ['we', together]
+		// arr of key-words related to the theme ['we, 'together']
+		let themeKeywords = selectedTheme[themesArray]
 
 		//loop through theme words
-	  for(let k in curThemeKeyWords){ //k = we, k= together
+	  for(let keyWord in themeKeywords){
 	  	
 	  	//Apply theme html to each sentence
 	  	//[2] or [2,3]
-		  curThemeKeyWords[k].forEach((sentenceNumber, idx) => {
+		  themeKeywords[keyWord].forEach((sentenceNumber, idx) => {
 
 		  		//sentence offset magic
 		  		// deal with 0-based arr indexing
-		  		let sentenceOffset = sentenceNumber - firstSentenceIndex - 1 
+		  		let sentenceOffset = sentenceNumber - viewableFirstSentenceIndex - 1 
 		  		
 		  		if(inViewSentences[sentenceOffset]){
-		  			const matchedThemeRegex = new RegExp(k, 'gi')
+		  			const matchedThemeRegex = new RegExp(keyWord, 'gi')
 			  		//italicize theme-key-word
 			  		let matchedThemeTxt = inViewSentences[sentenceOffset]
-			  			.replace(matchedThemeRegex, `<i>${k}</i>`) //figure-out the capitalization
+			  			.replace(matchedThemeRegex, `<i>${keyWord}</i>`) //figure-out the capitalization
 
 			  		//apply theme
-			  		inViewSentences[sentenceOffset] = `<span class="themed theme-${k}">${matchedThemeTxt}</span>` //inViewSentences[sentenceOffset]
+			  		inViewSentences[sentenceOffset] = `<span class="themed theme-${keyWord}">${matchedThemeTxt}</span>` //inViewSentences[sentenceOffset]
 		  		}
 		  })
 	  }
