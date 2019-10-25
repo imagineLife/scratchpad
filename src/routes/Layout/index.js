@@ -6,7 +6,7 @@ const Layout = () => {
 		<main id="layout">
 			<div id="title-box" className="f-w i-b"></div>
 			<div id="area-box" className="i-b"></div>
-			<div id="focu-area-box" className="i-b"></div>
+			<div id="focus-area-box" className="i-b"></div>
 			<div id="area-explain-box" className="i-b"></div>
 			<div id="theme-box" className="i-b"></div>
 			<div id="image-box" className="i-b"></div>
