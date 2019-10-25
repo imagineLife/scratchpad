@@ -22,6 +22,10 @@
 	display: inline-block;
 }
 
+#layout div{
+	vertical-align: top;
+}
+
 .f-w{
 	width: 100%;
 }
@@ -32,7 +36,21 @@
 }
 
 #layout div#area-box{
+	height: 125px;
+	background-color: var(--c3);
+	width: 100%;
+}
+
+#layout div#focus-area-box{
 	height: 250px;
-	background-color: var(--c2);
-	min-width: 500px;
+	background-color: var(--c5);
+	width: 40%;
+	min-width: 500px;	
+}
+
+#layout div#area-explain-box{
+	height: 100px;
+	background-color: var(--c7);
+	width: 60%;
+	min-width: 400px;	
 }
