@@ -10,6 +10,7 @@ import CombineThreeContexted from './routes/CombineThree/ContextWrapper'
 // CombineThreeContexted + multi-word-selection component
 import MultiWordSelector from './routes/MultiWordSelector/ContextWrapper'
 import Circles from './routes/Circles'
+import Layout from './routes/Layout'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
 
@@ -29,6 +30,7 @@ const ThisRouter = () => {
       <CombineThreeContexted path="combineThree"/>  
       <MultiWordSelector path="multiWord"/>  
       <Circles path="circles"/>  
+      <Layout path="layout"/>  
       <Redirect from="/*" to="/combine"/>
     </Router>
   )
