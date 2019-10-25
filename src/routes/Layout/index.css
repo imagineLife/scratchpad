@@ -1,0 +1,32 @@
+#layout{
+	background-color: rgb(37,43,51);
+}
+
+.i-b{
+	display: inline-block;
+}
+
+.f-w{
+	width: 100%;
+}
+
+#title-box{
+	height: 125px;
+	background-color: "#6e40aa"
+}
+
+/*
+	[
+	"#6e40aa",
+	"#963db3",
+	"#bf3caf",
+	"#e4419d",
+	"#fe4b83",
+	"#ff5e63",
+	"#ff7847",
+	"#fb9633",
+	"#e2b72f",
+	"#c6d63c",
+	"#aff05b"
+	]
+*/
