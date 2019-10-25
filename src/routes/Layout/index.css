@@ -1,5 +1,21 @@
+:root{
+	--gray-border: rgb(113,117,119);
+	--c1: rgb(110,64,170);
+	--c2: rgb(150,61,179);
+	--c3: rgb(191,60,175);
+	--c4: rgb(228,65,157);
+	--c5: rgb(254,75,131);
+	--c6: rgb(255,94,99);
+	--c7: rgb(255,120,71);
+	--c8: rgb(251,150,51);
+	--c9: rgb(226,183,47);
+	--c10: rgb(198,214,60);
+	--c11: rgb(175,240,91);
+};
+
 #layout{
 	background-color: rgb(37,43,51);
+	min-width: 950px;
 }
 
 .i-b{
@@ -10,23 +26,13 @@
 	width: 100%;
 }
 
-#title-box{
+#layout div#title-box{
 	height: 125px;
-	background-color: "#6e40aa"
+	background-color: var(--c1);
 }
 
-/*
-	[
-	"#6e40aa",
-	"#963db3",
-	"#bf3caf",
-	"#e4419d",
-	"#fe4b83",
-	"#ff5e63",
-	"#ff7847",
-	"#fb9633",
-	"#e2b72f",
-	"#c6d63c",
-	"#aff05b"
-	]
-*/
+#layout div#area-box{
+	height: 250px;
+	background-color: var(--c2);
+	min-width: 500px;
+}
