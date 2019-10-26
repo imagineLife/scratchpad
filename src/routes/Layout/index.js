@@ -23,11 +23,11 @@ const Layout = () => {
 			<div id="image-box" className="i-b col-5">
 				<p>Image Box</p>
 			</div>
-			<div id="words-of-interest-box" className="i-b col-5">
+			<div id="words-of-interest-box" className="i-b col-4">
 				<p>Words-Of-Interest Box</p>
 			</div>
-			<div id="words-by-length-box" className="i-b col-7">
-				<p>Bords-By-Length Box</p>
+			<div id="words-by-length-box" className="i-b col-8">
+				<p>Words-By-Length Box</p>
 			</div>
 			<div id="divider-box" className="i-b col-12">
 				<p>Divider Box</p>
