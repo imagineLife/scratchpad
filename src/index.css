@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Comfortaa-Regular';
+  src: url('./fonts/Comfortaa-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Comfortaa-Light';
+  src: url('./fonts/Comfortaa-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Comfortaa-Bold';
+  src: url('./fonts/Comfortaa-Bold.ttf');
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -25,7 +40,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	/*font: inherit;*/
-	font-family: sans-serif;
+	font-family: Comfortaa-Regular;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -50,4 +65,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+html{
+	background-color: rgb(29,34,41);
+	color: rgb(240,240,240);
 }
