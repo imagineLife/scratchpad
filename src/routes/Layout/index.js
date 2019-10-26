@@ -6,14 +6,16 @@ const Layout = () => {
 	return(
 		<main id="layout" className="layout">
 			<div id="title-box" className="f-w i-b col-12">
-				<h1 className="title">SayWhat?!</h1>
-				<div className="corner-box">
-					<p>A Play on Newspapers, Text-Analysis, & Interaction</p>
+				<div className="title-text-wrapper">
+					<h1 className="title">SayWhat?!</h1>
+					<div className="corner-box">
+						<p>A Play on Newspapers, Text-Analysis, & Interaction</p>
+					</div>
 				</div>
 				<div className="title-data">
 					<span className="sub-title border-right">Donald Trump</span>
 					<span className="sub-title border-right">On the 20th Day of February in the Year of 2017</span>
-					<span>Gives his 1473-word address to the nation</span>
+					<span className="sub-title">Gives his 1473-word address to the nation</span>
 				</div>
 			</div>
 			<div id="area-box" className="i-b col-12">
@@ -43,6 +45,8 @@ const Layout = () => {
 			</div>
 			<div id="words-of-interest-box" className="i-b col-4">
 				<h2 className="section-text">Words Of Interest</h2>
+				<p className="explanatory-text">Here are some various types of words that were spoken. 
+				The word lists are toggle-able & the words are selectable. SELECT.SELECT</p>
 				<p>Words-Of-Interest Box</p>
 			</div>
 			<div id="words-by-length-box" className="i-b col-8">
