@@ -24,7 +24,8 @@
 #layout div{
 	vertical-align: top;
 	float: left;
-	border: 1px dotted rgb(120,120,120)
+	border: 1px dotted rgb(120,120,120);
+	padding: 3px;
 }
 
 .f-w{
@@ -63,6 +64,11 @@
 	/*background-color: var(--c5);*/
 	/*width: 40%;*/
 	/*min-width: 500px;	*/
+}
+
+#layout div#focus-area-box #focus-area-hover{
+	height: 200px;
+	width: 100%
 }
 
 #layout div#area-explain-box{
