@@ -75,10 +75,11 @@
 	background-color: var(--c2);
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
+	margin-top: -174px;
 }
 
 #layout div#words-by-length-box{
-	height: 350px;
+	height: 275px;
 	background-color: var(--c4);
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
