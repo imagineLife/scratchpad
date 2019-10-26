@@ -7,6 +7,9 @@ const Layout = () => {
 		<main id="layout" className="layout">
 			<div id="title-box" className="f-w i-b col-12">
 				<h1 className="title">SayWhat?!</h1>
+				<div className="corner-box">
+					<p>A Play on Newspapers, Text-Analysis, & Interaction</p>
+				</div>
 				<div className="title-data">
 					<span className="sub-title border-right">Donald Trump</span>
 					<span className="sub-title border-right">On the 20th Day of February in the Year of 2017</span>
@@ -31,6 +34,7 @@ const Layout = () => {
 			</div>
 			<div id="theme-box" className="i-b col-3">
 				<h2 className="section-text">Textual Themes</h2>
+				<p className="explanatory-text">Colors match text to a 'theme'. CLICK</p>
 				<p>Theme Box</p>
 			</div>
 			<div id="image-box" className="i-b col-5">
