@@ -70,9 +70,30 @@
 	/*min-width: 200px;	*/
 }
 
-#layout div#words-or-interest-box{
-	height: 650px;
-	background-color: var(--2);
+#layout div#words-of-interest-box{
+	height: 450px;
+	background-color: var(--c2);
+	/*width: 40%;*/
+	/*min-width: 200px;	*/
+}
+
+#layout div#words-by-length-box{
+	height: 350px;
+	background-color: var(--c4);
+	/*width: 40%;*/
+	/*min-width: 200px;	*/
+}
+
+#layout div#divider-box{
+	height: 50px;
+	background-color: var(--c6);
+	/*width: 40%;*/
+	/*min-width: 200px;	*/
+}
+
+#layout div#text-display-box{
+	height: 500px;
+	background-color: var(--c8);
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 }
