@@ -17,10 +17,15 @@ const Layout = () => {
 				<p>Area Box</p>
 			</div>
 			<div id="focus-area-box" className="i-b col-4">
-				<p>Focus-Area Box</p>
+				<div id="focus-area-hover"></div>
+				<p>Hover over this area chart to highlight the sentence 
+				that was spoken at the specific point in time during the 
+				president’s address.  HOVER</p>
 			</div>
 			<div id="area-explain-box" className="i-b col-8">
-				<p>Area-Explain Box</p>
+				<p>In the above area chart, the dotted-box can be used to select a specific 
+					range of the speech, & update the remainder of the document 
+					(move, shrink, widen) CLICK.DRAG.MOVE</p>
 			</div>
 			<div id="theme-box" className="i-b col-3">
 				<p>Theme Box</p>
