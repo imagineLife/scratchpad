@@ -6,7 +6,12 @@ const Layout = () => {
 	return(
 		<main id="layout" className="layout">
 			<div id="title-box" className="f-w i-b col-12">
-				<p>Title Box</p>
+				<h1 className="title">Title Box</h1>
+				<div className="title-data">
+					<span className="sub-title border-right">Donald Trump</span>
+					<span className="sub-title border-right">On the 20th Day of February in the Year of 2017</span>
+					<span>Gives his 1473-word address to the nation</span>
+				</div>
 			</div>
 			<div id="area-box" className="i-b col-12">
 				<p>Area Box</p>
