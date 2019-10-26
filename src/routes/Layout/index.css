@@ -14,7 +14,6 @@
 };
 
 #layout{
-	background-color: rgb(37,43,51);
 	min-width: 950px;
 }
 
@@ -25,6 +24,7 @@
 #layout div{
 	vertical-align: top;
 	float: left;
+	border: 1px dotted rgb(120,120,120)
 }
 
 .f-w{
@@ -33,46 +33,46 @@
 
 #layout div#title-box{
 	height: 125px;
-	background-color: var(--c1);
+	/*background-color: var(--c1);*/
 }
 
 #layout div#area-box{
 	height: 100px;
-	background-color: var(--c3);
+	background-color:/* var(--c3);*/
 	/*width: 100%;*/
 }
 
 #layout div#focus-area-box{
 	height: 250px;
-	background-color: var(--c5);
+	/*background-color: var(--c5);*/
 	/*width: 40%;*/
 	/*min-width: 500px;	*/
 }
 
 #layout div#area-explain-box{
 	height: 75px;
-	background-color: var(--c7);
+	/*background-color: var(--c7);*/
 	/*width: 60%;*/
 	/*min-width: 400px;	*/
 }
 
 #layout div#theme-box{
 	height: 350px;
-	background-color: var(--c9);
+	/*background-color: var(--c9);*/
 	/*width: 20%;*/
 	/*min-width: 200px;	*/
 }
 
 #layout div#image-box{
 	height: 350px;
-	background-color: var(--c11);
+	/*background-color: var(--c11);*/
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 }
 
 #layout div#words-of-interest-box{
 	height: 450px;
-	background-color: var(--c2);
+	/*background-color: var(--c2);*/
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 	margin-top: -174px;
@@ -80,21 +80,21 @@
 
 #layout div#words-by-length-box{
 	height: 275px;
-	background-color: var(--c4);
+	/*background-color: var(--c4);*/
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 }
 
 #layout div#divider-box{
 	height: 50px;
-	background-color: var(--c6);
+	/*background-color: var(--c6);*/
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 }
 
 #layout div#text-display-box{
 	height: 500px;
-	background-color: var(--c8);
+	/*background-color: var(--c8);*/
 	/*width: 40%;*/
 	/*min-width: 200px;	*/
 }
