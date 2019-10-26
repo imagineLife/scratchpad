@@ -24,10 +24,11 @@
 
 #layout div{
 	vertical-align: top;
+	float: left;
 }
 
 .f-w{
-	width: 100%;
+	/*width: 100%;*/
 }
 
 #layout div#title-box{
@@ -36,21 +37,42 @@
 }
 
 #layout div#area-box{
-	height: 125px;
+	height: 100px;
 	background-color: var(--c3);
-	width: 100%;
+	/*width: 100%;*/
 }
 
 #layout div#focus-area-box{
 	height: 250px;
 	background-color: var(--c5);
-	width: 40%;
-	min-width: 500px;	
+	/*width: 40%;*/
+	/*min-width: 500px;	*/
 }
 
 #layout div#area-explain-box{
-	height: 100px;
+	height: 75px;
 	background-color: var(--c7);
-	width: 60%;
-	min-width: 400px;	
+	/*width: 60%;*/
+	/*min-width: 400px;	*/
+}
+
+#layout div#theme-box{
+	height: 350px;
+	background-color: var(--c9);
+	/*width: 20%;*/
+	/*min-width: 200px;	*/
+}
+
+#layout div#image-box{
+	height: 350px;
+	background-color: var(--c11);
+	/*width: 40%;*/
+	/*min-width: 200px;	*/
+}
+
+#layout div#words-or-interest-box{
+	height: 650px;
+	background-color: var(--2);
+	/*width: 40%;*/
+	/*min-width: 200px;	*/
 }
