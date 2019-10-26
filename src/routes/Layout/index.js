@@ -6,7 +6,7 @@ const Layout = () => {
 	return(
 		<main id="layout" className="layout">
 			<div id="title-box" className="f-w i-b col-12">
-				<h1 className="title">Title Box</h1>
+				<h1 className="title">SayWhat?!</h1>
 				<div className="title-data">
 					<span className="sub-title border-right">Donald Trump</span>
 					<span className="sub-title border-right">On the 20th Day of February in the Year of 2017</span>
@@ -38,13 +38,15 @@ const Layout = () => {
 				<h2 className="image-subtext">The President Addresses The Nation</h2>
 			</div>
 			<div id="words-of-interest-box" className="i-b col-4">
+				<h2 className="section-text">Words Of Interest</h2>
 				<p>Words-Of-Interest Box</p>
 			</div>
 			<div id="words-by-length-box" className="i-b col-8">
+				<h2 className="section-text">Words By Length</h2>
 				<p>Words-By-Length Box</p>
 			</div>
 			<div id="divider-box" className="i-b col-12">
-				<p>Divider Box</p>
+				<p>The text content of the speech, below, is responsive to interactions above.</p>
 			</div>
 			<div id="text-display-box" className="i-b col-12">
 				<p>Text-Display Box</p>

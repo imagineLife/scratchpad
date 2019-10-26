@@ -88,6 +88,12 @@
 	height: 50px;
 }
 
+#layout div#divider-box p{
+	width: 100%;
+	text-align: center;
+	line-height: 47px;
+}
+
 #layout div#text-display-box{
 	height: 500px;
 }
