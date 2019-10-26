@@ -58,7 +58,7 @@
 #layout div .corner-box{
   border: 1px solid rgb(120,120,120);
   position: absolute;
-  top: 15px;
+  top: 19px;
   right: 15px;
   width: 175px;
   font-size: .75em;
@@ -68,12 +68,12 @@
 
 .sub-title{
 	margin: 0 10px;
-	font-size: .75rem
+	font-size: .75rem;
+	text-transform: uppercase;
 }
 
 #layout div#area-box{
 	height: 100px;
-	background-color:
 }
 
 #layout div#focus-area-box{
@@ -119,12 +119,23 @@
 
 #layout div#text-display-box{
 	height: 500px;
+	overflow-x: scroll;
+}
+
+#layout div#text-display-box p.text-content{
+	line-height: 2.3;
+	columns: 2;
+	column-rule: 1px solid rgb(130, 130, 130);
+	column-gap: 20px;
+	overflow-x: scroll;
+	max-height: 500px;
 }
 
 .image-subtext, .section-text{
 	text-transform: uppercase;
   font-size: 1.6em;
   text-align: center;
+  width: 100%;
 }
 
 .image-subtext{
