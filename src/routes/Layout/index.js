@@ -17,7 +17,9 @@ const Layout = () => {
 				<p>Area Box</p>
 			</div>
 			<div id="focus-area-box" className="i-b col-4">
-				<div id="focus-area-hover"></div>
+				<h2 className="section-text">A Glance At The Text</h2>
+				<div id="focus-area-hover">
+				</div>
 				<p className="explanatory-text">Hover over this area chart to highlight the sentence 
 				that was spoken at the specific point in time during the 
 				president’s address.  HOVER</p>
@@ -28,10 +30,12 @@ const Layout = () => {
 					(move, shrink, widen) CLICK.DRAG.MOVE</p>
 			</div>
 			<div id="theme-box" className="i-b col-3">
+				<h2 className="section-text">Textual Themes</h2>
 				<p>Theme Box</p>
 			</div>
 			<div id="image-box" className="i-b col-5">
 				<p>Image Box</p>
+				<h2 className="image-subtext">The President Addresses The Nation</h2>
 			</div>
 			<div id="words-of-interest-box" className="i-b col-4">
 				<p>Words-Of-Interest Box</p>
