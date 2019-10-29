@@ -11,6 +11,7 @@ import CombineThreeContexted from './routes/CombineThree/ContextWrapper'
 import MultiWordSelector from './routes/MultiWordSelector/ContextWrapper'
 import Circles from './routes/Circles'
 import Layout from './routes/Layout'
+import FlexLayout from './routes/FlexLayout'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
 
@@ -31,6 +32,7 @@ const ThisRouter = () => {
       <MultiWordSelector path="multiWord"/>  
       <Circles path="circles"/>  
       <Layout path="layout"/>  
+      <FlexLayout path="flex"/>  
       <Redirect from="/*" to="/combine"/>
     </Router>
   )
