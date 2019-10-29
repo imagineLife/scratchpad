@@ -1,0 +1,62 @@
+#flex-layout{
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+#flex-layout div{
+	border: 1px dotted rgb(120,120,120);
+}
+
+#flex-layout #title-box, #flex-layout  #area-box, #flex-layout #divider-box, #flex-layout #text-display-box{
+	min-width: 100%;
+}
+
+
+#flex-layout #title-box{
+	height: 150px;
+}
+
+#flex-layout #area-box{
+	height: 100px;
+}
+
+#flex-layout #focus-area-box{
+	width: 40%;
+	height: 315px;
+}
+
+#layout div#focus-area-box #focus-area-hover{
+	height: 200px;
+	width: 100%;
+}
+
+#flex-layout #area-explain-box{
+	width: 60%;
+	height: 75px;
+}
+
+#flex-layout #theme-box{
+	width: 20%;
+	height: 350px;
+}
+
+#flex-layout #image-box{
+	width: 40%;
+	height: 350px;
+}
+
+#flex-layout #words-of-interest-box{
+	width: 40%;
+	height: 385px;
+}
+
+#flex-layout #words-by-length-box{
+	width: 60%;
+	height: 275px;
+}
