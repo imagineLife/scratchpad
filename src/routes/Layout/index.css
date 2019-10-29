@@ -128,7 +128,7 @@
 	column-rule: 1px solid rgb(130, 130, 130);
 	column-gap: 20px;
 	overflow-x: scroll;
-	max-height: 500px;
+	max-height: 480px;
 }
 
 .image-subtext, .section-text{
