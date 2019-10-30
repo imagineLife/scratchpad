@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css'
 import useDimensions from '../../lib/useDims'
 
+const makeNewSizes = (height, width, m) => {return {h: height - m.t - m.b, w: width - m.l - m.r}}
 const mockData = [
   {
     "size": 3,
@@ -48,21 +49,18 @@ const Circles = () => {
 
 		//on first-render-calculation
 		let firstCalc = (height && width && lessM['w'] == undefined)
+		let newM ={}
 		if(firstCalc){
-			setLessM({
-				h: height - m.t - m.b,
-				w: width - m.l - m.r
-			})
+			newM = makeNewSizes(height,width,m)
+			setLessM(newM)
 		}
 
 		//on new-width (resize)
 		let newWidth = (width - m.l - m.r !== lessM.w)
 		let alreadyCalcdWidthOnce = lessM.w !== undefined
 		if(newWidth && alreadyCalcdWidthOnce){
-			setLessM({
-				h: height - m.t - m.b,
-				w: width - m.l - m.r
-			})
+			newM = makeNewSizes(height,width,m)
+			setLessM(newM)
 		}
 		
 	}, [ref, height, width])
