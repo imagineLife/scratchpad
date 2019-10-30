@@ -7,7 +7,6 @@ import WordLists from './routes/WordLists'
 import CombineContexted from './routes/Combine/ContextWrapper'
 import CombineTwoContexted from './routes/CombineTwo/ContextWrapper'
 import CombineThreeContexted from './routes/CombineThree/ContextWrapper'
-// CombineThreeContexted + multi-word-selection component
 import MultiWordSelector from './routes/MultiWordSelector/ContextWrapper'
 import Circles from './routes/Circles'
 import Layout from './routes/Layout'
@@ -33,6 +32,7 @@ const ThisRouter = () => {
       <Circles path="circles"/>  
       <Layout path="layout"/>  
       <FlexLayout path="flex"/>  
+
       <Redirect from="/*" to="/combine"/>
     </Router>
   )
