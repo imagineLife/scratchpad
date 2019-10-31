@@ -62,7 +62,7 @@ const Circles = () => {
 		if(firstCalc){
 			newDimsLessMargins = makeNewSizes(height,width, m)
 			let wDivision = mockData.length + .5 
-			let newCircleMaxHeight = newDimsLessMargins.w / wDivision
+			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .8
 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
 		}
 
@@ -72,7 +72,7 @@ const Circles = () => {
 		if(newWidth && alreadyCalcdWidthOnce){
 			newDimsLessMargins = makeNewSizes(height,width, m)
 			let wDivision = mockData.length + 1 
-			let newCircleMaxHeight = newDimsLessMargins.w / wDivision
+			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .8
 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
 		}
 		
@@ -101,7 +101,7 @@ const Circles = () => {
 						{lessM && lessM.h && circleRadiusRange !== null &&
 							withRadius.map((c, idx) => {
 								let circleX = c.thisX + c.prevX
-								let circleY = lessM.h / 2
+								let circleY = lessM.h * .4
 								return(
 									<React.Fragment key={`${c.size}-${idx}`}>
 										<circle
@@ -113,7 +113,7 @@ const Circles = () => {
 											cy={circleY} />
 										<text>
 											<tspan x={circleX} y={lessM.h - 25} className="circle-label">{c.size}-Letter</tspan>
-											<tspan x={circleX} y={lessM.h - 25} className="circle-label">Words</tspan>
+											<tspan x={circleX} y={lessM.h - 12} className="circle-label">Words</tspan>
 										</text>
 										<text>
 											<tspan x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
