@@ -48,32 +48,32 @@ const Circles = () => {
 	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
 	let [buffer, setBuffer] = React.useState(0)
 
+	const updateFromResize = (dims, circleMax) => {
+		setLessM(dims)
+		setCircleRadiusRange([0, circleMax])
+		setBuffer(dims.w * .01)
+	}
 	//Update state dimensions
 	React.useEffect(() => {
-
 		//on first-render-calculation
 		let firstCalc = (height && width && lessM['w'] == undefined)
 		let newDimsLessMargins ={};
 		let newRadiusRange = []
 		if(firstCalc){
 			newDimsLessMargins = makeNewSizes(height,width, m)
-			setLessM(newDimsLessMargins)
 			let wDivision = mockData.length + .5 
 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision
-			setCircleRadiusRange([0, newCircleMaxHeight])
-			setBuffer(newDimsLessMargins.w * .01)
+			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
 		}
 
-		//on new-width (resize)
+		//on resize
 		let newWidth = (width - m.l - m.r !== lessM.w)
 		let alreadyCalcdWidthOnce = lessM.w !== undefined
 		if(newWidth && alreadyCalcdWidthOnce){
 			newDimsLessMargins = makeNewSizes(height,width, m)
-			setLessM(newDimsLessMargins)
 			let wDivision = mockData.length + 1 
 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision
-			setCircleRadiusRange([0, newCircleMaxHeight])
-			setBuffer(newDimsLessMargins.w * .01)
+			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
 		}
 		
 	}, [ref, height, width])
@@ -91,7 +91,7 @@ const Circles = () => {
 		c.thisX = c.prevX + c.thisXWithBuffer;
 		return c
 	})
-	let widthSection = lessM.w / (mockData.length + 1)
+
 	return(
 		<React.Fragment>
 			<h2>Circles</h2>
@@ -100,19 +100,25 @@ const Circles = () => {
 					<g transform={`translate(${m.l}, ${m.t})`}>
 						{lessM && lessM.h && circleRadiusRange !== null &&
 							withRadius.map((c, idx) => {
-								console.log('c')
-								console.log(c)
-								
+								let circleX = c.thisX + c.prevX
+								let circleY = lessM.h / 2
 								return(
-									<circle
-										key={`${c.size}-${idx}`}
-										r={rScale(c.occurances)}
-										stroke="black"
-										strokeWidth={3}
-										cx={c.thisX + c.prevX}
-										cy={lessM.h / 2}
-									/>
-									
+									<React.Fragment key={`${c.size}-${idx}`}>
+										<circle
+											className='word-circle'
+											r={rScale(c.occurances)}
+											stroke="black"
+											strokeWidth={3}
+											cx={circleX}
+											cy={circleY} />
+										<text>
+											<tspan x={circleX} y={lessM.h - 25} className="circle-label">{c.size}-Letter</tspan>
+											<tspan x={circleX} y={lessM.h - 25} className="circle-label">Words</tspan>
+										</text>
+										<text>
+											<tspan x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
+										</text>
+									</React.Fragment>
 								)
 							})}
 					</g>
