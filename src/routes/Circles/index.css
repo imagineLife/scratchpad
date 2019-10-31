@@ -2,5 +2,12 @@
 	width: 80%;
 	min-width: 500px;
 	height: 250px;
-	border: 1px solid green;
+	border: 1px dotted green;
+}
+
+.circle-label{
+	fill: white;
+	text-anchor: middle;
+	font-size: 12px;
+	alignment-baseline: middle;
 }
