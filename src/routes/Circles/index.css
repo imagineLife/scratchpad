@@ -6,7 +6,7 @@
 }
 
 .circle-label{
-	fill: white;
+	fill: rgb(147,147,147);
 	text-anchor: middle;
 	font-size: 12px;
 	alignment-baseline: middle;
