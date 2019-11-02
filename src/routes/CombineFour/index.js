@@ -6,7 +6,7 @@ import * as d3Select from 'd3-selection'
 import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
 import SelectableArea from '../../components/SelectableArea/complexContext'
-import Circles from '../../components/Circles'
+import Circles from '../../components/Circles/ContextWrapper'
 import CommonWords from '../../components/WordList/UsingContext'
 // import './index.css'
 
