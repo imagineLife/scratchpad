@@ -19,16 +19,6 @@ let TextAreaProvider = (props) => {
 	*/
 	const initialContext = {text: ''};
 
-	/*
-		STATE
-			{
-				text: 'string...',
-				displayText: 'stri..' (affected by area-selection)
-				sentences: [
-					{y: 8}
-				]
-			}
-	*/
 	const reducer = (state, action) => {
 		let resText;
 								
@@ -39,6 +29,7 @@ let TextAreaProvider = (props) => {
 					sentences: action.payload
 				}
 				break;
+
 			case "UPDATE_DISPLAY_TEXT_FROM_AREA":
 				return {
 					...state,
@@ -46,6 +37,15 @@ let TextAreaProvider = (props) => {
 					displayText: updateDisplayText(state.sentences, action.payload)	// [0, 23]
 				}
 				break;
+
+			case "WORD_LENGTH":
+				console.log('Selected Circle, in t.a.provider reducer!');
+				return {
+					...state,
+					wordLength: action.payload
+				};
+				break;
+
 			default:
 				return {...state, text: action.payload}	
 				break;
@@ -90,7 +90,6 @@ let TextAreaProvider = (props) => {
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
 					textAreaDispatch({type: "SENTENCES", payload: getSentences(textRes)})
-
 				}))
 	}, [])
 	
