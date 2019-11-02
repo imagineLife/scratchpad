@@ -34,8 +34,12 @@ const TextDisplay = React.memo(function TextDisplay(){
 	
 	//apply selected word to text display
 	if(selectedWord){
-		resText = getQueriedWord(displayText, selectedWord)
+		resText = getQueriedWord(displayText, selectedWord, 'selected-text')
 	}
+
+	// if(wordLength){
+	// 	resText = getQueriedWord(displayText, wordLength, 'word-length')
+	// }
 
 	/*TODO: 
 		Convert to use 'sentences' array from textAReaContext?! [ {text: 'sentenceOne...'...etc}]
