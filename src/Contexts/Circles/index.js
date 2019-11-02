@@ -1,25 +1,25 @@
 import React from 'react';
-const CircleContext = React.createContext(); 
-const {Provider, Consumer} = CircleContext;
-import { 
-	getWordsByCount, 
-	getLongestThirty, 
-	convertStrToWordArr, 
-	ingWords,
-	arrayOfWords,
-	getWordsByLength 
-} from '../../lib/stats'
+const CirclesContext = React.createContext(); 
+const {Provider, Consumer} = CirclesContext;
+import { getWordsByLength } from '../../lib/stats'
 
 const CirclesProvider = (props) => {
  
-	return(<Provider value={{}}>
+ 	//state
+ 	let [wordsByLength, setWordsByLength] = React.useState([]) 
+
+ 	//calculation && state-setter
+ 	const calcWordsByLength = (str) => {
+ 		setWordsByLength(getWordsByLength(str))
+ 	}
+ 	
+	return(<Provider value={{calcWordsByLength, wordsByLength}}>
 		{props.children}
 	</Provider>)
 }
 
-// export default Provider;
 export {
 	CirclesProvider, 
 	Consumer as CirclesConsumer, 
-	CircleContext
+	CirclesContext
 }
