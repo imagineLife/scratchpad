@@ -63,16 +63,8 @@ let TextAreaProvider = (props) => {
 		// console.log('LOADING TEXT in textAreaProvider');
 		fetch('../../data/fullText.txt')
 			.then(res => res.text().then(textRes => {
-				// console.log('Fetched Data');
 
-					/*
-						regex Prep 
-						taken from say-what-api
-						for most-common word, 
-							&& other word-statistics
-					*/
-
-					//gets rid of line-break or whatever
+					//gets rid of line-break
 		      let newReg = /(^)?\s*$/gm;
 
 		      let uniqueWordRegex = /([a-z]\w+)(?![\s\S]*\1)/gi
@@ -81,11 +73,11 @@ let TextAreaProvider = (props) => {
 		      let puncRegEx = /[.,-]/g
 
 		      //apply regex
-		      const regexTxt = textRes.replace(newReg," ").replace(puncRegEx, "")
-		      const uniqueWordCount = textRes.match(uniqueWordRegex).length
+		      // const regexTxt = textRes.replace(newReg," ").replace(puncRegEx, "")
+		      // const uniqueWordCount = textRes.match(uniqueWordRegex).length
 		      
 		      //split txt into arr of words
-		      let arrOfText =  regexTxt.split(" ")
+		      // let arrOfText =  regexTxt.split(" ")
 
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
