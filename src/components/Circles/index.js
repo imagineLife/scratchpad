@@ -15,7 +15,6 @@ const Circles = () => {
 	const [lessM, setLessM] = React.useState({})
 	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
 	let [buffer, setBuffer] = React.useState(0)
-	let [data] = React.useState(null)
 
 	const updateFromResize = (dims, circleMax) => {
 		setLessM(dims)
@@ -32,34 +31,37 @@ const Circles = () => {
   		calcWordsByLength(displayText)
   	}
   }, [displayText, wordsByLength])
-	// //Update state dimensions
-	// React.useEffect(() => {
-	// 	if(data){
-	// 		//on first-render-calculation
-	// 		let firstCalc = (height && width && lessM['w'] == undefined)
-	// 		let newDimsLessMargins ={};
-	// 		let newRadiusRange = []
-	// 		if(firstCalc){
-	// 			newDimsLessMargins = makeDimsLessMargins(height,width, m)
-	// 			let wDivision = data.length + .5 
-	// 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
-	// 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
-	// 		}
+	
+	//Update state dimensions
+	React.useEffect(() => {
+		if(wordsByLength.length > 0){
+			//on first-render-calculation
+			let firstCalc = (height && width && lessM['w'] == undefined)
+			let newDimsLessMargins ={};
+			let newRadiusRange = []
+			if(firstCalc){
+				newDimsLessMargins = makeDimsLessMargins(height,width, m)
+				let wDivision = wordsByLength.length + .5 
+				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
+				let maxCircleHeight = Math.min(maxCircleHeightByWidth, newDimsLessMargins.h * .5)
+				updateFromResize(newDimsLessMargins, maxCircleHeight)
+			}
 
-	// 		//on resize
-	// 		let newWidth = (width - m.l - m.r !== lessM.w)
-	// 		let alreadyCalcdWidthOnce = lessM.w !== undefined
-	// 		if(newWidth && alreadyCalcdWidthOnce){
-	// 			newDimsLessMargins = makeDimsLessMargins(height,width, m)
-	// 			let wDivision = data.length + .5
-	// 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
-	// 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
-	// 		}
-	// 	}
-	// }, [ref, height, width, data])
+			//on resize
+			let newWidth = (width - m.l - m.r !== lessM.w)
+			let alreadyCalcdWidthOnce = lessM.w !== undefined
+			if(newWidth && alreadyCalcdWidthOnce){
+				newDimsLessMargins = makeDimsLessMargins(height,width, m)
+				let wDivision = wordsByLength.length + .5
+				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
+				let maxCircleHeight = Math.min(maxCircleHeightByWidth, newDimsLessMargins.h * .5)
+				updateFromResize(newDimsLessMargins, maxCircleHeight)
+			}
+		}
+	}, [ref, height, width, wordsByLength])
 
-	//sanity checking data props
-	if(!data){
+	//sanity checking wordsByLength props
+	if(!(wordsByLength.length > 0)){
 		return <p style={{color: 'gray'}}>Loading Circle Data...</p>
 	}
 
@@ -67,12 +69,12 @@ const Circles = () => {
 		.domain([0, 90])
 		.range(circleRadiusRange)
 	
-	let withRadius = data.map((c, idx) => {
+	let withRadius = wordsByLength.map((c, idx) => {
 		let scaledR = rScale(c.occurances)
 		c.scaledR = scaledR 
 		c.scaledD = scaledR * 2
 		c.thisXWithBuffer = buffer + scaledR
-		c.prevX = idx === 0 ? 0 : data[idx - 1].thisX
+		c.prevX = idx === 0 ? 0 : wordsByLength[idx - 1].thisX
 		c.thisX = c.prevX + c.thisXWithBuffer;
 		return c
 	})
