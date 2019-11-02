@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css'
 import useDimensions from '../../lib/useDims'
 import { TextAreaContext } from '../../Contexts/TextArea'
+import { CirclesContext } from '../../Contexts/Circles'
 import * as s from 'd3-scale'
 import * as a from 'd3-array'
 
@@ -24,12 +25,13 @@ const Circles = () => {
 	
 	//load visible text string
   const { displayText } = React.useContext(TextAreaContext);
-
+  const { calcWordsByLength, wordsByLength } = React.useContext(CirclesContext);
+  
   React.useEffect(() => {
-  	if(displayText){
-  		console.log('IS display text!');
+  	if(displayText && wordsByLength.length < 1){
+  		calcWordsByLength(displayText)
   	}
-  }, [displayText])
+  }, [displayText, wordsByLength])
 	// //Update state dimensions
 	// React.useEffect(() => {
 	// 	if(data){
