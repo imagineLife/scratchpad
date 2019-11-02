@@ -23,7 +23,7 @@ const Circles = () => {
 	}
 	
 	//load visible text string
-  const { displayText } = React.useContext(TextAreaContext);
+  const { displayText, textAreaDispatch } = React.useContext(TextAreaContext);
   const { calcWordsByLength, wordsByLength } = React.useContext(CirclesContext);
   
   React.useEffect(() => {
@@ -95,7 +95,8 @@ const Circles = () => {
 										stroke="black"
 										strokeWidth={3}
 										cx={circleX}
-										cy={circleY} />
+										cy={circleY}
+										onClick={() => {textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})}} />
 									<text>
 										<tspan x={circleX} y={lessM.h - 18} className="circle-label">{c.size}-Letter</tspan>
 										<tspan x={circleX} y={lessM.h - 5} className="circle-label">Words</tspan>
