@@ -17,8 +17,9 @@ const TextDisplay = React.memo(function TextDisplay(){
 
 
 	//1. load txt string
-  const { displayText, selectedAreaArr, sentences } = React.useContext(TextAreaContext);
-
+  const { displayText, selectedAreaArr, sentences, wordLength } = React.useContext(TextAreaContext);
+  
+  
   //2. get selected word from selectedWordList 
   const { selectedWord } = React.useContext(WordListContext);
 
@@ -44,6 +45,7 @@ const TextDisplay = React.memo(function TextDisplay(){
   let standarizeWS = /([?!.]\s)(.)/gm;  
   let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
 	
+	//GET in-view-sentences
   let inViewSentences = resText.replace(twoWhiteSpaces, " ")
     .replace(standarizeWS, ". $2")
     .match(sentRegex);
@@ -58,6 +60,14 @@ const TextDisplay = React.memo(function TextDisplay(){
 		columnRuleStyle: 'solid',
 		height: '450px'
 	}
+
+	/*
+		BEFORE sentence-wide-styles applied?
+		wordLength is the selected wordLength from the circles in the combined-view
+		if(wordLength){
+			apply word-length selected styling to resulting text
+		}
+	*/
 
 	/* apply theme to theme-d sentence*/
 	if(selectedTheme){
@@ -97,6 +107,15 @@ const TextDisplay = React.memo(function TextDisplay(){
 	  //re-join sentences
 	  resText = inViewSentences.join("")
 	}
+
+
+	/*
+		AFTER sentence-wide-styles applied?
+		if(wordLength){
+			apply word-length selected styling to resulting text
+		}
+	*/
+
 	return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{__html: resText}}></p>
 })
 
