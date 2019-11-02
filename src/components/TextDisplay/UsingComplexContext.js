@@ -30,9 +30,6 @@ const TextDisplay = React.memo(function TextDisplay(){
 
 	//if no selected word && no 
 	let resText = displayText
-
-	console.log('selectedWord')
-	console.log(selectedWord)
 	
 	//apply selected word to text display
 	if(selectedWord){
