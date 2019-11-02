@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css'
 import useDimensions from '../../lib/useDims'
+import { TextAreaContext } from '../../Contexts/TextArea'
 import * as s from 'd3-scale'
 import * as a from 'd3-array'
 
@@ -13,37 +14,47 @@ const Circles = () => {
 	const [lessM, setLessM] = React.useState({})
 	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
 	let [buffer, setBuffer] = React.useState(0)
+	let [data] = React.useState(null)
 
-	
 	const updateFromResize = (dims, circleMax) => {
 		setLessM(dims)
 		setCircleRadiusRange([0, circleMax])
 		setBuffer(dims.w * .017)
 	}
-	//Update state dimensions
-	React.useEffect(() => {
-		//on first-render-calculation
-		let firstCalc = (height && width && lessM['w'] == undefined)
-		let newDimsLessMargins ={};
-		let newRadiusRange = []
-		if(firstCalc){
-			newDimsLessMargins = makeDimsLessMargins(height,width, m)
-			let wDivision = data.length + .5 
-			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
-			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
-		}
+	
+	//load visible text string
+  const { displayText } = React.useContext(TextAreaContext);
 
-		//on resize
-		let newWidth = (width - m.l - m.r !== lessM.w)
-		let alreadyCalcdWidthOnce = lessM.w !== undefined
-		if(newWidth && alreadyCalcdWidthOnce){
-			newDimsLessMargins = makeDimsLessMargins(height,width, m)
-			let wDivision = data.length + .5
-			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
-			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
-		}
-		
-	}, [ref, height, width])
+  React.useEffect(() => {
+  	if(displayText){
+  		console.log('IS display text!');
+  	}
+  }, [displayText])
+	// //Update state dimensions
+	// React.useEffect(() => {
+	// 	if(data){
+	// 		//on first-render-calculation
+	// 		let firstCalc = (height && width && lessM['w'] == undefined)
+	// 		let newDimsLessMargins ={};
+	// 		let newRadiusRange = []
+	// 		if(firstCalc){
+	// 			newDimsLessMargins = makeDimsLessMargins(height,width, m)
+	// 			let wDivision = data.length + .5 
+	// 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
+	// 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
+	// 		}
+
+	// 		//on resize
+	// 		let newWidth = (width - m.l - m.r !== lessM.w)
+	// 		let alreadyCalcdWidthOnce = lessM.w !== undefined
+	// 		if(newWidth && alreadyCalcdWidthOnce){
+	// 			newDimsLessMargins = makeDimsLessMargins(height,width, m)
+	// 			let wDivision = data.length + .5
+	// 			let newCircleMaxHeight = newDimsLessMargins.w / wDivision * .85
+	// 			updateFromResize(newDimsLessMargins, newCircleMaxHeight)
+	// 		}
+	// 	}
+	// }, [ref, height, width, data])
 
 	//sanity checking data props
 	if(!data){
