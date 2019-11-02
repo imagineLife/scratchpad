@@ -17,7 +17,7 @@ const Circles = ({data}) => {
 	const updateFromResize = (dims, circleMax) => {
 		setLessM(dims)
 		setCircleRadiusRange([0, circleMax])
-		setBuffer(dims.w * .01)
+		setBuffer(dims.w * .017)
 	}
 	//Update state dimensions
 	React.useEffect(() => {
