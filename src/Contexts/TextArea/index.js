@@ -14,9 +14,7 @@ const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
 }
 
 let TextAreaProvider = (props) => {
-	/*
-			State management
-	*/
+	
 	const initialContext = {text: ''};
 
 	const reducer = (state, action) => {
@@ -46,6 +44,12 @@ let TextAreaProvider = (props) => {
 				};
 				break;
 
+			case "TEXT": 
+				return {
+					...state,
+					text: action.payload
+				}
+
 			default:
 				return {...state, text: action.payload}	
 				break;
@@ -63,21 +67,6 @@ let TextAreaProvider = (props) => {
 		// console.log('LOADING TEXT in textAreaProvider');
 		fetch('../../data/fullText.txt')
 			.then(res => res.text().then(textRes => {
-
-					//gets rid of line-break
-		      let newReg = /(^)?\s*$/gm;
-
-		      let uniqueWordRegex = /([a-z]\w+)(?![\s\S]*\1)/gi
-
-		      //remove some punc
-		      let puncRegEx = /[.,-]/g
-
-		      //apply regex
-		      // const regexTxt = textRes.replace(newReg," ").replace(puncRegEx, "")
-		      // const uniqueWordCount = textRes.match(uniqueWordRegex).length
-		      
-		      //split txt into arr of words
-		      // let arrOfText =  regexTxt.split(" ")
 
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
