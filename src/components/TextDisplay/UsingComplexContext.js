@@ -4,7 +4,7 @@ import './index.css'
 import { TextAreaContext } from '../../Contexts/TextArea'
 import { WordListContext } from '../../Contexts/CommonWords'
 import { getQueriedWord } from '../../lib/getQueriedWord'
-
+import getWordLength from '../../lib/getWordLength'
 const TextDisplay = React.memo(function TextDisplay(){
 
 	let selectedTheme = {
@@ -37,14 +37,10 @@ const TextDisplay = React.memo(function TextDisplay(){
 		resText = getQueriedWord(displayText, selectedWord, 'selected-text')
 	}
 
-	// if(wordLength){
-	// 	resText = getQueriedWord(displayText, wordLength, 'word-length')
-	// }
+	if(wordLength){
+		resText = getWordLength(resText, wordLength, 'word-length')
+	}
 
-	/*TODO: 
-		Convert to use 'sentences' array from textAReaContext?! [ {text: 'sentenceOne...'...etc}]
-		&& area-selection array [0, 24] 
-	*/
 	let twoWhiteSpaces = /(\s{2})/gm;
   let standarizeWS = /([?!.]\s)(.)/gm;  
   let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
