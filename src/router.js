@@ -12,6 +12,7 @@ import MultiWordSelector from './routes/MultiWordSelector/ContextWrapper'
 import Circles from './routes/Circles'
 import Layout from './routes/Layout'
 import FlexLayout from './routes/FlexLayout'
+import FlexGrid from './routes/FlexGrid'
 let Home = () => <div>Home</div>
 let Dash = () => <div>Dash</div>
 
@@ -69,6 +70,7 @@ const ThisRouter = () => {
       <Circles path="circles"/>  
       <Layout path="layout"/>  
       <FlexLayout path="flex"/>  
+      <FlexGrid path="flexgrid"/>  
 
       <Redirect from="/*" to="/combine"/>
     </Router>
