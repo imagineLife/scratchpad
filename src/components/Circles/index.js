@@ -68,16 +68,6 @@ const Circles = () => {
 				// console.log(maxCircleHeight)
 				updateFromResize(newDimsLessMargins, maxCircleHeight)
 			}
-
-			// console.log('firstCalc')
-			// console.log(firstCalc)
-			// console.log('resized')
-			// console.log(resized)
-			// console.log('alreadyCalcdWidthOnce')
-			// console.log(alreadyCalcdWidthOnce)
-			// console.log('// - - - - - //')
-			
-			
 			
 			if(firstCalc == false && resized == false && alreadyCalcdWidthOnce == true){
 				console.log('HERE!!');
