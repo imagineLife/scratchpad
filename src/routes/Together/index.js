@@ -1,5 +1,8 @@
 import React from 'react'
 import './index.css'
+import SelectableArea from '../../components/SelectableArea/complexContext'
+
+const moved = () => console.log('moved');
 
 const FlexGrid = () => {
 	return(
@@ -21,7 +24,13 @@ const FlexGrid = () => {
 				</div>
 				
 				<div id="area-box">
-					<p>Area Box</p>
+					<SelectableArea 
+						dims={{
+							width: '700px',
+							height: '100px'
+						}}
+						onMove={moved}
+					/>
 				</div>
 			</header>
 			
