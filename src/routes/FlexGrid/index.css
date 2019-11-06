@@ -1,0 +1,95 @@
+/* 
+	Grid-Template-areas 
+	https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas 
+
+	Grid-template-rows
+	https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
+	grid-template-rows: 250px 1fr 2fr; 
+	
+	Grid-template-columns
+	https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
+
+	fr = fraction
+		cut the remaining content into 3rds (1+2)
+*/
+
+#flex-grid-layout{
+	/*I-E-Friendly styles before the grid-api ... :/ */
+	display: inline-block;
+	display: grid;
+	width: 100%;
+	grid-template-areas: 
+		"top top"
+	  "l r"
+	  "bottom bottom";
+	grid-template-rows: 250px 1fr 2fr; 
+	grid-template-columns: 40% 1fr;
+}
+
+/*TOP SECTION?! 
+	magic, like css var(--varHere) from "top top"
+	from the grid-template-areas above
+*/
+header{
+	grid-area: top;
+}
+
+#left-side{
+	grid-area: l;
+}
+
+#right-side{
+	grid-area: r;
+}
+
+footer{
+	grid-area: bottom;
+}
+#flex-grid-layout div{
+	border: 1px dotted rgb(120,120,120);
+}
+
+#flex-grid-layout #title-box{
+	max-height: 150px;
+}
+
+#flex-grid-layout #area-box{
+	max-height: 100px;
+}
+
+#flex-grid-layout #focus-area-box{
+	max-height: 315px;
+}
+
+#layout div#focus-area-box #focus-area-hover{
+	max-height: 200px;
+}
+
+#flex-grid-layout #area-explain-box{
+	max-height: 75px;
+}
+
+#flex-grid-layout #theme-box{
+	max-height: 350px;
+}
+
+#flex-grid-layout #image-box{
+	max-height: 350px;
+}
+
+#flex-grid-layout #words-of-interest-box{
+	max-height: 385px;
+}
+
+#flex-grid-layout #words-by-length-box{
+	max-height: 275px;
+}
+
+#flex-grid-layout div#text-display-box p.text-content{
+	line-height: 2.3;
+	columns: 2;
+	column-rule: 1px solid rgb(130, 130, 130);
+	column-gap: 20px;
+	overflow-x: scroll;
+	max-height: 480px;
+}

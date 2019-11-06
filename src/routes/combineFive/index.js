@@ -7,11 +7,10 @@ import * as brush from 'd3-brush'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
 import SelectableArea from '../../components/SelectableArea/complexContext'
 import Circles from '../../components/Circles/ContextWrapper'
-import CommonWords from '../../components/WordList/UsingContext'
-// import './index.css'
+import WordListPicker from '../../components/MultiWordPicker/UsingContext'
+import './index.css'
 
-const CombineFour = ({data}) => {
-
+const CombineFive = ({data}) => {
 	const moved = (d) => {
 		// console.log('MOVED');
 		// console.log(d);
@@ -26,11 +25,11 @@ const CombineFour = ({data}) => {
 				}}
 				onMove={moved}
 			/>
-			<CommonWords />
+			<WordListPicker />
 			<Circles />
 			<TextDisplay />
 		</React.Fragment>
 	)
 }
 
-export default CombineFour
+export default CombineFive
