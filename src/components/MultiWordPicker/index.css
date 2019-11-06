@@ -1,7 +1,6 @@
-#words-of-interest{
+#words-of-interest-for-ui{
 	border: 1px solid gray;
-	width: 300px;
-  min-height: 255px;
+	width: 100%;
   display: inline-block;
 }
 
