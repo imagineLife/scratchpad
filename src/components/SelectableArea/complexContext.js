@@ -21,7 +21,7 @@ const SelectableArea = ({onMove}) => {
 	let [hoverArr, setHoverArr] = React.useState([0,175])
 	let [brushBoxG,setBrushBoxG] = React.useState(null)
 	let [brushed, setBrushed] = React.useState(false)
-	let [dims, setDims] = React.useState({width: '700px', height: '130px'})
+	let [dims, setDims] = React.useState({width: '700px', height: '95px'})
 	let [set, setSet] = React.useState(false)
 	let brushRef = React.useRef()
 	
