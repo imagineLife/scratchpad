@@ -12,12 +12,6 @@ const TextDisplay = React.memo(function TextDisplay(){
     console.log('{ textStore }')
     console.log(textStore)
     
-    
- //    let resText = (selectedWord) ? getQueriedWord(textStore.text, selectedWord) : textStore.text;
-
-	// return(
-	// 	<div id="text-display">{resText || 'placeholder...'}</div>
-	// )
 	if(!textStore || !textStore.text){
 		return(<p>ONLY Text with Context</p>)
 	}
