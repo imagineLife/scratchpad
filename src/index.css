@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: 'Comfortaa-Regular';
   src: url('./fonts/Comfortaa-Regular.ttf');
 }
@@ -11,7 +11,7 @@
 @font-face {
   font-family: 'Comfortaa-Bold';
   src: url('./fonts/Comfortaa-Bold.ttf');
-}
+}*/
 
 * {
 	box-sizing: border-box;
@@ -40,7 +40,8 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	/*font: inherit;*/
-	font-family: Comfortaa-Regular;
+	/*font-family: Comfortaa-Regular;*/
+	font-family: 'Roboto Slab', serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -67,7 +68,13 @@ table {
 	border-spacing: 0;
 }
 
+
 html{
-	background-color: rgb(29,34,41);
+	background-color: rgb(29,34,41); /* rgb(20,20,20) */
 	color: rgb(147,147,147);
+}
+
+.light > * {
+	color: black;
+	background-color: white;
 }
