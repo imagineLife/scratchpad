@@ -41,7 +41,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	/*font: inherit;*/
 	/*font-family: Comfortaa-Regular;*/
-	font-family: 'Roboto Slab', serif;
+	/*font-family: 'Roboto Slab', serif;*/
+	font-family: 'Prata', serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -77,4 +78,18 @@ html{
 .light > * {
 	color: black;
 	background-color: white;
+}
+
+h1.title{
+	text-align: center;
+	font-size: 36px;
+}
+
+.title-data{
+	border-top: 1px solid rgb(147,147,147);
+	border-bottom: 1px solid rgb(147,147,147);
+}
+
+.explanatory-text{
+	text-align: center
 }
