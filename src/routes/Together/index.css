@@ -47,3 +47,20 @@ li.sub-title:nth-child(even){
   font-size: .76em;
   border-bottom: var(--border)
 }
+
+
+#theme-box{
+  width: 40%;
+  display: inline-block;
+}
+
+#flex-grid-layout #image-box{
+  width: 60%;
+  display: inline-block;
+}
+
+.image-sub{
+  font-size: 1em;
+  width: 100%;
+  text-align: center;
+}
