@@ -3,7 +3,8 @@ import './index.css'
 import SelectableArea from '../../components/SelectableArea/complexContext'
 import WordListPicker from '../../components/MultiWordPicker/UsingContextForUI'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
-
+import Circles from '../../components/Circles/ContextWrapperForUI'
+import trumpImg from '../../../data/trump.jpg'
 const moved = () => console.log('moved');
 
 const FlexGrid = () => {
@@ -13,16 +14,16 @@ const FlexGrid = () => {
 			<header>
 				<div id="title-box" className="f-w">
 					<div className="title-text-wrapper">
-						<h1 className="title">SayWhat?!</h1>
+						<h1 className="title">The Slice-N-Dice Times</h1>
 						<div className="corner-box">
 							<p>A Play on Newspapers, Text-Analysis, & Interaction</p>
 						</div>
 					</div>
-					<div className="title-data">
-						<span className="sub-title border-right">Donald Trump</span>
-						<span className="sub-title border-right">On the 20th Day of February in the Year of 2017</span>
-						<span className="sub-title">Gives his 1473-word address to the nation</span>
-					</div>
+					<ul className="title-data">
+						<li className="sub-title border-right">Donald Trump</li>
+						<li className="sub-title border-right">On the 20th Day of February in the Year of 2017</li>
+						<li className="sub-title">Gives his 1473-word address to the nation</li>
+					</ul>
 				</div>
 				
 				<div id="area-box">
@@ -56,31 +57,37 @@ const FlexGrid = () => {
 			
 			<section id="right-side">
 				<div id="area-explain-box">
-					<p className="explanatory-text">In the above area chart, the dotted-box can be used to select a specific 
+					<p className="explanatory-text selectable-area-explain">In the above area chart, the dotted-box can be used to select a specific 
 						range of the speech, & update the remainder of the document 
-						(move, shrink, widen) CLICK.DRAG.MOVE</p>
+						(move, shrink, widen) <br />
+						CLICK.DRAG.MOVE</p>
 				</div>
 				
 				<div id="theme-box">
 					<h2 className="section-text">Textual Themes</h2>
-					<p className="explanatory-text">Colors match text to a 'theme'. CLICK</p>
-					<p>Theme Box</p>
+					<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
+					<ul className="theme-list">
+						<li>Employment</li>
+						<li>Trade</li>
+						<li>Protection</li>
+						<li>Patriotism</li>
+					</ul>
 				</div>
 				
 				<div id="image-box">
-					<p>Image Box</p>
+					<img className="face-image" src={trumpImg}/>
 					<h2 className="section-text image-sub">The President <br /> Addresses The Nation</h2>
 				</div>
 				
 				<div id="words-by-length-box">
 					<h2 className="section-text">Words By Length</h2>
-					<p>Words-By-Length Box</p>
+					<Circles />
 				</div>
 			</section>
 			
 			<footer>
 				<div id="divider-box">
-					<p>The text content of the speech, below, is responsive to interactions above.</p>
+					<p className="explanatory-text">The text content of the speech, below, is responsive to interactions above.</p>
 				</div>
 				
 				<div id="text-display-box">
