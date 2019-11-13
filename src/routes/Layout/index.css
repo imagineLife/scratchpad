@@ -98,6 +98,10 @@
 	position: relative;
 }
 
+.image-sub{
+	bottom: 0;
+}
+
 #layout div#words-of-interest-box{
 	height: 385px;
 	margin-top: -110px;
