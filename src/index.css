@@ -1,3 +1,7 @@
+:root{
+	--border: 2px solid rgb(80,80,80);
+};
+
 /*@font-face {
   font-family: 'Comfortaa-Regular';
   src: url('./fonts/Comfortaa-Regular.ttf');
@@ -86,8 +90,8 @@ h1.title{
 }
 
 .title-data{
-	border-top: 1px solid rgb(147,147,147);
-	border-bottom: 1px solid rgb(147,147,147);
+	border-top: var(--border);
+	border-bottom: var(--border);
 }
 
 .explanatory-text{
