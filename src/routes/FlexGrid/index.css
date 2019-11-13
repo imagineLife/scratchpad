@@ -22,9 +22,10 @@
 		"top top"
 	  "l r"
 	  "bottom bottom";
-	grid-template-rows: 250px 1fr 2fr; 
+	grid-template-rows: 210px 1fr 1fr; 
 	grid-template-columns: 40% 1fr;
 	padding: 0 25px;
+	grid-column-gap: 20px;
 }
 
 /*TOP SECTION?! 
@@ -41,13 +42,13 @@ header{
 
 #right-side{
 	grid-area: r;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 footer{
 	grid-area: bottom;
-}
-#flex-grid-layout div{
-	/*border: 1px dotted rgb(120,120,120);*/
 }
 
 #flex-grid-layout #title-box{
@@ -60,6 +61,7 @@ footer{
 
 #flex-grid-layout #focus-area-box{
 	max-height: 315px;
+	border-bottom: var(--border)
 }
 
 #layout div#focus-area-box #focus-area-hover{
@@ -76,6 +78,13 @@ footer{
 
 #flex-grid-layout #image-box{
 	max-height: 350px;
+	border-left: var(--border);
+	padding: 5px
+}
+
+.face-image{
+	max-height: 100%;
+	max-width: 100%;
 }
 
 #flex-grid-layout #words-of-interest-box{
@@ -84,6 +93,7 @@ footer{
 
 #flex-grid-layout #words-by-length-box{
 	max-height: 275px;
+	flex: 1;
 }
 
 #flex-grid-layout div#text-display-box p.text-content{
@@ -94,3 +104,4 @@ footer{
 	overflow-x: scroll;
 	max-height: 480px;
 }
+
