@@ -93,7 +93,3 @@ h1.title{
 	border-top: var(--border);
 	border-bottom: var(--border);
 }
-
-.explanatory-text{
-	text-align: center
-}
