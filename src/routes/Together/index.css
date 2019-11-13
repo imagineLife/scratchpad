@@ -1,0 +1,49 @@
+ul.title-data{
+	text-align: center;
+}
+
+li.sub-title{
+  margin: 5px 20px;
+  font-size: .7rem;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/*
+	Interesting style-choice, not what i thought but nice && grow-able
+*/
+li.sub-title:nth-child(even){
+	border: var(--border);
+	border-width: 0 2px;
+	padding: 0 20px;
+	margin: 0;
+}
+
+.title-text-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.title-text-wrapper > h1{
+	width: 100%;
+	margin: 10px 0;
+}
+
+.corner-box{
+  border: 1px solid rgb(100,100,100);
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  width: 135px;
+  font-size: .25em;
+  text-align: center;
+  padding: 6px;
+  margin: 10px 0;
+}
+
+.selectable-area-explain{
+  padding: 7px;
+  font-family: sans-serif;
+  font-size: .76em;
+  border-bottom: var(--border)
+}
