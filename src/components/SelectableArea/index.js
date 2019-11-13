@@ -14,7 +14,6 @@ const SelectableArea = ({dims, onMove, data}) => {
 	let brushRef = React.useRef()
 	
 	function brushedFn(){
-		// console.log('%c brushed fn', 'background-color: steelblue; color: black;')
 		
 		var selectedPixels = d3Select.event.selection;
 		
@@ -23,8 +22,6 @@ const SelectableArea = ({dims, onMove, data}) => {
 
 		setHoverArr(selectedPixels)
 		onMove([scaledBegin, scaledEnd])
-
-		// console.log('%c - - - - -', 'background-color: steelblue; color: black;')
 		
 	}
 
@@ -32,7 +29,7 @@ const SelectableArea = ({dims, onMove, data}) => {
 		select && save the 'brushBox' to state
 	*/
 	React.useEffect(() => {
-		if(data){
+		if(data && !brushBox){
 			setBrushBox(d3Select.select(brushRef.current))
 		}
 	}, [data])
@@ -57,6 +54,10 @@ const SelectableArea = ({dims, onMove, data}) => {
 		}
 	}, [brushBox])
 
+
+	/*
+		could add the useLayout Effect here to work-around d3 race issue(s)
+	*/
 	//////////////////////////// /////
 	//// default loading return /////
 	//////////////////////////// /////
@@ -86,12 +87,6 @@ const SelectableArea = ({dims, onMove, data}) => {
 		.x((d, i) => xScale(i + 1))
 		.y0(100)
 		.y1((d) => yScale(d.y))
-
-
-	// console.log('%c SCALED sentence indexes', 'background-color: orange; color: white;')
-	// console.log(Math.floor(translateScale(hoverArr[0])))
-	// console.log(Math.floor(translateScale(hoverArr[1])))
-	// console.log('%c  - - - - ', 'background-color: orange; color: white;')
 
 	const pathD = areaFn(data)
 
