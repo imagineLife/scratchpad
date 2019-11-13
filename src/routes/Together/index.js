@@ -40,8 +40,7 @@ const FlexGrid = () => {
 			<section id="left-side">
 				<div id="focus-area-box">
 					<h2 className="section-text">A Glance At The Text</h2>
-					<div id="focus-area-hover">
-					</div>
+					<div id="focus-area-hover" />
 					<p className="explanatory-text">Hover over this area chart to highlight the sentence 
 					that was spoken at the specific point in time during the 
 					president’s address.  HOVER</p>
