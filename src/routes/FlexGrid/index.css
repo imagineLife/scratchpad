@@ -24,6 +24,7 @@
 	  "bottom bottom";
 	grid-template-rows: 250px 1fr 2fr; 
 	grid-template-columns: 40% 1fr;
+	padding: 0 25px;
 }
 
 /*TOP SECTION?! 
@@ -46,7 +47,7 @@ footer{
 	grid-area: bottom;
 }
 #flex-grid-layout div{
-	border: 1px dotted rgb(120,120,120);
+	/*border: 1px dotted rgb(120,120,120);*/
 }
 
 #flex-grid-layout #title-box{
