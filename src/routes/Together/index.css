@@ -57,10 +57,21 @@ li.sub-title:nth-child(even){
 #flex-grid-layout #image-box{
   width: 60%;
   display: inline-block;
+  max-height: 290px;
 }
 
 .image-sub{
   font-size: 1em;
   width: 100%;
   text-align: center;
+}
+
+.theme-explanatory{
+  text-align: center
+}
+
+.theme-list{
+  margin-top: 20px;
+  text-align: center;
+  line-height: 2;
 }
