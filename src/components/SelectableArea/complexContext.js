@@ -106,6 +106,7 @@ const SelectableArea = ({onMove}) => {
 		.x((d, i) => xScale(i + 1))
 		.y0(100)
 		.y1((d) => yScale(d.y))
+		.curve(d3Shape.curveCatmullRom)
 
 	const pathD = areaFn(areaData)
 
@@ -116,12 +117,18 @@ const SelectableArea = ({onMove}) => {
 	return(
 		<Fragment>
 			<svg id="selectable" style={dims}>
+				<defs>
+			    <linearGradient id="myGradient" gradientTransform="rotate(90)">
+			      <stop offset="50%" stopColor="rgb(147,147,147)" />
+			      <stop offset="100%"  stopColor="rgba(49,54,61,0)" />
+			    </linearGradient>
+			  </defs>
 			  <g className="g-wrapper">
 			    
 			    {/*Area Path*/}
 			    <path 
 			      d={pathD}
-						fill={'#ccc'} />
+						fill={'url(#myGradient)'} />
 					
 					{/*Brush Handle*/}
 					<g className="brush-g-window" ref={brushRef} />
