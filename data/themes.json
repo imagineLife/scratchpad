@@ -1,4 +1,69 @@
 /*
+	Resulting theme object parsing && building
+
+	OPTION 1
+	//{themeName: [theme,key,words]}
+	...translatable to figuring out key-word-to-themes && 
+		having run-tum connect the themes in the sentences
+	...big O is complex
+	..great at run-time for this one!
+
+	PROBLEM / slowness here:
+		if a single theme (i.e 'unity') has MANY key-words,
+			looping through the one key will take a long time each sentence
+	
+	{
+		patriotism: ['president'],  //1
+		thankful: ['thank'],				//1
+		unity, ['we', 'together'],	//2, 3, 4
+		change : [rebuild, restore],//2
+		pessimism: hardship, 				//5
+		comparison: but 						//5
+	}
+
+
+	OPTION 2
+	
+	{1: [patriotism, thankful]}
+	{2: [unity, change]}
+	3: unity
+	4: unity
+
+	...not useful for run-time analysis
+	...big O is less complex
+	// 1 : [water, mmelon, chicken, grtiz]
+
+
+
+	frontend logic ...(store this data)
+	-ON AREA-CHANGE:
+		populate area-list
+		- get selected sentences array (sentence numbers no more?... not sure here...)
+		- grab option-2 array-of-arrays (index-to-sentence number automagic)
+		- Grab themes from the array positions [sentenceStart, sentenceEnd]
+		- Show in theme-list
+
+	-ON-THEME-CLICK, to text-blob-highlight
+		- click a theme
+		- use option-1-object
+		- ket keywords from theme-key ('thankful') returns thank
+		- regex.match the text-blob
+			- capture the sentence ** unique, different from previous regex work
+		- return sentence with a special-class
+
+		idea for adding theme content to the text file
+		~!~Array-of-Array Option-2 Theme-Content-Here~!~
+		~!~[["one","two"],["three","four"]]~!~
+		- split the text @ ~!~, only use the text part
+		- json.parse the ~!~ array 
+
+
+	NOTES:
+	option 1 at run-time
+	option 2 ONCE,
+
+
+
 	1.
 	Chief Justice Roberts, President Carter, 
 		President Clinton, President Bush, President Obama, 
@@ -19,8 +84,6 @@
 			join*ed
 		Change
 			rebuild, restore
-		Hope
-			restore, rebuild
 
 	3.
 		Together we will determine the course of America, 
@@ -28,18 +91,20 @@
 
 		Unity
 			Together
-		Power
-			determine?!
+
 	4.
 		We will face challenges
-		Challenge
-			challenges
+		Unity
+			we
 	5.
 		We will confront hardships, but we will get the job done.
+		unity
+			we
 		Pessimism?
 			hardships
-		Optimism
-			"we will"
+		comparison
+			but
+		
 	6.
 		Every four years, we gather on these steps to carry out the 
 			orderly and peaceful transfer of power, and we are grateful 
