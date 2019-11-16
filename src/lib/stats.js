@@ -9,7 +9,6 @@ const convertStrToWordArr = str => {
 
   //apply regex
   const regexTxt = str.replace(newReg," ").replace(puncRegEx, "")
-  const uniqueWordCount = str.match(uniqueWordRegex).length
   
   //split txt into arr of words
   return regexTxt.split(" ")
