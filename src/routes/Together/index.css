@@ -33,7 +33,7 @@ li.sub-title:nth-child(even){
   border: 1px solid rgb(100,100,100);
   position: absolute;
   top: 8px;
-  right: 15px;
+  right: 25px;
   width: 135px;
   font-size: .25em;
   text-align: center;
