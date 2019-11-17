@@ -3,6 +3,7 @@ import './index.css'
 import SelectableArea from '../../components/SelectableArea/dimsFromParent'
 import WordListPicker from '../../components/MultiWordPicker/UsingContextForUI'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
+import AreaBox from '../../components/Area'
 import Circles from '../../components/Circles/ContextWrapperForUI'
 import useDimensions from '../../lib/useDims'
 import trumpImg from '../../../data/trump.jpg'
@@ -11,7 +12,8 @@ const moved = () => console.log('moved');
 
 const FlexGrid = () => {
 
-	const [areaBoxRef, {width, height}] = useDimensions();
+	const [areaBoxRef, {width: areaBoxWidth, height: areaBoxHeight}] = useDimensions();
+	const [focusAreaRef, {width: focusAreaW, height: focusAreaH}] = useDimensions();
 	let [themeObj, setThemeObj] = React.useState({})
 	let [themeArr] = React.useState([['Patriotism','Thankful'], ['timeframe','unity','change'], ['unity'], ['we'],['unity','pessimism','comparison']])
 	/*
@@ -50,10 +52,10 @@ const FlexGrid = () => {
 		})
 	}, [])
 
-	console.log('themeObj')
-	console.log(themeObj)
-	console.log('themeArr')
-	console.log(themeArr)
+	// console.log('themeObj')
+	// console.log(themeObj)
+	// console.log('themeArr')
+	// console.log(themeArr)
 	
 
 	return(
@@ -77,8 +79,8 @@ const FlexGrid = () => {
 				<div id="area-box" ref={areaBoxRef}>
 					<SelectableArea 
 						dims={{
-							width: width,
-							height: height
+							width: areaBoxWidth,
+							height: areaBoxHeight
 						}}
 						onMove={moved}
 					/>
@@ -88,7 +90,9 @@ const FlexGrid = () => {
 			<section id="left-side">
 				<div id="focus-area-box">
 					<h2 className="section-text">A Glance At The Text</h2>
-					<div id="focus-area-hover" />
+					<div id="focus-area-hover" ref={focusAreaRef}>
+						<AreaBox />
+					</div>
 					<p className="explanatory-text">Hover over this area chart to highlight the sentence 
 					that was spoken at the specific point in time during the 
 					president’s address.  HOVER</p>
