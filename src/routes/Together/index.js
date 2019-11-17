@@ -1,13 +1,61 @@
 import React from 'react'
 import './index.css'
-import SelectableArea from '../../components/SelectableArea/complexContext'
+import SelectableArea from '../../components/SelectableArea/dimsFromParent'
 import WordListPicker from '../../components/MultiWordPicker/UsingContextForUI'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
 import Circles from '../../components/Circles/ContextWrapperForUI'
+import useDimensions from '../../lib/useDims'
 import trumpImg from '../../../data/trump.jpg'
+import * as d3data from 'd3-fetch'
 const moved = () => console.log('moved');
 
 const FlexGrid = () => {
+
+	const [areaBoxRef, {width, height}] = useDimensions();
+	let [themeObj, setThemeObj] = React.useState({})
+	let [themeArr] = React.useState([['Patriotism','Thankful'], ['timeframe','unity','change'], ['unity'], ['we'],['unity','pessimism','comparison']])
+	/*
+		DEV ONLY - convert csv-type data to an object consumable by this project
+	*/
+	React.useEffect(() => {
+		let newObj={}
+		d3data.tsv('../../../data/themes.tsv').then(res => {
+			
+			/*Option 1*/
+			res.map((tsv, idx) => {
+				if(!newObj.hasOwnProperty(tsv.theme)){
+					let theseWords = tsv.keywords.split(",")
+					newObj[tsv.theme] = theseWords
+				}
+				if(newObj.hasOwnProperty(tsv.theme)){
+					
+					let startArr = newObj[tsv.theme]
+					
+					let newArr = tsv.keywords.split(',')
+					
+					// let resArr = [...startArr, ...newArr]
+
+					/*
+						SET?!
+						https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+						remove duplicates
+					*/
+					let resArr = [...new Set([...startArr, ...newArr])]
+					
+					newObj[tsv.theme] = resArr
+
+				}
+			})	
+			setThemeObj(newObj)
+		})
+	}, [])
+
+	console.log('themeObj')
+	console.log(themeObj)
+	console.log('themeArr')
+	console.log(themeArr)
+	
+
 	return(
 		<main id="flex-grid-layout">
 			
@@ -26,11 +74,11 @@ const FlexGrid = () => {
 					</ul>
 				</div>
 				
-				<div id="area-box">
+				<div id="area-box" ref={areaBoxRef}>
 					<SelectableArea 
 						dims={{
-							width: '700px',
-							height: '100px'
+							width: width,
+							height: height
 						}}
 						onMove={moved}
 					/>
