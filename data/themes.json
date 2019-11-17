@@ -45,11 +45,14 @@
 
 	-ON-THEME-CLICK, to text-blob-highlight
 		- click a theme
-		- use option-1-object
+		- use option-1-object {them: [...keywords]}
 		- ket keywords from theme-key ('thankful') returns thank
+		
 		- regex.match the text-blob
 			- capture the sentence ** unique, different from previous regex work
+		
 		- return sentence with a special-class
+
 
 		idea for adding theme content to the text file
 		~!~Array-of-Array Option-2 Theme-Content-Here~!~
@@ -64,6 +67,57 @@
 
 
 
+
+
+theme-box
+
+
+- get selected sentence arr
+	[0, 5]
+
+- get themesArr
+[
+  [
+    "Patriotism",
+    "Thankful"
+  ],
+  [
+    "timeframe",
+    "unity",
+    "change"
+  ],
+  [
+    "unity"
+  ],
+  [
+    "we"
+  ],
+  [
+    "unity",
+    "pessimism",
+    "comparison"
+  ]
+]
+
+- loop through && condense themes into single list of themes
+let resList = []
+
+//LOOP
+	for(let i = startSentenceNumber; i < endSEntenceNumber; i++){
+		resList = [
+			...resList,
+			...themesArr[i]
+		]
+	}
+
+resList = [...new Set(resList)]
+
+
+
+
+
+
+
 	1.
 	Chief Justice Roberts, President Carter, 
 		President Clinton, President Bush, President Obama, 
@@ -73,12 +127,14 @@
 			President
 		Thankful
 			thank
+	['Patriotism','Thankful']
 
 	2.
 		We the citizens of America are now joined in a great 
 			national effort to rebuild our country and restore
 			 its promise for all of our people.
-
+		timeframe
+			now
 		Unity
 			We
 			join*ed
@@ -96,6 +152,7 @@
 		We will face challenges
 		Unity
 			we
+
 	5.
 		We will confront hardships, but we will get the job done.
 		unity
@@ -180,7 +237,9 @@
 	16.
 		That all changes, starting right here and right now, 
 		because this moment is your moment --- it belongs to you.
-
+		Timeframe
+			starting
+			now
 		Change
 			changes
 		ownership
@@ -225,6 +284,8 @@
 
 	23. Everyone is listening to you now.
 		attention
+		timeframe
+			now
 
 	24. You came by the tens of millions to become part of a historic movement, the likes of which the world has never seen before.
 		amazement
@@ -306,6 +367,7 @@
 			carnage
 		change
 			stops
+		timeframe
 			now
 
 	30. We are one nation and their pain is our pain. 
@@ -400,8 +462,9 @@
 
 	40. But that is the past, and now we are looking only to the future. 
 
-	change
+	timeframe
 		now
+	change
 		but
 
 	41. We assembled here today our issuing a new decree to be heard in every city, 
@@ -466,6 +529,8 @@
 		america
 	success
 		winning
+	timeframe
+		start
 
 	48. We will bring back our jobs. 
 	unity
@@ -633,24 +698,48 @@
 		god
 		
 	67. Finally, we must think big and dream even bigger. 
-	
+	idealism
+		dream
 
-	68. In America, we understand that a nation is only living as long as it is striving. 
+	68. In America, we understand that a nation is only 
+	living as long as it is striving. 
+	Patriotism
+		America
 
 	69. We will no longer accept politicians who are all talk and no action, constantly 
 	complaining but never doing anything about it. 
+	politics
+		politicians
+	negitivity
+		complaining
+
 
 	70. The time for empty talk is over. 
+	timeframe
+		over
 
 	71. Now arrives the hour of action. 
+	timeframe
+		now
+		arrives
+
 
 	72. Do not allow anyone to tell you that it cannot be done. 
+	timeframe
+		done
 
 	73. No challenge can match the heart and fight and spirit of America. 
-
+	patriotism
+		America
+	
 	74. We will not fail. 
+	success
+		fail
 
 	75. Our country will thrive and prosper again.
+	success
+		thrive
+		prosper
 
 	76. We stand at the birth of a new millennium, ready to unlock the mysteries of space, 
 	to free the Earth from the miseries of disease and to harness the industries and 
