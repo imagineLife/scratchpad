@@ -19,6 +19,7 @@ const FlexGrid = () => {
 	/*
 		DEV ONLY - convert csv-type data to an object consumable by this project
 	*/
+	
 	React.useEffect(() => {
 		let newObj={}
 		d3data.tsv('../../../data/themes.tsv').then(res => {
@@ -91,7 +92,7 @@ const FlexGrid = () => {
 				<div id="focus-area-box">
 					<h2 className="section-text">A Glance At The Text</h2>
 					<div id="focus-area-hover" ref={focusAreaRef}>
-						<AreaBox />
+						<AreaBox dims={{width: focusAreaW, height: focusAreaH}}/>
 					</div>
 					<p className="explanatory-text">Hover over this area chart to highlight the sentence 
 					that was spoken at the specific point in time during the 
