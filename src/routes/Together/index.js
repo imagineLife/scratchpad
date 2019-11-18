@@ -111,8 +111,7 @@ const FlexGrid = () => {
 				<div id="area-explain-box">
 					<p className="explanatory-text selectable-area-explain">In the above area chart, the dotted-box can be used to select a specific 
 						range of the speech, & update the remainder of the document 
-						(move, shrink, widen) <br />
-						CLICK.DRAG.MOVE</p>
+						(move, shrink, widen) CLICK.DRAG.MOVE</p>
 				</div>
 				
 				<div id="theme-box">
