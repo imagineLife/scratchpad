@@ -11,10 +11,8 @@ import {TextAreaContext} from '../../Contexts/TextArea'
 const SelectableArea = ({onMove, dims}) => {
 	
 	if(!dims || !dims.height || !dims.width){
-		console.log('1');
 		return <p>...loading</p>
 	}
-	console.log('2');
 	
 	let {
 		sentences, 
@@ -120,8 +118,7 @@ const SelectableArea = ({onMove, dims}) => {
 	}
 
 	return(
-		<Fragment>
-			<svg id="selectable" style={dims}>
+		<svg id="selectable" style={dims}>
 				<defs>
 			    <linearGradient id="myGradient" gradientTransform="rotate(90)">
 			      <stop offset="50%" stopColor="rgb(147,147,147)" />
@@ -140,8 +137,7 @@ const SelectableArea = ({onMove, dims}) => {
 
 				</g>
 		</svg>
-		</Fragment>
-		)
+	)
 }
 
 export default SelectableArea
