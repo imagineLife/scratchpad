@@ -11,7 +11,7 @@ const Circles = () => {
 	
 	const dims = useDimensions()
 	let [ref, {height, width}] = dims
-	const [m] = React.useState({t: 10, r: 25, b: 10, l: 25})
+	const [m] = React.useState({t: 10, r: 25, b: 10, l: 15})
 	const [lessM, setLessM] = React.useState({})
 	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
 	let [buffer, setBuffer] = React.useState(0)
@@ -19,7 +19,7 @@ const Circles = () => {
 	const updateFromResize = (dims, circleMax) => {
 		setLessM(dims)
 		setCircleRadiusRange([0, circleMax])
-		setBuffer(dims.w * .012)
+		setBuffer(dims.w * .01)
 	}
 	
 	//load visible text string
@@ -43,42 +43,25 @@ const Circles = () => {
 	//Update state dimensions
 	React.useEffect(() => {
 		if(wordsByLength.length > 0){
-			//on first-render-calculation
+			
+			//check for first calculation
 			let firstCalc = (height && width && lessM['w'] == undefined)
 			let newDimsLessMargins ={};
 			let newRadiusRange = []
-			if(firstCalc){
-				newDimsLessMargins = makeDimsLessMargins(height,width, m)
-				let wDivision = wordsByLength.length + .5 
-				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
-				let maxCircleHeight = Math.min(maxCircleHeightByWidth, newDimsLessMargins.h * .5)
-				updateFromResize(newDimsLessMargins, maxCircleHeight)
-			}
 
-			//on resize
+			//check for resized-window
 			let newWidth = (width - m.l - m.r !== lessM.w)
 			let alreadyCalcdWidthOnce = lessM.w !== undefined
-			let resized = newWidth && alreadyCalcdWidthOnce
-			if(resized){
-				newDimsLessMargins = makeDimsLessMargins(height,width, m)
-				let wDivision = wordsByLength.length + .5
-				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
-				let maxCircleHeight = Math.min(maxCircleHeightByWidth, (newDimsLessMargins.h * .5))
-				// console.log('maxCircleHeight')
-				// console.log(maxCircleHeight)
-				updateFromResize(newDimsLessMargins, maxCircleHeight)
-			}
 			
-			if(firstCalc == false && resized == false && alreadyCalcdWidthOnce == true){
-				console.log('HERE!!');
+
+			let resized = newWidth && alreadyCalcdWidthOnce
+			let windowResized = firstCalc == false && resized == false && alreadyCalcdWidthOnce == true;
+			
+			if(resized || firstCalc){
 				newDimsLessMargins = makeDimsLessMargins(height,width, m)
 				let wDivision = wordsByLength.length + .5
 				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
 				let maxCircleHeight = Math.min(maxCircleHeightByWidth, (newDimsLessMargins.h * .5))
-
-				console.log('maxCircleHeight')
-				console.log(maxCircleHeight)
-				
 				updateFromResize(newDimsLessMargins, maxCircleHeight)
 			}
 		}
