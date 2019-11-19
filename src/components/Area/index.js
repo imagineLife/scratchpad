@@ -40,8 +40,36 @@ const Area = ({dims}) => {
 
 	const pathD = areaFn(selectedSentences)
 
+	//mousedOver && mouseMove
+  const moused = d => {
+    let areaSVG = document.getElementsByClassName('area-svg')[0]
+
+    //$FlowSVGBug
+    let areaSVGXOffset = areaSVG.getBoundingClientRect().x
+    
+    let xPos = d.pageX - areaSVGXOffset
+    
+    if(xPos >= xScale.range()[0]){
+      let sentenceNumber = Math.ceil(xScale.invert(xPos))  
+      console.log('sentenceNumber')
+      console.log(sentenceNumber)
+      
+      // if(sentenceNumber < (howManySentences)){
+      // 	console.log('sentenceNumber')
+      // 	console.log(sentenceNumber)
+        // setSentenceNumber(sentenceNumber)
+        // setShowLine(true)
+        // setCurSentence(data[(sentenceNumber - 1)])
+      // }
+    } 
+  }
 	return(
-		<svg id="area" style={dims}>
+		<svg 
+			id="area" 
+			style={dims} 
+			className='area-svg'
+			onMouseOver={moused}
+      onMouseMove={moused}>
 				<defs>
 			    <linearGradient id="areaGradient" gradientTransform="rotate(90)">
 			      <stop offset="1%" stopColor="rgb(147,147,147)" />
