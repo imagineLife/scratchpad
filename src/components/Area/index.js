@@ -36,7 +36,7 @@ const Area = ({dims}) => {
 		.x((d, i) => xScale(i))
 		.y0(yScale(0))
 		.y1((d) => yScale(d.wordCount))
-		.curve(d3Shape.curveCatmullRom)
+		// .curve(d3Shape.curveCatmullRom)
 
 	const pathD = areaFn(selectedSentences)
 
