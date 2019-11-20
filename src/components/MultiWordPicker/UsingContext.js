@@ -11,7 +11,7 @@ const CommonWords = () => {
 		selectWordList, 
 		setSelectedWord,
 		selectedWord,
-		wordListFocus 
+		wordListFocus
 	} = React.useContext(WordListContext);
 	
 	React.useEffect(() => { //look into useLayoutEffect
