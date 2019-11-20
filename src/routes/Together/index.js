@@ -7,7 +7,7 @@ import AreaBox from '../../components/Area'
 import Circles from '../../components/Circles/ContextWrapperForUI'
 import useDimensions from '../../lib/useDims'
 import trumpImg from '../../../data/trump.jpg'
-import * as d3data from 'd3-fetch'
+const d3data = React.lazy(() => import('d3-fetch')) 
 const moved = () => console.log('moved');
 
 const FlexGrid = () => {
@@ -101,7 +101,7 @@ const FlexGrid = () => {
 					<h2 className="section-text">Words Of Interest</h2>
 					<WordListPicker />
 					<p className="explanatory-text">Here are some various types of words that were spoken. 
-					The word lists are toggle-able & the words are selectable. SELECT.SELECT</p>
+					The word lists are toggle-able & the words are selectable. <span className="interaction-note">SELECT.SELECT</span></p>
 				</div>
 			</section>
 			
@@ -109,23 +109,25 @@ const FlexGrid = () => {
 				<div id="area-explain-box">
 					<p className="explanatory-text selectable-area-explain">In the above area chart, the dotted-box can be used to select a specific 
 						range of the speech, & update the remainder of the document 
-						(move, shrink, widen) CLICK.DRAG.MOVE</p>
+						(move, shrink, widen) <span className="interaction-note">CLICK.DRAG.MOVE</span></p>
 				</div>
 				
-				<div id="theme-box">
-					<h2 className="section-text">Textual Themes</h2>
-					<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
-					<ul className="theme-list">
-						<li>Employment</li>
-						<li>Trade</li>
-						<li>Protection</li>
-						<li>Patriotism</li>
-					</ul>
-				</div>
-				
-				<div id="image-box">
-					<img className="face-image" src={trumpImg}/>
-					<h2 className="section-text image-sub">The President <br /> Addresses The Nation</h2>
+				<div className="flex-row">
+					<div id="theme-box">
+						<h2 className="section-text">Textual Themes</h2>
+						<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
+						<ul className="theme-list">
+							<li>Employment</li>
+							<li>Trade</li>
+							<li>Protection</li>
+							<li>Patriotism</li>
+						</ul>
+					</div>
+					
+					<div id="image-box">
+						<img className="face-image" src={trumpImg}/>
+						<h2 className="section-text image-sub">The President <br /> Addresses The Nation</h2>
+					</div>
 				</div>
 				
 				<div id="words-by-length-box">
