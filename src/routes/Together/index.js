@@ -20,38 +20,39 @@ const FlexGrid = () => {
 		DEV ONLY - convert csv-type data to an object consumable by this project
 	*/
 	
-	React.useEffect(() => {
-		let newObj={}
-		d3data.tsv('../../../data/themes.tsv').then(res => {
+	// let dataFileURL = process.env.NODE_ENV === 'development' ?'../../../data/themes.tsv' : './themes.tsv'
+	// React.useEffect(() => {
+	// 	let newObj={}
+	// 	d3data.tsv(dataFileURL).then(res => {
 			
-			/*Option 1*/
-			res.map((tsv, idx) => {
-				if(!newObj.hasOwnProperty(tsv.theme)){
-					let theseWords = tsv.keywords.split(",")
-					newObj[tsv.theme] = theseWords
-				}
-				if(newObj.hasOwnProperty(tsv.theme)){
+	// 		/*Option 1*/
+	// 		res.map((tsv, idx) => {
+	// 			if(!newObj.hasOwnProperty(tsv.theme)){
+	// 				let theseWords = tsv.keywords.split(",")
+	// 				newObj[tsv.theme] = theseWords
+	// 			}
+	// 			if(newObj.hasOwnProperty(tsv.theme)){
 					
-					let startArr = newObj[tsv.theme]
+	// 				let startArr = newObj[tsv.theme]
 					
-					let newArr = tsv.keywords.split(',')
+	// 				let newArr = tsv.keywords.split(',')
 					
-					// let resArr = [...startArr, ...newArr]
+	// 				// let resArr = [...startArr, ...newArr]
 
-					/*
-						SET?!
-						https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
-						remove duplicates
-					*/
-					let resArr = [...new Set([...startArr, ...newArr])]
+	// 				/*
+	// 					SET?!
+	// 					https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+	// 					remove duplicates
+	// 				*/
+	// 				let resArr = [...new Set([...startArr, ...newArr])]
 					
-					newObj[tsv.theme] = resArr
+	// 				newObj[tsv.theme] = resArr
 
-				}
-			})	
-			setThemeObj(newObj)
-		})
-	}, [])
+	// 			}
+	// 		})	
+	// 		setThemeObj(newObj)
+	// 	})
+	// }, [])
 
 	// console.log('themeObj')
 	// console.log(themeObj)
@@ -92,11 +93,8 @@ const FlexGrid = () => {
 				<div id="focus-area-box">
 					<h2 className="section-text">A Glance At The Text</h2>
 					<div id="focus-area-hover" ref={focusAreaRef}>
-						<AreaBox dims={{width: focusAreaW, height: focusAreaH}}/>
+						<AreaBox dims={{width: focusAreaW, height: focusAreaH * .8}} setSentenceNumber/>
 					</div>
-					<p className="explanatory-text">Hover over this area chart to highlight the sentence 
-					that was spoken at the specific point in time during the 
-					president’s address.  HOVER</p>
 				</div>
 
 				<div id="words-of-interest-box">
