@@ -38,6 +38,8 @@ header{
 
 #left-side{
   grid-area: l;
+  display: flex;
+  flex-direction: column
 }
 
 #right-side{
@@ -60,7 +62,8 @@ footer{
 }
 
 #flex-grid-layout #focus-area-box{
-  max-height: 315px;
+  /*315px;*/
+  min-height: 345px;
   border-bottom: var(--border)
 }
 
@@ -71,6 +74,11 @@ footer{
 
 #flex-grid-layout #area-explain-box{
   max-height: 75px;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
 }
 
 #flex-grid-layout #theme-box{
@@ -112,8 +120,8 @@ ul.title-data{
 }
 
 li.sub-title{
-  margin: 5px 20px;
-  font-size: .7rem;
+  margin: 7px 25px;
+  font-size: .8em;
   text-transform: uppercase;
   display: inline-block;
 }
@@ -124,7 +132,7 @@ li.sub-title{
 li.sub-title:nth-child(even){
 	border: var(--border);
 	border-width: 0 2px;
-	padding: 0 20px;
+	padding: 0 25px;
 	margin: 0;
 }
 
@@ -154,7 +162,8 @@ li.sub-title:nth-child(even){
   padding: 7px;
   font-family: sans-serif;
   font-size: .76em;
-  border-bottom: var(--border)
+  border-bottom: var(--border);
+  /*margin-bottom: 10px;*/
 }
 
 
@@ -221,6 +230,10 @@ li.sub-title:nth-child(even){
 */
 header{
   grid-area: top;
+}
+
+#left-side, #right-side{
+  margin-top: 10px;
 }
 
 #left-side{
@@ -321,4 +334,8 @@ footer{
   text-anchor: middle;
   font-size: 12px;
   alignment-baseline: middle;
+}
+
+.interaction-note{
+  font-family: prata;
 }
