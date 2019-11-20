@@ -14,11 +14,21 @@ const CommonWords = () => {
 		wordListFocus
 	} = React.useContext(WordListContext);
 	
-	React.useEffect(() => { //look into useLayoutEffect
+	//MAKE common words after display-text gets added to context
+	React.useEffect(() => {
 		if(displayText){
 			makeCommonWords(displayText)
 		}
 	}, [displayText])
+
+	//AUTO-SELECT a word-list 'onLoad'
+	React.useEffect(() => {
+		if(displayText && wordLists && !wordListFocus){
+			let lists = Object.keys(wordLists)
+			selectWordList(lists[0])
+			
+		}
+	}, [displayText, wordListFocus, wordLists])
 
 	if(!wordLists){
 		return <p>Missing Word Lists</p>
@@ -30,6 +40,7 @@ const CommonWords = () => {
 		<section id="words-of-interest-for-ui">
 			{/* List of List-Titles */}
 			<section id="word-list">
+				<h3 className="word-list-title">Word Lists</h3>
 				<ul id="word-lists">
 					{lists.map((l, idx) => (
 						<li 
