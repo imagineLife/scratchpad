@@ -654,13 +654,14 @@ resList = [...new Set(resList)]
 
 	60. The Bible tells us, how good and pleasant it is when God's people live together 
 	in unity. 
-	Faith
-		bible
 	positivity
 		good
 		pleasant
 	unity
 		people
+	spirituality
+		God
+		bible
 
 	61. We must speak our minds openly, debate our disagreements, but always pursue 
 	solidarity. 
@@ -704,8 +705,8 @@ resList = [...new Set(resList)]
 		we
 	protection
 		protected
-	faith
-		god
+	spirituality
+		God
 		
 	67. Finally, we must think big and dream even bigger. 
 	idealism
@@ -809,27 +810,58 @@ resList = [...new Set(resList)]
 		american
 	timeframe
 		never
+	fate
+		destiny
 
 
 	83. And your courage and goodness and love, will forever guide us along the way. 
-	
+		power
+			courage
+		timeframe
+			forever
+
 
 	84. Together, we will make America strong again. 
+		Patriotism
+			America
+		power
+			strong
 
 	85. We will make America wealthy again. 
+		Patriotism
+			America
+		economics
+			wealthy
 
-	86. We will make America proud again We will make America safe again, And yes, together, we will make we will make America great again. 
+	86. We will make America proud again.
+	Patriotism
+			America
 
-	87. Thank you. 
+	87. We will make America safe again, and yes, together, we will make we will make America great again. 
+	Patriotism
+			America
 
-	88. God bless you. 
+	88. Thank you. 
+	thankfulness
+		thank
 
-	89. And god bless America. 
+	89. God bless you. 
+	spirituality
+		God
+		Bless
 
-	90. Thank you. 
+	90. And god bless America. 
+	Patriotism
+		America
+	spirituality
+		God
+		Bless
 
-	91. God bless America.
+	91. Thank you. 
 
+	92. God bless America.
+	spirituality
+		God
 
 	{
 		ThemeWord: {
