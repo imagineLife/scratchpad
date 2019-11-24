@@ -69,7 +69,11 @@ const CommonWords = () => {
 								key={`${thisWord}-${idx}`} 
 								className={`focus-word-option ${ selectedWord && selectedWord === thisWord ? ' selected-focus-word' : ''}`}
 								onClick={() => {
-								setSelectedWord((thisWord))
+									if(selectedWord === thisWord){
+										setSelectedWord(null)
+									}else{
+										setSelectedWord(thisWord)
+									}
 								}}
 							>{thisWord}</li>
 						)
