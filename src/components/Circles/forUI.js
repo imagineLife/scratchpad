@@ -97,18 +97,24 @@ const Circles = () => {
 							let circleX = c.thisX + c.prevX
 							let circleY = lessM.h * .45
 							return(
-								<React.Fragment key={`${c.size}-${idx}`}>
+								<g 
+									key={`${c.size}-${idx}`} 
+										onClick={() => {
+											if(wordLength === c.size){
+												textAreaDispatch({"type": "WORD_LENGTH", "payload": null})
+											}else{
+												textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})
+											}
+										}}>
 									<circle
 										className='word-circle'
 										r={rScale(c.occurances)}
 										stroke={wordLength == c.size ? 'rgb(125,125,0)' : 'rgb(125,125,125)'}
-										strokeWidth={1}
+										strokeWidth={2}
 										cx={circleX}
 										cy={circleY}
-										fill={wordLength == c.size ? 'black' : 'rgb(25,25,25)'}
-										onClick={() => {
-											textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})
-										}} />
+										fill={'rgb(25,25,25)'}
+									/>
 									<text>
 										<tspan x={circleX} y={lessM.h - 15} className="circle-label">{c.size}-Letter</tspan>
 										<tspan x={circleX} y={lessM.h} className="circle-label">Words</tspan>
@@ -116,7 +122,7 @@ const Circles = () => {
 									<text>
 										<tspan x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
 									</text>
-								</React.Fragment>
+								</g>
 							)
 						})}
 				</g>
