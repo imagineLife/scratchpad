@@ -24,7 +24,7 @@ const Circles = () => {
 	
 	//load visible text string
   const txtCtx = React.useContext(TextAreaContext);
-  const { displayText, textAreaDispatch, selectedAreaArr } = txtCtx
+  const { displayText, textAreaDispatch, selectedAreaArr, wordLength } = txtCtx
   const { calcWordsByLength, wordsByLength } = React.useContext(CirclesContext);
   
   React.useEffect(() => {
@@ -60,7 +60,7 @@ const Circles = () => {
 			if(resized || firstCalc){
 				newDimsLessMargins = makeDimsLessMargins(height,width, m)
 				let wDivision = wordsByLength.length + .5
-				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
+				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .9
 				let maxCircleHeight = Math.min(maxCircleHeightByWidth, (newDimsLessMargins.h * .45))
 				updateFromResize(newDimsLessMargins, maxCircleHeight)
 			}
@@ -101,11 +101,14 @@ const Circles = () => {
 									<circle
 										className='word-circle'
 										r={rScale(c.occurances)}
-										stroke="black"
-										strokeWidth={3}
+										stroke={wordLength == c.size ? 'rgb(125,125,0)' : 'rgb(125,125,125)'}
+										strokeWidth={1}
 										cx={circleX}
 										cy={circleY}
-										onClick={() => {textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})}} />
+										fill={wordLength == c.size ? 'black' : 'rgb(25,25,25)'}
+										onClick={() => {
+											textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})
+										}} />
 									<text>
 										<tspan x={circleX} y={lessM.h - 15} className="circle-label">{c.size}-Letter</tspan>
 										<tspan x={circleX} y={lessM.h} className="circle-label">Words</tspan>
