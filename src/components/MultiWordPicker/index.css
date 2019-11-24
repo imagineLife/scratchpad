@@ -43,8 +43,9 @@
 	text-decoration: underline;
 }
 
-.word-list-option.selected, .focus-word-option.selected{
-	font-weight: bold;
+.selected-focus-word{
+	text-decoration: underline;
+	text-transform: uppercase;
 }
 
 section#word-list{

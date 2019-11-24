@@ -36,6 +36,9 @@ const CommonWords = () => {
 	
 	let lists = Object.keys(wordLists)
 
+	console.log('selectedWord')
+	console.log(selectedWord)
+	
 	return(
 		<section id="words-of-interest-for-ui">
 			{/* List of List-Titles */}
@@ -64,10 +67,11 @@ const CommonWords = () => {
 						return (
 							<li 
 								key={`${thisWord}-${idx}`} 
-								className={`focus-word-option ${ selectedWord && selectedWord === thisWord ? ' selected' : ''}`}
+								className={`focus-word-option ${ selectedWord && selectedWord === thisWord ? ' selected-focus-word' : ''}`}
 								onClick={() => {
 								setSelectedWord((thisWord))
-							}}>{thisWord}</li>
+								}}
+							>{thisWord}</li>
 						)
 					})}
 				</ul>
