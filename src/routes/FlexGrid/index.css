@@ -56,7 +56,7 @@ footer{
 }
 
 #flex-grid-layout #area-box{
-	max-height: 100px;
+	height: 100px;
 }
 
 #flex-grid-layout #focus-area-box{
@@ -64,8 +64,9 @@ footer{
 	border-bottom: var(--border)
 }
 
-#layout div#focus-area-box #focus-area-hover{
+#flex-grid-layout div#focus-area-box #focus-area-hover{
 	max-height: 200px;
+	min-height: 190px;
 }
 
 #flex-grid-layout #area-explain-box{
