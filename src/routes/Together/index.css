@@ -100,6 +100,7 @@ footer{
 #flex-grid-layout #words-by-length-box{
   max-height: 275px;
   flex: 1;
+  padding-top: 35px;
 }
 
 #flex-grid-layout div#text-display-box p.text-content{
@@ -175,7 +176,7 @@ li.sub-title:nth-child(even){
   max-height: 290px;
   border-image: var(--bottom-mid);
   max-height: 350px;
-  padding: 0 25px 10px 25px;
+  padding: 0 25px 15px 25px
 }
 
 .image-sub{
@@ -258,6 +259,7 @@ header{
 
 footer{
   grid-area: bottom;
+  margin-top: 25px;
 }
 
 #flex-grid-layout #title-box{
@@ -293,11 +295,7 @@ footer{
 
 #flex-grid-layout #words-of-interest-box{
   max-height: 385px;
-}
-
-#flex-grid-layout #words-by-length-box{
-  max-height: 275px;
-  flex: 1;
+  padding: 15px 0;
 }
 
 #flex-grid-layout div#text-display-box p.text-content{
@@ -323,6 +321,14 @@ footer{
 
 .explanatory-text{
   font-size: .85em
+}
+
+#divider-box {
+  border-top:  var(--border);
+  border-bottom:  var(--border);
+  line-height: 2;
+  text-align: center;
+  margin: 10px 0;
 }
 
 .circle-label{
