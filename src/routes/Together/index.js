@@ -68,13 +68,13 @@ const FlexGrid = () => {
 					<div className="title-text-wrapper">
 						<h1 className="title">The Slice-N-Dice Times</h1>
 						<div className="corner-box">
-							<p>A Play on Newspapers, Text-Analysis, & Interaction</p>
+							<p>A Play on Newspapers, Text-Analysis, & Interaction. Some "Top" portions of this are interactive. The bottom shows the text of a speech, resposive to your interactions.</p>
 						</div>
 					</div>
 					<ul className="title-data">
 						<li className="sub-title border-right">Donald Trump</li>
 						<li className="sub-title border-right">On the 20th Day of February in the Year of 2017</li>
-						<li className="sub-title">Gives his 1473-word address to the nation</li>
+						<li className="sub-title">Gives his 1400+ word address to the nation</li>
 					</ul>
 				</div>
 				
