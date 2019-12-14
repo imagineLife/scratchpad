@@ -114,8 +114,10 @@ const FlexGrid = () => {
 				
 				<div className="flex-row">
 					<div id="theme-box">
-						<h2 className="section-text">Textual Themes</h2>
-						<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
+						<div className="theme-title">
+							<h2 className="section-text">Textual Themes</h2>
+							<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
+						</div>
 						<ul className="theme-list">
 							<li>Employment</li>
 							<li>Trade</li>
