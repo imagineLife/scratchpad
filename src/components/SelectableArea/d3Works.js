@@ -8,8 +8,8 @@ import './index.css'
 
 import {TextAreaContext} from '../../Contexts/TextArea'
 
-const SelectableArea = ({onMove, dims}) => {
-	
+const SelectableArea = ({dims, onMove}) => {
+
 	let {
 		sentences, 
 		textAreaDispatch, 
@@ -17,34 +17,50 @@ const SelectableArea = ({onMove, dims}) => {
 		setAreaData
 	} = React.useContext(TextAreaContext)
 
-	let [brushFn, setBrushFn] = React.useState(null)
+	// let [brushFn, setBrushFn] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
-	let [brushBoxG,setBrushBoxG] = React.useState(null)
 	let [brushed, setBrushed] = React.useState(false)
-	let [myDims, setDims] = React.useState({width: '700px', height: '95px'})
-	let [set, setSet] = React.useState(false)
+	let [finished, setFinished] = React.useState(false)
 	let brushRef = React.useRef()
-	
-	/*
-		called 'onBrush'
-	*/
-	function brushedFn(){
-		var selectedPixels = d3Select.event.selection;
-		let scaledBegin = Math.floor(translateScale(selectedPixels[0]))
-		let scaledEnd = Math.floor(translateScale(selectedPixels[1]))
-		setHoverArr(selectedPixels)
 
-		//dispatch Context-updater
-		textAreaDispatch({type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', payload: [scaledBegin, scaledEnd]})
+			/*
+				called 'onBrush'
+			*/
+			function brushedFn(){
+				var selectedPixels = d3Select.event.selection;
+				let scaledBegin = Math.floor(translateScale(selectedPixels[0]))
+				let scaledEnd = Math.floor(translateScale(selectedPixels[1]))
+				setHoverArr(selectedPixels)
 
-		onMove([scaledBegin, scaledEnd])
+				//dispatch Context-updater
+				textAreaDispatch({type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', payload: [scaledBegin, scaledEnd]})
+
+				onMove([scaledBegin, scaledEnd])
+			}
+
+	const buildChart = () => {
+
+			let brushBoxG = d3Select.select(brushRef.current).append('g').attr('class', 'brush-g-window');
+
+			//build the brushFn
+			let brushFn = brush.brushX()
+				.handleSize(10)
+				.on('brush', brushedFn)
+
+			// set the brushFn to the burshBox, 'instantiating'
+			// the brush UI element(s)
+			brushBoxG.call(brushFn);
+
+			//set the initial overlay to 1/4 width
+			// brushFn.move(brushBoxG, hoverArr)
+			// setFinished(true)
 	}
-
 	/*
 		Set Area Context data 'initially', 
 			from textStore sentences array
 	*/
 	React.useEffect(()=>{
+
 		if(sentences && !areaData){
 			let preppedAreaData = []
 			sentences.forEach((s,ind) => {
@@ -52,31 +68,16 @@ const SelectableArea = ({onMove, dims}) => {
 			})
 			setAreaData(preppedAreaData)
 		}
-	},[sentences])
+	},[sentences, areaData])
 	
 	////    //////////////////////// /////
 	//	connect the brush to the g wrapper
 	////    //////////////////////// /////
 	React.useEffect(() => {
-		if(brushRef && brushRef.current && areaData){
-			
-			//build the brushFn
-			let thisBrushFN = brush.brushX()
-				// .extent([0,0], [[700, 100]])
-				.handleSize(10)
-				.on('brush', brushedFn)
-
-			// set the brushFn to the burshBox, 'instantiating'
-			// the brush UI element(s)
-			let thisBrushBox = d3Select.select(brushRef.current);
-			setTimeout(() => {
-				thisBrushBox.call(thisBrushFN);
-
-				//set the initial overlay to 1/4 width
-				thisBrushFN.move(thisBrushBox, hoverArr)
-			}, 10)
+		if(brushRef.current && areaData){
+			buildChart()
 		}
-	}, [brushRef, areaData])
+	}, [brushRef.current, areaData])
 
 	//////////////////////////// /////
 	//// default loading return /////
@@ -106,7 +107,6 @@ const SelectableArea = ({onMove, dims}) => {
 		.x((d, i) => xScale(i + 1))
 		.y0(100)
 		.y1((d) => yScale(d.y))
-		.curve(d3Shape.curveCatmullRom)
 
 	const pathD = areaFn(areaData)
 
@@ -116,25 +116,13 @@ const SelectableArea = ({onMove, dims}) => {
 
 	return(
 		<Fragment>
-			<svg id="selectable" style={myDims}>
-				<defs>
-			    <linearGradient id="myGradient" gradientTransform="rotate(90)">
-			      <stop offset="50%" stopColor="rgb(147,147,147)" />
-			      <stop offset="100%"  stopColor="rgba(49,54,61,0)" />
-			    </linearGradient>
-			  </defs>
-			  <g className="g-wrapper">
-			    
-			    {/*Area Path*/}
+			<svg id="selectable" style={dims}>
+			  <g className="g-wrapper" ref={brushRef}>
 			    <path 
 			      d={pathD}
-						fill={'url(#myGradient)'} />
-					
-					{/*Brush Handle*/}
-					<g className="brush-g-window" ref={brushRef} />
-
+						fill={'#ccc'} />
 				</g>
-		</svg>
+			</svg>
 		</Fragment>
 		)
 }

@@ -29,7 +29,6 @@ const Circles = () => {
   
   React.useEffect(() => {
   	if(displayText && wordsByLength.length < 1){
-  		console.log('Processing');
   		calcWordsByLength(displayText)
   	}
   }, [displayText, wordsByLength, Object.values(txtCtx)])
@@ -87,7 +86,7 @@ const Circles = () => {
 		c.thisX = c.prevX + c.thisXWithBuffer;
 		return c
 	})
-
+	
 	return(
 		<div id="circlesBox-forUI" ref={ref}>
 			<svg id="circle-svg" width={width} height={height}>

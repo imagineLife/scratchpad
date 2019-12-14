@@ -17,8 +17,6 @@ const SelectableArea = ({dims, onMove}) => {
 	let areaData = React.useContext(AreaContext)
 	
 	function brushedFn(){
-		// console.log('%c brushed fn', 'background-color: steelblue; color: black;')
-		
 		var selectedPixels = d3Select.event.selection;
 		
 		let scaledBegin = Math.floor(translateScale(selectedPixels[0]))
@@ -26,9 +24,6 @@ const SelectableArea = ({dims, onMove}) => {
 
 		setHoverArr(selectedPixels)
 		onMove([scaledBegin, scaledEnd])
-
-		// console.log('%c - - - - -', 'background-color: steelblue; color: black;')
-		
 	}
 
 	/*

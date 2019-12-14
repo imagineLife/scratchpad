@@ -7,7 +7,7 @@ import { getWordsByCount } from '../../lib/stats'
 
 const CommonWords = () => {
 	let {displayText} = React.useContext(TextAreaContext)
-	let { commonWords, makeCommonWords, selectedWord, setSelectedWord } = React.useContext(WordListContext);
+	let { commonWords, makeCommonWords, selectedWord, setSelectedWord, longestNine } = React.useContext(WordListContext);
 	
 	React.useEffect(() => { //look into useLayoutEffect
 		if(displayText){

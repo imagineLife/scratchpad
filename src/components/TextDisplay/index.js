@@ -23,15 +23,6 @@ import './index.css'
 // }
 
 const TextDisplay = (props) => {
-
-    console.log('TextDisplay props')
-    console.log(props)
-    
-
-	// let resText = (props.commonWord) ? getQueriedWord(props.text, props.commonWord) : props.text;
-    // let resText = (commonWord) ? getLongestWord(txt, longestWord) : txt;
-
-    // resText = !resText ? 'placeholder...' : resText;
 	return(
 		<div id="text-display">{props.text || 'placeholder...'}</div>
 	)

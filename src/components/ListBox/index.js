@@ -25,7 +25,7 @@ const ListBox = ({lists, selectedList, selectItem}) => {
 			</ul>
 		</section>
 
-	{/*List-Words*/}
+		{/*List-Words*/}
 		<section id="words">
 			<h4>Words</h4>
 			<ul>

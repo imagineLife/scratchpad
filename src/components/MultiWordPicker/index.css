@@ -18,7 +18,8 @@
 }
 
 #word-lists{
-	line-height: 2;
+  line-height: 3;
+  padding: 0 15px;
 }
 
 #word-picker-title{
@@ -44,7 +45,6 @@
 }
 
 .selected-focus-word{
-	text-decoration: underline;
 	text-transform: uppercase;
 }
 

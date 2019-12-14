@@ -7,7 +7,6 @@ import * as brush from 'd3-brush'
 import './index.css'
 
 const SelectableArea = ({dims, onMove, data}) => {
-	console.log('SelectableArea fn');
 	let [brushFn, setBrushFn] = React.useState(null)
 	let [hoverArr, setHoverArr] = React.useState([0,175])
 	let [brushBox,setBrushBox] = React.useState(null)

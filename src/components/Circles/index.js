@@ -29,7 +29,6 @@ const Circles = () => {
   
   React.useEffect(() => {
   	if(displayText && wordsByLength.length < 1){
-  		console.log('Processing');
   		calcWordsByLength(displayText)
   	}
   }, [displayText, wordsByLength, Object.values(txtCtx)])

@@ -35,9 +35,6 @@ const CommonWords = () => {
 	}
 	
 	let lists = Object.keys(wordLists)
-
-	console.log('selectedWord')
-	console.log(selectedWord)
 	
 	return(
 		<section id="words-of-interest-for-ui">
