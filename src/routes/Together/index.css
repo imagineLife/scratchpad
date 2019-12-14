@@ -84,10 +84,6 @@ footer{
   flex-direction: row;
 }
 
-#flex-grid-layout #theme-box{
-  max-height: 350px;
-}
-
 .face-image{
   max-height: 100%;
   max-width: 100%;
@@ -162,12 +158,6 @@ li.sub-title:nth-child(even){
   font-size: .76em;
   border-bottom: var(--border);
   margin-bottom: 20px;
-}
-
-
-#theme-box{
-  width: 40%;
-  display: inline-block;
 }
 
 #flex-grid-layout #image-box{
@@ -285,7 +275,16 @@ footer{
 }
 
 #flex-grid-layout #theme-box{
+  width: 40%;
+  display: inline-block;
   max-height: 350px;
+  border-image: linear-gradient(to bottom, 
+    transparent 10%,
+    rgb(80,80,80) 10% 85%, 
+    transparent 85% 100%
+  ) 1 / 2px;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .face-image{
