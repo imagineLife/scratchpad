@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 /* 
   Grid-Template-areas 
   https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas 
@@ -29,6 +30,7 @@
   grid-template-columns: 40% 1fr;
   padding: 0 25px;
   grid-column-gap: 20px;
+  min-width: 1250px;
 }
 
 /*TOP SECTION?! 
@@ -97,6 +99,7 @@ footer{
   max-height: 275px;
   flex: 1;
   padding-top: 35px;
+  border-left: var(--border)
 }
 
 #flex-grid-layout div#text-display-box p.text-content{
@@ -145,7 +148,7 @@ li.sub-title:nth-child(even){
   position: absolute;
   top: 8px;
   right: 25px;
-  width: 135px;
+  width: 380px;
   font-size: .25em;
   text-align: center;
   padding: 6px;
