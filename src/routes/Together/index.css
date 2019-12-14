@@ -26,11 +26,11 @@
     "top top"
     "l r"
     "bottom bottom";
-  grid-template-rows: 210px 1fr 1fr; 
-  grid-template-columns: 40% 1fr;
+  grid-template-rows: 210px 1fr ; /*1fr*/ 
   padding: 0 25px;
   grid-column-gap: 20px;
-  min-width: 1250px;
+  /*width: 1280px;*/
+  border: 1px solid var(--border);
 }
 
 /*TOP SECTION?! 
@@ -210,21 +210,6 @@ li.sub-title:nth-child(even){
     cut the remaining content into 3rds (1+2)
 */
 
-#flex-grid-layout{
-  /*I-E-Friendly styles before the grid-api ... :/ */
-  display: inline-block;
-  display: grid;
-  width: 100%;
-  grid-template-areas: 
-    "top top"
-    "l r"
-    "bottom bottom";
-  grid-template-rows: 210px 1fr ; /*1fr*/ 
-  grid-template-columns: 40% 1fr;
-  padding: 0 25px;
-  grid-column-gap: 20px;
-}
-
 /*TOP SECTION?! 
   like css var(--varHere) 
     from "top top"
@@ -348,3 +333,5 @@ footer{
 .interaction-note{
   font-family: prata;
 }
+
+/*@media only screen and (min-width: 120)*/
