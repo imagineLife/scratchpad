@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 /* 
   Grid-Template-areas 
   https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas 
@@ -73,7 +76,7 @@ footer{
 }
 
 #flex-grid-layout #area-explain-box{
-  max-height: 75px;
+  height: fit-content;
 }
 
 .flex-row{
@@ -163,7 +166,7 @@ li.sub-title:nth-child(even){
   font-family: sans-serif;
   font-size: .76em;
   border-bottom: var(--border);
-  /*margin-bottom: 10px;*/
+  margin-bottom: 10px;
 }
 
 
@@ -218,15 +221,16 @@ li.sub-title:nth-child(even){
     "top top"
     "l r"
     "bottom bottom";
-  grid-template-rows: 210px 1fr 1fr; 
+  grid-template-rows: 210px 1fr ; /*1fr*/ 
   grid-template-columns: 40% 1fr;
   padding: 0 25px;
   grid-column-gap: 20px;
 }
 
 /*TOP SECTION?! 
-  magic, like css var(--varHere) from "top top"
-  from the grid-template-areas above
+  like css var(--varHere) 
+    from "top top"
+    from the grid-template-areas above
 */
 header{
   grid-area: top;
@@ -243,7 +247,8 @@ header{
 #right-side{
   grid-area: r;
   display: flex;
-  flex-direction: row;
+  /*row*/
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
@@ -322,18 +327,16 @@ footer{
   font-size: .85em
 }
 
-#circlesBox{
-  width: 80%;
-  min-width: 500px;
-  height: 250px;
-  border: 1px dotted green;
-}
-
 .circle-label{
   fill: rgb(147,147,147);
   text-anchor: middle;
   font-size: 12px;
   alignment-baseline: middle;
+}
+
+#circlesBox-forUI{
+  height: 80%;
+  width: 100%;  
 }
 
 .interaction-note{
