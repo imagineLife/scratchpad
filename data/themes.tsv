@@ -1,16 +1,16 @@
-1	Patriotism	President
-1	Thankful	thank
+1	patriotism	President
+1	thankful	thank
 2	timeframe	now
-2	unity	we, joined
+2	unity	we,joined
 2	change	rebuild,restore
 3	unity	together
 4	unity	we
-5	pesimism	hardships
+5	pessimism	hardships
 5	comparison	but
 6	thankful	grateful,gracious,magnificent
 6	patriotism	president
 7	awe	magnificent
-8	Thankful	thank
+8	thankful	thank
 9	power	power
 9	government	administration,washington
 10	power	rewards,borne
@@ -75,7 +75,7 @@
 34	government	subsidized,military
 34	grim	depletions
 35	separation	border
-35	security	defent
+35	security	defend
 36	patriotism	america's
 36	economy	infrastructure
 36	grim	disrepair,decay
@@ -88,12 +88,12 @@
 40	timeframe	now
 40	change	but
 41	change	new,forward,going
-41	Patriotism	America
-42	Patriotism	America
+41	patriotism	America
+42	patriotism	America
 43	economy	trade,taxes,workers
 43	community	immigration
 43	families	families
-43	Patriotism	America
+43	patriotism	America
 44	protection	protect
 44	security	borders
 44	pessimism	ravages,stealing,destroying
@@ -105,7 +105,7 @@
 46	timeframe	never
 47	patriotism	america
 47	success	winning
-47	timegrame	start,never
+47	timeframe	start,never
 48	unity	we
 48	economy	jobs
 49	unity	we
@@ -166,7 +166,7 @@
 69	timeframe	never
 70	timeframe	time
 71	timeframe	now
-72	timeframe	dome
+72	timeframe	done
 73	patriotism	america
 74	unity	we
 74 	failure	fail
@@ -205,10 +205,10 @@
 86	patriotism	america
 87	unity	we
 87	patriotism	america
-88	Thankful	thank
+88	thankful	thank
 89	spirituality	god,bless
 90	spirituality	god
 90	patriotism	america
-91	Thankful	thank
+91	thankful	thank
 92	spirituality	god
 92	patriotism	america
