@@ -7,7 +7,8 @@
 4	unity	we
 5	pessimism	hardships
 5	comparison	but
-6	thankful	grateful,gracious,magnificent
+6	thankful	grateful,gracious
+6	awe	magnificent
 6	patriotism	president
 7	awe	magnificent
 8	thankful	thank
@@ -70,7 +71,7 @@
 32	fate	destiny
 33	government	office
 34	timeframe	decades
-34	economics	industry
+34	economy	industry
 34	patriotism	american
 34	government	subsidized,military
 34	grim	depletions
@@ -79,11 +80,12 @@
 36	patriotism	america's
 36	economy	infrastructure
 36	grim	disrepair,decay
-37	power	wealth,strength,confidence
+37	power	strength,confidence
+37	economy	wealth
 37	grim	dissipated
 38	economy	factories
 38	grim	shuddered
-39	money	wealth
+39	economy	wealth
 39	class	class
 40	timeframe	now
 40	change	but

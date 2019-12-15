@@ -8,7 +8,7 @@
     'flag',      'salute',
     'americans'
   ],
-  thankful: [ 'thank', 'grateful', 'gracious', 'magnificent' ],
+  thankful: [ 'thank', 'grateful', 'gracious' ],
   timeframe: [
     'now',   'starting',
     'never', 'decades',
@@ -47,14 +47,14 @@
   comparison: [ 'but' ],
   awe: [ 'magnificent', 'historic' ],
   power: [
-    'power',      'rewards',
-    'borne',      'controls',
-    'controlled', 'rulers',
-    'wealth',     'strength',
-    'confidence', 'loyalty',
-    'allegiance', 'unstoppable',
-    'military',   'enforcement',
-    'courage',    'strong'
+    'power',       'rewards',
+    'borne',       'controls',
+    'controlled',  'rulers',
+    'strength',    'confidence',
+    'loyalty',     'allegiance',
+    'unstoppable', 'military',
+    'enforcement', 'courage',
+    'strong'
   ],
   government: [
     'administration',
@@ -68,15 +68,16 @@
     'welfare'
   ],
   economy: [
-    'cost',           'jobs',
-    'poverty',        'success',
-    'infrastructure', 'factories',
-    'trade',          'taxes',
-    'workers',        'prosperity',
-    'wealth',         'work',
-    'labor',          'buy',
-    'hire',           'industries',
-    'technologies',   'wealthy'
+    'cost',       'jobs',
+    'poverty',    'success',
+    'industry',   'infrastructure',
+    'wealth',     'factories',
+    'trade',      'taxes',
+    'workers',    'prosperity',
+    'work',       'labor',
+    'buy',        'hire',
+    'industries', 'technologies',
+    'wealthy'
   ],
   politics: [ 'politicians', 'establishment', 'politics' ],
   winning: [ 'victories', 'triumphs ' ],
@@ -102,10 +103,8 @@
   ],
   jobs: [ 'factories' ],
   fate: [ 'destiny' ],
-  economics: [ 'industry' ],
   separation: [ 'border' ],
   security: [ 'defend', 'borders', 'protection' ],
-  money: [ 'wealth' ],
   class: [ 'class' ],
   protection: [ 'protect', 'protected' ],
   confrontation: [ 'fight' ],
