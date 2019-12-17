@@ -139,13 +139,17 @@ li.sub-title:nth-child(even){
 }
 
 .title-text-wrapper > h1{
-	width: 100%;
-	margin: 10px 0;
+	/*width: 100%;*/
+  /*width: calc(100% - 291px);*/
+	/*margin: 10px 0;*/
+  width: calc(100% - 291px);
+  margin: 10px 0;
+  padding-left: 210px;
 }
 
 .corner-box{
   border: 1px solid rgb(100,100,100);
-  position: absolute;
+  /*position: absolute;*/
   top: 8px;
   right: 25px;
   width: 380px;
