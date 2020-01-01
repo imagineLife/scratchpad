@@ -112,7 +112,7 @@ const Circles = () => {
 										strokeWidth={2}
 										cx={circleX}
 										cy={circleY}
-										fill={'rgb(25,25,25)'}
+										fill={wordLength == c.size ? 'rgb(40,40,0)' : 'rgb(25,25,25)'}
 									/>
 									<text>
 										<tspan x={circleX} y={lessM.h - 15} className="circle-label">{c.size}-Letter</tspan>
