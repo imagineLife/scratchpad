@@ -3,6 +3,7 @@ let TextAreaContext = React.createContext();
 let {Provider, Consumer} = TextAreaContext;
 import {getQueriedWord} from '../../lib/getQueriedWord'
 import { getSentences } from '../../lib/stats'
+import * as arr from 'd3-array'
 
 const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
 	let resString = '';
@@ -32,7 +33,7 @@ let TextAreaProvider = (props) => {
 				return {
 					...state,
 					selectedAreaArr: action.payload,
-					displayText: updateDisplayText(state.sentences, action.payload)	// [0, 23]
+					displayText: updateDisplayText(state.sentences, action.payload)
 				}
 				break;
 
@@ -50,6 +51,12 @@ let TextAreaProvider = (props) => {
 					text: action.payload
 				}
 
+			case "MAX_WORDS": 
+				return {
+					...state,
+					maxWordsPerSentence: action.payload
+				}
+
 			default:
 				return {...state, text: action.payload}	
 				break;
@@ -64,13 +71,25 @@ let TextAreaProvider = (props) => {
 		load the text from textFile 'on load'
 	*/
 	React.useEffect(() => {
+		let fetchURL = process.env.NODE_ENV == 'development' ? '../../data/fullText.txt' : './fullText.txt'
 		// console.log('LOADING TEXT in textAreaProvider');
-		fetch('../../data/fullText.txt')
+		fetch(fetchURL)
 			.then(res => res.text().then(textRes => {
-
+					let sentences = getSentences(textRes)
+					let maxWordCount = arr.max(sentences, d => d.wordCount)
+					
 		      //update Provider state, triggering reducer with dispatched actions
 					textAreaDispatch({type: "TEXT", payload: textRes})
-					textAreaDispatch({type: "SENTENCES", payload: getSentences(textRes)})
+					textAreaDispatch({type: "SENTENCES", payload: sentences})
+					textAreaDispatch({type: "MAX_WORDS", payload: maxWordCount})
+
+					let themesURL = process.env.NODE_ENV == 'development' ? '../../data/themesArr.json' : './themesArr.json'
+					fetch(themesURL)
+					.then(res => res.json().then(themeData => {
+							console.log('themeData')
+							console.log(themeData)
+						})
+					)
 				}))
 	}, [])
 	
