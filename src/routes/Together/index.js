@@ -16,50 +16,7 @@ const FlexGrid = () => {
 	const [focusAreaRef, {width: focusAreaW, height: focusAreaH}] = useDimensions();
 	let [themeObj, setThemeObj] = React.useState({})
 	let [themeArr] = React.useState([['Patriotism','Thankful'], ['timeframe','unity','change'], ['unity'], ['we'],['unity','pessimism','comparison']])
-	/*
-		DEV ONLY - convert csv-type data to an object consumable by this project
-	*/
 	
-	// let dataFileURL = process.env.NODE_ENV === 'development' ?'../../../data/themes.tsv' : './themes.tsv'
-	// React.useEffect(() => {
-	// 	let newObj={}
-	// 	d3data.tsv(dataFileURL).then(res => {
-			
-	// 		/*Option 1*/
-	// 		res.map((tsv, idx) => {
-	// 			if(!newObj.hasOwnProperty(tsv.theme)){
-	// 				let theseWords = tsv.keywords.split(",")
-	// 				newObj[tsv.theme] = theseWords
-	// 			}
-	// 			if(newObj.hasOwnProperty(tsv.theme)){
-					
-	// 				let startArr = newObj[tsv.theme]
-					
-	// 				let newArr = tsv.keywords.split(',')
-					
-	// 				// let resArr = [...startArr, ...newArr]
-
-	// 				/*
-	// 					SET?!
-	// 					https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
-	// 					remove duplicates
-	// 				*/
-	// 				let resArr = [...new Set([...startArr, ...newArr])]
-					
-	// 				newObj[tsv.theme] = resArr
-
-	// 			}
-	// 		})	
-	// 		setThemeObj(newObj)
-	// 	})
-	// }, [])
-
-	// console.log('themeObj')
-	// console.log(themeObj)
-	// console.log('themeArr')
-	// console.log(themeArr)
-	
-
 	return(
 		<main id="flex-grid-layout">
 			
