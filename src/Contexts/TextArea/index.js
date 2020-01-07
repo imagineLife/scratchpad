@@ -66,6 +66,7 @@ let TextAreaProvider = (props) => {
 
 	let [textStore, textAreaDispatch] = React.useReducer(reducer, initialContext)
 	let [areaData, setAreaData] = React.useState(null)
+	let [themesData, setThemesData] = React.useState(null)
 
 	/*
 		load the text from textFile 'on load'
@@ -85,15 +86,12 @@ let TextAreaProvider = (props) => {
 
 					let themesURL = process.env.NODE_ENV == 'development' ? '../../data/themesArr.json' : './themesArr.json'
 					fetch(themesURL)
-					.then(res => res.json().then(themeData => {
-							console.log('themeData')
-							console.log(themeData)
-						})
+					.then(res => res.json().then(setThemesData)
 					)
 				}))
 	}, [])
 	
-	return(<Provider value={{textAreaDispatch, areaData, setAreaData, ...textStore}}>
+	return(<Provider value={{textAreaDispatch, areaData, themesData, setAreaData, ...textStore}}>
 		{props.children}
 	</Provider>)
 }
