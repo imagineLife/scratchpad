@@ -1,7 +1,14 @@
 import React from 'react';
 const WordListContext = React.createContext(); 
 const {Provider, Consumer} = WordListContext;
-import { getWordsByCount, getLongestThirty, convertStrToWordArr, ingWords } from '../../lib/stats'
+import { 
+	getWordsByCount, 
+	getLongestThirty, 
+	convertStrToWordArr, 
+	ingWords,
+	arrayOfWords,
+	getWordsByLength 
+} from '../../lib/stats'
 import { TextAreaContext } from '../TextArea/'
 
 const CommonWordsProvider = (props) => {
@@ -57,6 +64,7 @@ const CommonWordsProvider = (props) => {
 		setLongestNine(getLongestThirty(arrayOfWords).slice(0,10))
 		setWordLists({type: "COMMON_WORDS", payload: getWordsByCount(arrayOfWords).slice(0,10)})
 		setWordLists({type: "LONGEST_WORDS", payload: getLongestThirty(arrayOfWords).slice(0,10)})
+		setWordLists({type: "WORDS_BY_LENGTH", payload: getWordsByLength(arrayOfWords)})
 		setWordLists({type: "ACTION_WORDS", payload: (function getINGWords(){
 			let words = ingWords(sentencesString)
 			if(!words) {
