@@ -1,0 +1,29 @@
+#flex-grid-layout #theme-box{
+  width: 40%;
+  display: inline-block;
+  max-height: 350px;
+  border-image: linear-gradient(to bottom, 
+    transparent 10%,
+    rgb(80,80,80) 10% 85%, 
+    transparent 85% 100%
+  ) 1 / 2px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.theme-title{
+  border-image: var(--bottom-narrow);
+  padding-bottom: 10px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.theme-explanatory{
+  text-align: center;
+}
+
+.theme-list{
+  margin-top: 20px;
+  text-align: center;
+  line-height: 2;
+}
