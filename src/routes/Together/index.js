@@ -1,12 +1,16 @@
 import React from 'react'
 import './index.css'
+import useDimensions from '../../lib/useDims'
+import trumpImg from '../../../data/trump.jpg'
+
+//Components
 import SelectableArea from '../../components/SelectableArea/dimsFromParent'
 import WordListPicker from '../../components/MultiWordPicker/UsingContextForUI'
 import TextDisplay from '../../components/TextDisplay/UsingComplexContext'
 import AreaBox from '../../components/Area'
 import Circles from '../../components/Circles/ContextWrapperForUI'
-import useDimensions from '../../lib/useDims'
-import trumpImg from '../../../data/trump.jpg'
+import ThemeBox from '../../components/ThemeBox'
+
 const d3data = React.lazy(() => import('d3-fetch')) 
 const moved = () => console.log('moved');
 
@@ -70,19 +74,7 @@ const FlexGrid = () => {
 				</div>
 				
 				<div className="flex-row">
-					<div id="theme-box">
-						<div className="theme-title">
-							<h2 className="section-text">Textual Themes</h2>
-							<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
-						</div>
-						<ul className="theme-list">
-							<li>Employment</li>
-							<li>Trade</li>
-							<li>Protection</li>
-							<li>Patriotism</li>
-						</ul>
-					</div>
-					
+					<ThemeBox />
 					<div id="image-box">
 						<img className="face-image" src={trumpImg}/>
 						<h2 className="section-text image-sub">The President <br /> Addresses The Nation</h2>
