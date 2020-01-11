@@ -4,9 +4,31 @@ import './ThemeBox.css'
 import { TextAreaContext } from '../../Contexts/TextArea'
 const ThemeBox = () => {
 
-	const ctxVals = useContext(TextAreaContext)
-	console.log('ctxVals')
-	console.log(ctxVals)
+	const { selectedAreaArr, themesData } = useContext(TextAreaContext)
+	console.log('%c ---- THEME BOX----', 'background-color: orange; color: black;')
+	
+	/*
+		Get all selected Themes, store in a single Array, no duplicates
+	*/
+	let selectedThemes = []
+	if(selectedAreaArr && themesData){
+		for(
+			let thisThemeArrayIndex = selectedAreaArr[0]; 
+			thisThemeArrayIndex <= selectedAreaArr[1]; 
+			thisThemeArrayIndex++
+		){
+			let thisSentenceIndexsThemeArr = themesData[thisThemeArrayIndex]
+			thisSentenceIndexsThemeArr.forEach(theme => {
+				if(!selectedThemes.includes(theme)){
+					selectedThemes.push(theme)
+				}
+			})
+		}
+	}
+
+	console.log('selectedThemes')
+	console.log(selectedThemes)
+	
 	
 	return(
 		<div id="theme-box">
