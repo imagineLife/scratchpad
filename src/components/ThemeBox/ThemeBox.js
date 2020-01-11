@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ThemeBox.css'
 
 import { TextAreaContext } from '../../Contexts/TextArea'
@@ -7,6 +7,7 @@ const ThemeBox = () => {
 	const { selectedAreaArr, themesData } = useContext(TextAreaContext)
 	console.log('%c ---- THEME BOX----', 'background-color: orange; color: black;')
 	
+	let [currentThemes, setCurrentThemes] = useState(null)
 	/*
 		Get all selected Themes, store in a single Array, no duplicates
 	*/
@@ -25,10 +26,13 @@ const ThemeBox = () => {
 			})
 		}
 	}
-
-	console.log('selectedThemes')
-	console.log(selectedThemes)
 	
+	useEffect(() => {
+		if(!currentThemes && selectedAreaArr && themesData){
+			console.log('%c ---SET CURRENT THEME HERE---', 'background-color: darkblue; color: white;')
+			setCurrentThemes(selectedThemes)
+		}
+	}, [currentThemes, selectedAreaArr, themesData])
 	
 	return(
 		<div id="theme-box">
@@ -36,12 +40,16 @@ const ThemeBox = () => {
 				<h2 className="section-text">Textual Themes</h2>
 				<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
 			</div>
-			<ul className="theme-list">
-				<li>Employment</li>
-				<li>Trade</li>
-				<li>Protection</li>
-				<li>Patriotism</li>
-			</ul>
+			<div id="theme-list-box">
+				<ul className="theme-list">
+					{
+						currentThemes && 
+						currentThemes.map((theme,idx)=>  (
+							<li key={`theme-item-${theme}-${idx}`}>{theme}</li>
+						))
+					}
+				</ul>
+			</div>
 		</div>)
 }
 
