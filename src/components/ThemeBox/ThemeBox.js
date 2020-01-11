@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ThemeBox.css'
 
+import { TextAreaContext } from '../../Contexts/TextArea'
 const ThemeBox = () => {
+
+	const ctxVals = useContext(TextAreaContext)
+	console.log('ctxVals')
+	console.log(ctxVals)
+	
 	return(
 		<div id="theme-box">
 			<div className="theme-title">
