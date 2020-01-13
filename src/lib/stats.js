@@ -126,20 +126,25 @@ function ingWordsAndNextWord(str){
 function getSentences(srcTxt){
 
   let twoWhiteSpaces = /(\s{2})/gm;
-  let standarizeWS = /([?!.]\s)(.)/gm;  
-  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
+  let sentRegex = /(~~)\s/g;
+
 
   //arr of sentences
   let sentences = srcTxt.replace(twoWhiteSpaces, " ")
-    .replace(standarizeWS, ". $2")
-    .match(sentRegex);
+    .replace(/\.\s/g, ".~~ ")
+    .replace(/\?\s/g, "?~~ ")
+    .replace(/!\s/g, "!~~ ")
+    .split(sentRegex);
 
-  sentences = sentences.map(s => {
-    return {
-      text: s.trim(), //'three word sentence'
-      wordCount: s.trim().split(' ').length //3
-    }
-  })
+  sentences = sentences
+    .filter((d, idx) => idx % 2 === 0)
+    .map(s => {
+      return {
+        text: s.trim(), //'three word sentence'
+        wordCount: s.trim().split(' ').length //3
+      }
+    })
+
   return sentences
 }
 
