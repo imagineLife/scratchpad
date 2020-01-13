@@ -5,9 +5,7 @@ import { TextAreaContext } from '../../Contexts/TextArea'
 const ThemeBox = () => {
 
 	const { selectedAreaArr, themesData } = useContext(TextAreaContext)
-	console.log('%c ---- THEME BOX----', 'background-color: orange; color: black;')
 	
-	let [currentThemes, setCurrentThemes] = useState(null)
 	/*
 		Get all selected Themes, store in a single Array, no duplicates
 	*/
@@ -19,21 +17,15 @@ const ThemeBox = () => {
 			thisThemeArrayIndex++
 		){
 			let thisSentenceIndexsThemeArr = themesData[thisThemeArrayIndex]
+			thisSentenceIndexsThemeArr.length > 0 &&
 			thisSentenceIndexsThemeArr.forEach(theme => {
 				if(!selectedThemes.includes(theme)){
-					selectedThemes.push(theme)
+					selectedThemes.sort().push(theme)
 				}
 			})
 		}
 	}
-	
-	useEffect(() => {
-		if(!currentThemes && selectedAreaArr && themesData){
-			console.log('%c ---SET CURRENT THEME HERE---', 'background-color: darkblue; color: white;')
-			setCurrentThemes(selectedThemes)
-		}
-	}, [currentThemes, selectedAreaArr, themesData])
-	
+
 	return(
 		<div id="theme-box">
 			<div className="theme-title">
@@ -43,8 +35,9 @@ const ThemeBox = () => {
 			<div id="theme-list-box">
 				<ul className="theme-list">
 					{
-						currentThemes && 
-						currentThemes.map((theme,idx)=>  (
+						selectedThemes && 
+						selectedThemes.length > 0 && 
+						selectedThemes.map((theme,idx)=>  (
 							<li key={`theme-item-${theme}-${idx}`}>{theme}</li>
 						))
 					}
