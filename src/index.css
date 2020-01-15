@@ -31,10 +31,10 @@
   src: url('./fonts/Comfortaa-Bold.ttf');
 }*/
 
-@font-face{
+/*@font-face{
 	font-family: 'Imprint-MT-Shadow';
 	src: url('./fonts/ImprintMTShadow.ttf');
-}
+}*/
 
 * {
 	box-sizing: border-box;
