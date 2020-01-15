@@ -1,5 +1,5 @@
-import React from 'react';
-let TextAreaContext = React.createContext(); 
+import React, { useReducer, useState, useEffect, createContext } from 'react';
+let TextAreaContext = createContext(); 
 let {Provider, Consumer} = TextAreaContext;
 import {getQueriedWord} from '../../lib/getQueriedWord'
 import { getSentences } from '../../lib/stats'
@@ -20,7 +20,7 @@ let TextAreaProvider = (props) => {
 
 	const reducer = (state, action) => {
 		let resText;
-								
+		
 		switch(action.type){
 			case "SENTENCES": 
 				return {
@@ -38,20 +38,19 @@ let TextAreaProvider = (props) => {
 				break;
 
 			case "WORD_LENGTH":
-				console.log('Selected Circle, in t.a.provider reducer!');
 				return {
 					...state,
 					wordLength: action.payload
 				};
 				break;
 
-			case "TEXT": 
+			case "TEXT":
 				return {
 					...state,
 					text: action.payload
 				}
 
-			case "MAX_WORDS": 
+			case "MAX_WORDS":
 				return {
 					...state,
 					maxWordsPerSentence: action.payload
@@ -64,17 +63,19 @@ let TextAreaProvider = (props) => {
 	}
 
 
-	let [textStore, textAreaDispatch] = React.useReducer(reducer, initialContext)
-	let [areaData, setAreaData] = React.useState(null)
-	let [themesData, setThemesData] = React.useState(null)
+	let [textAnalyticsStore, textAreaDispatch] = useReducer(reducer, initialContext)
+	let [areaData, setAreaData] = useState(null)
+	let [themesData, setThemesData] = useState(null)
 
 	/*
 		load the text from textFile 'on load'
 	*/
-	React.useEffect(() => {
-		let fetchURL = process.env.NODE_ENV == 'development' ? '../../data/fullText.txt' : './fullText.txt'
+	useEffect(() => {
+		let textFileURL = process.env.NODE_ENV == 'development' ? '../../data/fullText.txt' : './data/fullText.txt'
+		let themesURL = process.env.NODE_ENV == 'development' ? '../../data/themesArrSlim.json' : './data/themesArrSlim.json'
+
 		// console.log('LOADING TEXT in textAreaProvider');
-		fetch(fetchURL)
+		fetch(textFileURL)
 			.then(res => res.text().then(textRes => {
 					let sentences = getSentences(textRes)
 					let maxWordCount = arr.max(sentences, d => d.wordCount)
@@ -84,14 +85,13 @@ let TextAreaProvider = (props) => {
 					textAreaDispatch({type: "SENTENCES", payload: sentences})
 					textAreaDispatch({type: "MAX_WORDS", payload: maxWordCount})
 
-					let themesURL = process.env.NODE_ENV == 'development' ? '../../data/themesArr.json' : './themesArr.json'
 					fetch(themesURL)
 					.then(res => res.json().then(setThemesData)
 					)
 				}))
 	}, [])
 	
-	return(<Provider value={{textAreaDispatch, areaData, themesData, setAreaData, ...textStore}}>
+	return(<Provider value={{textAreaDispatch, areaData, themesData, setAreaData, ...textAnalyticsStore}}>
 		{props.children}
 	</Provider>)
 }
