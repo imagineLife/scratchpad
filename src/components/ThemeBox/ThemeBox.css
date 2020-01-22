@@ -73,9 +73,14 @@
     background-color: rgb(89,94,101);
 }
 
-/*.theme-li{
-  display:  flex;
-}*/
+.theme-word{
+  cursor: pointer;
+  transition: all 250ms;
+}
+
+.theme-word:hover{
+  color: white;
+}
 
 .selected-underline{
   width: 70%;
