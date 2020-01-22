@@ -804,8 +804,9 @@ resList = [...new Set(resList)]
 	patriotism
 		americans
 
-	82. You will never be ignored again. Your voice, your hopes, and your dreams will 
-	define our American destiny. 
+	82. You will never be ignored again. 
+
+	83. Your voice, your hopes, and your dreams will define our American destiny. 
 	patriotism
 		american
 	timeframe
@@ -814,52 +815,52 @@ resList = [...new Set(resList)]
 		destiny
 
 
-	83. And your courage and goodness and love, will forever guide us along the way. 
+	84. And your courage and goodness and love, will forever guide us along the way. 
 		power
 			courage
 		timeframe
 			forever
 
 
-	84. Together, we will make America strong again. 
+	85. Together, we will make America strong again. 
 		Patriotism
 			America
 		power
 			strong
 
-	85. We will make America wealthy again. 
+	86. We will make America wealthy again. 
 		Patriotism
 			America
 		economics
 			wealthy
 
-	86. We will make America proud again.
+	87. We will make America proud again.
 	Patriotism
 			America
 
-	87. We will make America safe again, and yes, together, we will make we will make America great again. 
+	88. We will make America safe again, and yes, together, we will make we will make America great again. 
 	Patriotism
 			America
 
-	88. Thank you. 
+	89. Thank you. 
 	thankfulness
 		thank
 
-	89. God bless you. 
+	90. God bless you. 
 	spirituality
 		God
 		Bless
 
-	90. And god bless America. 
+	91. And god bless America. 
 	Patriotism
 		America
 	spirituality
 		God
 		Bless
 
-	91. Thank you. 
+	92. Thank you. 
 
-	92. God bless America.
+	93. God bless America.
 	spirituality
 		God
 
