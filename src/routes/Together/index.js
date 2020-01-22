@@ -19,7 +19,6 @@ const FlexGrid = () => {
 	const [areaBoxRef, {width: areaBoxWidth, height: areaBoxHeight}] = useDimensions();
 	const [focusAreaRef, {width: focusAreaW, height: focusAreaH}] = useDimensions();
 	let [themeObj, setThemeObj] = React.useState({})
-	let [themeArr] = React.useState([['Patriotism','Thankful'], ['timeframe','unity','change'], ['unity'], ['we'],['unity','pessimism','comparison']])
 	
 	return(
 		<main id="flex-grid-layout">
