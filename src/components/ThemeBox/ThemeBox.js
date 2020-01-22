@@ -4,7 +4,7 @@ import './ThemeBox.css'
 import { TextAreaContext } from '../../Contexts/TextArea'
 const ThemeBox = () => {
 
-	const { selectedAreaArr, themesData } = useContext(TextAreaContext)
+	const { selectedAreaArr, themesData, theme, textAreaDispatch } = useContext(TextAreaContext)
 	
 	/*
 		Get all selected Themes, store in a single Array, no duplicates
@@ -37,8 +37,21 @@ const ThemeBox = () => {
 					{
 						selectedThemes && 
 						selectedThemes.length > 0 && 
-						selectedThemes.map((theme,idx)=>  (
-							<li key={`theme-item-${theme}-${idx}`}>{theme}</li>
+						selectedThemes.map((thisTheme,idx)=>  (
+							<li 
+								key={`theme-item-${thisTheme}-${idx}`}
+								onClick={() => {
+									if(thisTheme == theme){
+										textAreaDispatch({"type": "THEME", "payload": null})
+									}else{
+										textAreaDispatch({"type": "THEME", "payload": thisTheme})
+									}
+								}}
+								className="theme-li"
+							>
+								{<span className="theme-word">{thisTheme}</span>}
+								{thisTheme == theme && <span className="selected-underline" />}
+							</li>
 						))
 					}
 				</ul>
