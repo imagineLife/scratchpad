@@ -259,6 +259,10 @@ footer{
   padding: 15px 0;
 }
 
+#words-of-interest-box > .section-text{
+  margin-bottom: 8px;
+}
+
 #flex-grid-layout div#text-display-box p.text-content{
   line-height: 2.3;
   columns: 2;
@@ -274,6 +278,8 @@ footer{
   text-align: center;
   width: 100%;
 }
+
+
 
 .image-subtext{
   position: absolute;
