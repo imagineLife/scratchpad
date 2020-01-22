@@ -1,5 +1,17 @@
 const fs = require('fs')
 
+
+/*
+	INPUT: themes tsv...
+		sentenceNumber(2). themeWord	words,related,to,the,themeWord
+		sentenceNumber(3). themeWord	more,words,related,to,the,themeWord....
+	OUTPUTs an object...
+		{
+			themeWord: [array,or,words,that,point,to,the,theme,word],
+			themeWord2: [array,or,words,that,point,to,the,theme,word2]
+			themeWord3: [array,or,words,that,point,to,the,theme,word3]
+		}
+*/
 fs.readFile('./themes.tsv', 'utf8', (err,data) => {
 	if(err){
 		console.log('ERROR')
