@@ -1,5 +1,4 @@
 #words-of-interest-for-ui{
-	/*border: 1px solid gray;*/
 	width: 100%;
   display: flex;
   min-height: 300px;
@@ -11,10 +10,8 @@
 	text-align: left;
 	padding: 10px;
 	float: left;
-}
-
-#word-lists, #focus-word-list{
-	text-align: left;
+	max-height: 275px;
+	overflow-y: auto;
 }
 
 #word-lists{
