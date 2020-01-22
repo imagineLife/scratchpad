@@ -72,3 +72,17 @@
     border: 1px solid rgb(89,94,101); /* should match background, can't be transparent */
     background-color: rgb(89,94,101);
 }
+
+/*.theme-li{
+  display:  flex;
+}*/
+
+.selected-underline{
+  width: 70%;
+  height: 7px;
+  background-color: orange;
+  margin: -7px auto 0 auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
