@@ -56,6 +56,12 @@ let TextAreaProvider = (props) => {
 					maxWordsPerSentence: action.payload
 				}
 
+			case "THEME":
+				return {
+					...state,
+					theme: action.payload
+				}
+
 			default:
 				return {...state, text: action.payload}	
 				break;
@@ -91,7 +97,13 @@ let TextAreaProvider = (props) => {
 				}))
 	}, [])
 	
-	return(<Provider value={{textAreaDispatch, areaData, themesData, setAreaData, ...textAnalyticsStore}}>
+	return(<Provider value={{
+		textAreaDispatch, 
+		areaData, 
+		themesData, 
+		setAreaData, 
+		...textAnalyticsStore
+	}}>
 		{props.children}
 	</Provider>)
 }
