@@ -17,13 +17,41 @@ const TextDisplay = React.memo(function TextDisplay(){
 
 
 	//1. load txt string
-  const { displayText, selectedAreaArr, sentences, wordLength } = React.useContext(TextAreaContext);
+  const { displayText, selectedAreaArr, sentences, wordLength, theme, themesData} = React.useContext(TextAreaContext);
   
+  // console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;')
+  // console.log('theme')
+  // console.log(theme)
+  // console.log('selectedAreaArr')
+  // console.log(selectedAreaArr)
+  // console.log('sentences')
+  // console.log(sentences)
+  // console.log('themesData')
+  // console.log(themesData)
+
+  /*
+  	Handle 
+  */
+  let absoluteSentenceIndexesThatIncludeSelectedTheme = []
+
+
+  if(theme){
+  	//loop through selected-sentence array
+  	for(let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++){
+  		
+  		//check if the current sentence HAS the selected theme
+  		if(themesData[i].includes(theme)){
+  			// console.log('THIS sentence index has the theme!');
+  			absoluteSentenceIndexesThatIncludeSelectedTheme.push({i, themes: themesData[i]})
+  		}
+  	}
+  }
+  
+  // console.log('absoluteSentenceIndexesThatIncludeSelectedTheme')
+  // console.log(absoluteSentenceIndexesThatIncludeSelectedTheme)
   
   //2. get selected word from selectedWordList 
   const { selectedWord } = React.useContext(WordListContext);
-
-  let displaySentences  = [];
 
 	if(!displayText){
 		return(<p>Text Display Using Complex Context</p>)
