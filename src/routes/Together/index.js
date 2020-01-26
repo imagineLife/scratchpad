@@ -52,6 +52,7 @@ const FlexGrid = () => {
 			<section id="left-side">
 				<div id="focus-area-box">
 					<h2 className="section-text">A Glance At The Text</h2>
+					<p className="explanatory-text">Hover over this area chart to highlight the sentence that was spoken at the specific point in time during the president’s address. <span className="interaction-note">HOVER</span></p>
 					<div id="focus-area-hover" ref={focusAreaRef}>
 						<AreaBox dims={{width: focusAreaW, height: focusAreaH * .8}} setSentenceNumber/>
 					</div>
@@ -59,9 +60,9 @@ const FlexGrid = () => {
 
 				<div id="words-of-interest-box">
 					<h2 className="section-text">Words Of Interest</h2>
-					<WordListPicker />
 					<p className="explanatory-text">Here are some various types of words that were spoken. 
 					The word lists are toggle-able & the words are selectable. <span className="interaction-note">SELECT.SELECT</span></p>
+					<WordListPicker />
 				</div>
 			</section>
 			
