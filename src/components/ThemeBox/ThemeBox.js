@@ -30,7 +30,9 @@ const ThemeBox = () => {
 		<div id="theme-box">
 			<div className="theme-title">
 				<h2 className="section-text">Textual Themes</h2>
-				<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. CLICK</p>
+				<p className="explanatory-text theme-explanatory">Colors match text to a 'theme'. 
+					<span className="interaction-note">CLICK</span>
+				</p>
 			</div>
 			<div id="theme-list-box">
 				<ul className="theme-list">
