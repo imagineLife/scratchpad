@@ -102,6 +102,13 @@ footer{
   border-left: var(--border)
 }
 
+#words-by-length-box > .explanatory-text{
+  padding: 0 30px 10px 30px;
+  border-image: var(--bottom-narrow);
+  border-width: 1px;
+  border-style: solid;
+}
+
 #flex-grid-layout div#text-display-box p.text-content{
   line-height: 2.3;
   columns: 2;
