@@ -161,6 +161,23 @@ header{
 	grid-area: l;
 }
 
+#left-side > div .section-text, #right-side > div .section-text{
+	transition: all 350ms;
+}
+
+#left-side > div:hover .section-text, #right-side > div:hover .section-text{
+	text-shadow: rgba(0,0,0,.5) 0 8px 3px;
+}
+
+#left-side > div .interaction-note, #right-side > div .interaction-note{
+	transition: all 350ms;
+}
+
+#left-side > div:hover .interaction-note, #right-side > div:hover .interaction-note{
+	font-weight: 800;
+	color: rgb(215,215,215);
+}
+
 #right-side{
 	grid-area: r;
 	display: flex;
@@ -198,6 +215,11 @@ footer{
 	max-height: 350px;
 	border-left: var(--border);
 	border-right: var(--border);
+	/*transition: all 500;*/
+}
+
+#flex-grid-layout #theme-box:hover{
+	/*box-shadow: rgba(147,147,147, .5) 1px 1px 6px inset;*/
 }
 
 #flex-grid-layout #image-box{
