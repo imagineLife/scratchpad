@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css'
 import useDimensions from '../../lib/useDims'
 import { TextAreaContext } from '../../Contexts/TextArea'
@@ -11,10 +11,11 @@ const Circles = () => {
 	
 	const dims = useDimensions()
 	let [ref, {height, width}] = dims
-	const [m] = React.useState({t: 10, r: 25, b: 5, l: 15})
-	const [lessM, setLessM] = React.useState({})
-	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
-	let [buffer, setBuffer] = React.useState(0)
+	const [m] = useState({t: 10, r: 25, b: 5, l: 15})
+	const [lessM, setLessM] = useState({})
+	let [circleRadiusRange, setCircleRadiusRange] = useState([])
+	let [buffer, setBuffer] = useState(0)
+	let [hoveredCircle, setHoveredCircle] = useState(null)
 
 	const updateFromResize = (dims, circleMax) => {
 		setLessM(dims)
@@ -105,21 +106,33 @@ const Circles = () => {
 												textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})
 											}
 										}}>
+										<defs>
+											<filter id="glow">
+												<feGaussianBlur className="blur" stdDeviation="2.5" result="coloredBlur"></feGaussianBlur>
+												<feMerge>
+													<feMergeNode in="coloredBlur"></feMergeNode>
+													<feMergeNode in="SourceGraphic"></feMergeNode>
+												</feMerge>
+											</filter>
+										</defs>
 									<circle
 										className='word-circle'
 										r={rScale(c.occurances)}
-										stroke={wordLength == c.size ? 'rgb(125,125,0)' : 'rgb(125,125,125)'}
+										stroke={wordLength == c.size ? 'rgb(125,125,0)' : hoveredCircle == idx ? 'rgb(85,85,30)' : 'rgb(125,125,125)'}
 										strokeWidth={2}
 										cx={circleX}
 										cy={circleY}
-										fill={wordLength == c.size ? 'rgb(40,40,0)' : 'rgb(25,25,25)'}
+										fill={wordLength == c.size ? 'rgb(25,25,0)' : 'rgb(25,25,25)'}
+										filter={hoveredCircle == idx ? "url(#glow)" : null}
+										onMouseOver={() => {setHoveredCircle(idx)}}
+										onMouseOut={() => {setHoveredCircle(null)}}
 									/>
-									<text>
-										<tspan x={circleX} y={lessM.h - 15} className="circle-label">{c.size}-Letter</tspan>
-										<tspan x={circleX} y={lessM.h} className="circle-label">Words</tspan>
+									<text pointerEvents={'none'}>
+										<tspan pointerEvents={'none'} x={circleX} y={lessM.h - 15} className="circle-label">{c.size}-Letter</tspan>
+										<tspan pointerEvents={'none'} x={circleX} y={lessM.h} className="circle-label">Words</tspan>
 									</text>
-									<text>
-										<tspan x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
+									<text pointerEvents={'none'}>
+										<tspan pointerEvents={'none'} x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
 									</text>
 								</g>
 							)
