@@ -83,6 +83,7 @@ const FlexGrid = () => {
 				
 				<div id="words-by-length-box">
 					<h2 className="section-text">Words By Length</h2>
+					<p className="explanatory-text">Circles can be selected and all of the words in the speech section that match this selected word-length circle with be highlighted. <span className="interaction-note">CLICK</span></p>
 					<Circles />
 				</div>
 			</section>
