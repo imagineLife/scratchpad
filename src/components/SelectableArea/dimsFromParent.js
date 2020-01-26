@@ -50,9 +50,10 @@ const SelectableArea = ({onMove, dims}) => {
 	React.useEffect(()=>{
 		if(sentences && !areaData){
 			let preppedAreaData = []
-			sentences.forEach((s,ind) => {
+			sentences.forEach((s) => {
 				preppedAreaData.push({y: s.wordCount})
 			})
+			
 			setAreaData(preppedAreaData)
 		}
 	},[sentences])
