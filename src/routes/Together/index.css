@@ -259,6 +259,13 @@ footer{
   padding: 15px 0;
 }
 
+/*.section-text:hover{
+  transition: all 500ms;
+}
+
+.section-text:hover{
+  text-shadow: rgba(0,0,0,.5) 0 8px 3px;
+}*/
 #words-of-interest-box > .section-text{
   margin-bottom: 8px;
 }
