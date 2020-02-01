@@ -15,43 +15,28 @@ const TextDisplay = React.memo(function TextDisplay(){
 	}
 
 
+  //STATE
+  const { 
+  	displayText, 
+  	selectedAreaArr, 
+  	sentences, 
+  	wordLength, 
+  	theme, 
+  	themesData
+  } = React.useContext(TextAreaContext);
 
-	//1. load txt string
-  const { displayText, selectedAreaArr, sentences, wordLength, theme, themesData} = React.useContext(TextAreaContext);
-  
-  // console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;')
-  // console.log('theme')
-  // console.log(theme)
-  // console.log('selectedAreaArr')
-  // console.log(selectedAreaArr)
-  // console.log('sentences')
-  // console.log(sentences)
-  // console.log('themesData')
-  // console.log(themesData)
-
-  /*
-  	Handle 
-  */
-  let absoluteSentenceIndexesThatIncludeSelectedTheme = []
-
-
-  if(theme){
-  	//loop through selected-sentence array
-  	for(let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++){
-  		
-  		//check if the current sentence HAS the selected theme
-  		if(themesData[i].includes(theme)){
-  			// console.log('THIS sentence index has the theme!');
-  			absoluteSentenceIndexesThatIncludeSelectedTheme.push({i, themes: themesData[i]})
-  		}
-  	}
-  }
-  
-  // console.log('absoluteSentenceIndexesThatIncludeSelectedTheme')
-  // console.log(absoluteSentenceIndexesThatIncludeSelectedTheme)
-  
-  //2. get selected word from selectedWordList 
   const { selectedWord } = React.useContext(WordListContext);
+  
+  console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;')
+  console.log('theme')
+  console.log(theme)
+  console.log('selectedAreaArr')
+  console.log(selectedAreaArr)
+  console.log('sentences')
+  console.log(sentences)
+  console.log('themesData')
+  console.log(themesData)
+
 
 	if(!displayText){
 		return(<p>Text Display Using Complex Context</p>)
@@ -60,25 +45,32 @@ const TextDisplay = React.memo(function TextDisplay(){
 	//if no selected word && no 
 	let resText = displayText
 	
-	//apply selected word to text display
+	/*
+    apply SELECTED WORD
+  */
 	if(selectedWord){
 		resText = getQueriedWord(displayText, selectedWord, 'selected-text')
 	}
 
+  /*
+    apply WORD-LENGTH
+  */
 	if(wordLength){
 		resText = getWordLength(resText, wordLength, 'word-length')
 	}
 
+  /*
+    calculate text-segment in-view
+  */
 	let twoWhiteSpaces = /(\s{2})/gm;
   let standarizeWS = /([?!.]\s)(.)/gm;  
   let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
-	
-	//GET in-view-sentences
   let inViewSentences = resText.replace(twoWhiteSpaces, " ")
     .replace(standarizeWS, ". $2")
     .match(sentRegex);
 
 
+  //"Responsive" UI column divisions
   let columnCount = Math.ceil(inViewSentences.length / 15)
   columnCount = Math.min(columnCount, 4)
 
@@ -90,12 +82,49 @@ const TextDisplay = React.memo(function TextDisplay(){
 	}
 
 	/*
-		BEFORE sentence-wide-styles applied?
-		wordLength is the selected wordLength from the circles in the combined-view
-		if(wordLength){
+		BEFORE sentence-wide-styles applied...
+		if(wordLength selected from circles){
 			apply word-length selected styling to resulting text
 		}
 	*/
+
+
+  /*
+    from selected-theme to theme-sentence-underlined
+  */
+
+  //HELP FROM JACK
+  //PLACEHOLDER, MOVE THIS ELSEWHERE
+  // let themeMappedObject = { }
+  // themesData && themesData.forEach((t,idx) => {
+    
+  //   //loop through the nested array element
+  //   t.forEach(nestedThemeWord => {
+  //     themeMappedObject[nestedThemeWord] = 
+  //       themeMappedObject[nestedThemeWord] ?  
+  //       [...themeMappedObject[nestedThemeWord], idx] : 
+  //       [idx]
+  //   })
+  // })
+
+  // let selectedThemeSentenceIndexes = themeMappedObject[theme]
+
+  
+  //   Sentences + Themes
+  //   Calulating, getting, && applying themes to sentences
+  
+  // let absoluteSentenceIndexesThatIncludeSelectedTheme = []
+
+  // if(theme){
+  //   //loop through selected-sentence array
+  //   for(let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++){
+      
+  //     //check if the current sentence HAS the selected theme
+  //     if(themesData[i].includes(theme)){
+  //       absoluteSentenceIndexesThatIncludeSelectedTheme.push({i, themes: themesData[i]})
+  //     }
+  //   }
+  // }
 
 	/* apply theme to theme-d sentence*/
 	if(selectedTheme){
@@ -135,14 +164,6 @@ const TextDisplay = React.memo(function TextDisplay(){
 	  //re-join sentences
 	  resText = inViewSentences.join("")
 	}
-
-
-	/*
-		AFTER sentence-wide-styles applied?
-		if(wordLength){
-			apply word-length selected styling to resulting text
-		}
-	*/
 
 	return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{__html: resText}}></p>
 })
