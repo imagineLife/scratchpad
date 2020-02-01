@@ -26,20 +26,10 @@ const TextDisplay = React.memo(function TextDisplay(){
   } = React.useContext(TextAreaContext);
 
   const { selectedWord } = React.useContext(WordListContext);
-  
-  console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;')
-  console.log('theme')
-  console.log(theme)
-  console.log('selectedAreaArr')
-  console.log(selectedAreaArr)
-  console.log('sentences')
-  console.log(sentences)
-  console.log('themesData')
-  console.log(themesData)
 
 
 	if(!displayText){
-		return(<p>Text Display Using Complex Context</p>)
+		return(<p>Loading Text Display...</p>)
 	}
 
 	//if no selected word && no 
@@ -62,13 +52,9 @@ const TextDisplay = React.memo(function TextDisplay(){
   /*
     calculate text-segment in-view
   */
-	let twoWhiteSpaces = /(\s{2})/gm;
-  let standarizeWS = /([?!.]\s)(.)/gm;  
-  let sentRegex = /(([A-Z][a-z])|\s)+[^.!?]*([A-Za-z].[A-Za-z]|[^.!?].)/g;
-  let inViewSentences = resText.replace(twoWhiteSpaces, " ")
-    .replace(standarizeWS, ". $2")
-    .match(sentRegex);
-
+	const inViewSentences = sentences.filter((s,i) => i >= selectedAreaArr[0] && i<= selectedAreaArr[1])
+  // const inViewThemes = themesData.filter((t,i) => i >= selectedAreaArr[0] && i<= selectedAreaArr[1])
+  
 
   //"Responsive" UI column divisions
   let columnCount = Math.ceil(inViewSentences.length / 15)
@@ -81,89 +67,92 @@ const TextDisplay = React.memo(function TextDisplay(){
 		height: '450px'
 	}
 
-	/*
-		BEFORE sentence-wide-styles applied...
-		if(wordLength selected from circles){
-			apply word-length selected styling to resulting text
-		}
-	*/
-
-
+  /*
+    CALCULATE THEME data...
+  */
+  
+  
   /*
     from selected-theme to theme-sentence-underlined
   */
 
   //HELP FROM JACK
   //PLACEHOLDER, MOVE THIS ELSEWHERE
-  // let themeMappedObject = { }
-  // themesData && themesData.forEach((t,idx) => {
+  let themeMappedObject = { }
+  themesData && themesData.forEach((t,idx) => {
     
-  //   //loop through the nested array element
-  //   t.forEach(nestedThemeWord => {
-  //     themeMappedObject[nestedThemeWord] = 
-  //       themeMappedObject[nestedThemeWord] ?  
-  //       [...themeMappedObject[nestedThemeWord], idx] : 
-  //       [idx]
-  //   })
-  // })
+    //loop through the nested array element
+    t.forEach(nestedThemeWord => {
+      themeMappedObject[nestedThemeWord] = 
+        themeMappedObject[nestedThemeWord] ?  
+        [...themeMappedObject[nestedThemeWord], idx] : 
+        [idx]
+    })
+  })
 
-  // let selectedThemeSentenceIndexes = themeMappedObject[theme]
+  let selectedThemeSentenceIndexes = themeMappedObject[theme]
 
   
-  //   Sentences + Themes
-  //   Calulating, getting, && applying themes to sentences
+  /*
+    Sentences + Themes
+    Calulating, getting, && applying themes to sentences
+  */
   
-  // let absoluteSentenceIndexesThatIncludeSelectedTheme = []
+  let absoluteSentenceIndexesThatIncludeSelectedTheme = []
 
-  // if(theme){
-  //   //loop through selected-sentence array
-  //   for(let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++){
+  if(theme){
+    //loop through selected-sentence array
+    for(let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++){
       
-  //     //check if the current sentence HAS the selected theme
-  //     if(themesData[i].includes(theme)){
-  //       absoluteSentenceIndexesThatIncludeSelectedTheme.push({i, themes: themesData[i]})
-  //     }
-  //   }
-  // }
+      //check if the current sentence HAS the selected theme
+      if(themesData[i].includes(theme)){
+        absoluteSentenceIndexesThatIncludeSelectedTheme.push({i, relativeI: i - selectedAreaArr[0], themes: themesData[i]})
+      }
+    }
+  }
 
-	/* apply theme to theme-d sentence*/
-	if(selectedTheme){
+  console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;')
+  // console.log('theme')
+  // console.log(theme)
+  // console.log('selectedAreaArr')
+  // console.log(selectedAreaArr)
+  // console.log('themeMappedObject')
+  // console.log(themeMappedObject)
+  console.log('absoluteSentenceIndexesThatIncludeSelectedTheme')
+  console.log(absoluteSentenceIndexesThatIncludeSelectedTheme)
+  console.log('inViewSentences')
+  console.log(inViewSentences)
 
-		//first sentence index from text-area box
-		let viewableFirstSentenceIndex = selectedAreaArr[0]
+  /*
+    BACKWARDS Loop thru selected-sentences WITH matching themes...
+  */
+  for(let i = absoluteSentenceIndexesThatIncludeSelectedTheme.length - 1; i >= 0; i--){
 
-		// array of selected-theme words ['unity']
-		let themesArray = Object.keys(selectedTheme)
-		
-		// arr of key-words related to the theme ['we, 'together']
-		let themeKeywords = selectedTheme[themesArray]
+    //@ each sentence, do some magic
+    const currentSentenceTextWithTheme = inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[i].relativeI].text
+    const openingTagIndex = resText.indexOf(currentSentenceTextWithTheme)
+    const closingTagIndex = openingTagIndex + currentSentenceTextWithTheme.length
+    console.log('%c MAGIC', 'background-color: darkblue; color: white;')
+    console.log('openingTagIndex')
+    console.log(openingTagIndex)
+    console.log('closingTagIndex')
+    console.log(closingTagIndex)
+    
 
-		//loop through theme words
-	  for(let keyWord in themeKeywords){
-	  	
-	  	//Apply theme html to each sentence
-	  	//[2] or [2,3]
-		  themeKeywords[keyWord].forEach((sentenceNumber, idx) => {
+    /*
+      Here
+      ...write </span>
+      ...then <span class="highlighted-sentence">
+      ...Update resIndex.charAt[closingTag]
+    */
+  }
 
-		  		//sentence offset magic
-		  		// deal with 0-based arr indexing
-		  		let sentenceOffset = sentenceNumber - viewableFirstSentenceIndex - 1 
-		  		
-		  		if(inViewSentences[sentenceOffset]){
-		  			const matchedThemeRegex = new RegExp(keyWord, 'gi')
-			  		//italicize theme-key-word
-			  		let matchedThemeTxt = inViewSentences[sentenceOffset]
-			  			.replace(matchedThemeRegex, `<i>${keyWord}</i>`) //figure-out the capitalization
-
-			  		//apply theme
-			  		inViewSentences[sentenceOffset] = `<span class="themed theme-${keyWord}">${matchedThemeTxt}</span>` //inViewSentences[sentenceOffset]
-		  		}
-		  })
-	  }
-
-	  //re-join sentences
-	  resText = inViewSentences.join("")
-	}
+  let selectedThemeSentenceStartingIndex = null
+  if(absoluteSentenceIndexesThatIncludeSelectedTheme.length > 0){
+    selectedThemeSentenceStartingIndex = resText.indexOf(inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[0].relativeI].text)
+    
+  }
+  
 
 	return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{__html: resText}}></p>
 })
