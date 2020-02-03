@@ -5,24 +5,24 @@ import { TextAreaContext } from '../../Contexts/TextArea'
 import { WordListContext } from '../../Contexts/CommonWords'
 import { getQueriedWord } from '../../lib/getQueriedWord'
 import getWordLength from '../../lib/getWordLength'
-const TextDisplay = React.memo(function TextDisplay(){
+const TextDisplay = {
 
-	let selectedTheme = {
-		unity : {
-			we: [2],
-			together: [2,3]
-		}
-	}
+	// let selectedTheme = {
+	// 	unity : {
+	// 		we: [2],
+	// 		together: [2,3]
+	// 	}
+	// }
 
 
   //STATE
   const { 
-  	displayText, 
-  	selectedAreaArr, 
-  	sentences, 
-  	wordLength, 
-  	theme, 
-  	themesData
+    displayText, 
+    selectedAreaArr,
+    sentences,
+    wordLength,
+    theme,
+    themesData
   } = React.useContext(TextAreaContext);
 
   const { selectedWord } = React.useContext(WordListContext);
@@ -90,7 +90,7 @@ const TextDisplay = React.memo(function TextDisplay(){
     })
   })
 
-  let selectedThemeSentenceIndexes = themeMappedObject[theme]
+  // let selectedThemeSentenceIndexes = themeMappedObject[theme]
 
   
   /*
@@ -147,14 +147,14 @@ const TextDisplay = React.memo(function TextDisplay(){
     */
   }
 
-  let selectedThemeSentenceStartingIndex = null
-  if(absoluteSentenceIndexesThatIncludeSelectedTheme.length > 0){
-    selectedThemeSentenceStartingIndex = resText.indexOf(inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[0].relativeI].text)
+  // let selectedThemeSentenceStartingIndex = null
+  // if(absoluteSentenceIndexesThatIncludeSelectedTheme.length > 0){
+  //   selectedThemeSentenceStartingIndex = resText.indexOf(inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[0].relativeI].text)
     
-  }
+  // }
   
 
 	return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{__html: resText}}></p>
-})
+}
 
 export default TextDisplay;
