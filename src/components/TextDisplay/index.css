@@ -16,3 +16,7 @@
 .themed{
 	text-decoration: underline pink wavy
 }
+
+.theme-sentence{
+	text-decoration: underline pink;
+}
