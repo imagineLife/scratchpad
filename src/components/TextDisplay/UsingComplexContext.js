@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './index.css';
 
 import { TextAreaContext } from '../../Contexts/TextArea';
@@ -6,14 +6,14 @@ import { WordListContext } from '../../Contexts/CommonWords';
 import { getQueriedWord } from '../../lib/getQueriedWord';
 import getWordLength from '../../lib/getWordLength';
 
-const TextDisplay = () => {
-  // let selectedTheme = {
-  // 	unity : {
-  // 		we: [2],
-  // 		together: [2,3]
-  // 	}
-  // }
 
+function splitStr(str, idx) {
+  const firstPart = str.substring(0, idx);
+  const secondPart = str.substring(idx);
+  return [firstPart, secondPart];
+}
+
+const TextDisplay = () => {
   const {
     displayText,
     selectedAreaArr,
@@ -21,10 +21,11 @@ const TextDisplay = () => {
     wordLength,
     theme,
     themesData,
-  } = React.useContext(TextAreaContext);
+  } = useContext(TextAreaContext);
 
-  const { selectedWord } = React.useContext(WordListContext);
-
+  const { selectedWord } = useContext(WordListContext);
+  const [closingSentenceTag] = useState('</span>');
+  const [openingSentenceTag] = useState('<span class="theme-sentence">');
 
   if (!displayText) {
     return (<p>Loading Text Display...</p>);
@@ -132,6 +133,13 @@ const TextDisplay = () => {
     console.log('closingTagIndex');
     console.log(closingTagIndex);
 
+    // Input CLOSING tag
+    const splitAtSpanEnd = splitStr(resText, closingTagIndex);
+    resText = `${splitAtSpanEnd[0]}${closingSentenceTag}${splitAtSpanEnd[1]}`;
+
+    // Input OPENING tag
+    const splitAtSpanBeginning = splitStr(resText, openingTagIndex);
+    resText = `${splitAtSpanBeginning[0]}${openingSentenceTag}${splitAtSpanBeginning[1]}`;
 
     /*
       Here
