@@ -24,8 +24,8 @@ const TextDisplay = () => {
   } = useContext(TextAreaContext);
 
   const { selectedWord } = useContext(WordListContext);
-  const [closingSentenceTag] = useState('</span>');
-  const [openingSentenceTag] = useState('<span class="theme-sentence">');
+  const [closingSentenceTag] = useState('</i>');
+  const [openingSentenceTag] = useState('<i class="theme-sentence">');
 
   if (!displayText) {
     return (<p>Loading Text Display...</p>);
@@ -52,8 +52,6 @@ const TextDisplay = () => {
     calculate text-segment in-view
   */
   const inViewSentences = sentences.filter((s, i) => i >= selectedAreaArr[0] && i <= selectedAreaArr[1]);
-  // const inViewThemes = themesData.filter((t,i) => i >= selectedAreaArr[0] && i<= selectedAreaArr[1])
-
 
   // "Responsive" UI column divisions
   let columnCount = Math.ceil(inViewSentences.length / 15);
@@ -87,9 +85,6 @@ const TextDisplay = () => {
     });
   });
 
-  // let selectedThemeSentenceIndexes = themeMappedObject[theme]
-
-
   /*
     Sentences + Themes
     Calulating, getting, && applying themes to sentences
@@ -107,18 +102,6 @@ const TextDisplay = () => {
     }
   }
 
-  console.log('%c -- TextDisplay --', 'background-color: darkblue; color: white;');
-  // console.log('theme')
-  // console.log(theme)
-  // console.log('selectedAreaArr')
-  // console.log(selectedAreaArr)
-  // console.log('themeMappedObject')
-  // console.log(themeMappedObject)
-  console.log('absoluteSentenceIndexesThatIncludeSelectedTheme');
-  console.log(absoluteSentenceIndexesThatIncludeSelectedTheme);
-  console.log('inViewSentences');
-  console.log(inViewSentences);
-
   /*
     BACKWARDS Loop thru selected-sentences WITH matching themes...
   */
@@ -127,11 +110,6 @@ const TextDisplay = () => {
     const currentSentenceTextWithTheme = inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[i].relativeI].text;
     const openingTagIndex = resText.indexOf(currentSentenceTextWithTheme);
     const closingTagIndex = openingTagIndex + currentSentenceTextWithTheme.length;
-    console.log('%c MAGIC', 'background-color: darkblue; color: white;');
-    console.log('openingTagIndex');
-    console.log(openingTagIndex);
-    console.log('closingTagIndex');
-    console.log(closingTagIndex);
 
     // Input CLOSING tag
     const splitAtSpanEnd = splitStr(resText, closingTagIndex);
@@ -140,20 +118,7 @@ const TextDisplay = () => {
     // Input OPENING tag
     const splitAtSpanBeginning = splitStr(resText, openingTagIndex);
     resText = `${splitAtSpanBeginning[0]}${openingSentenceTag}${splitAtSpanBeginning[1]}`;
-
-    /*
-      Here
-      ...write </span>
-      ...then <span class="highlighted-sentence">
-      ...Update resIndex.charAt[closingTag]
-    */
   }
-
-  // let selectedThemeSentenceStartingIndex = null
-  // if(absoluteSentenceIndexesThatIncludeSelectedTheme.length > 0){
-  //   selectedThemeSentenceStartingIndex = resText.indexOf(inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[0].relativeI].text)
-
-  // }
 
 
   return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{ __html: resText }} />;
