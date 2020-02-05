@@ -1,124 +1,150 @@
-import React from 'react';
-import './index.css'
-import useDimensions from '../../lib/useDims'
-import { TextAreaContext } from '../../Contexts/TextArea'
-import { CirclesContext } from '../../Contexts/Circles'
-import * as s from 'd3-scale'
-import * as a from 'd3-array'
+import React, { useState } from 'react';
+import './index.css';
+import * as s from 'd3-scale';
+import * as a from 'd3-array';
+import useDimensions from '../../lib/useDims';
+import { TextAreaContext } from '../../Contexts/TextArea';
+import { CirclesContext } from '../../Contexts/Circles';
 
-const makeDimsLessMargins = (height, width, m) => {return {h: height - m.t - m.b, w: width - m.l - m.r}}
+const makeDimsLessMargins = (height, width, m) => ({ h: height - m.t - m.b, w: width - m.l - m.r });
 const Circles = () => {
-	
-	const dims = useDimensions()
-	let [ref, {height, width}] = dims
-	const [m] = React.useState({t: 10, r: 25, b: 10, l: 15})
-	const [lessM, setLessM] = React.useState({})
-	let [circleRadiusRange, setCircleRadiusRange] = React.useState([])
-	let [buffer, setBuffer] = React.useState(0)
+  const dims = useDimensions();
+  const [ref, { height, width }] = dims;
+  const [m] = useState({
+    t: 10, r: 25, b: 5, l: 15,
+  });
+  const [lessM, setLessM] = useState({});
+  const [circleRadiusRange, setCircleRadiusRange] = useState([]);
+  const [buffer, setBuffer] = useState(0);
+  const [hoveredCircle, setHoveredCircle] = useState(null);
 
-	const updateFromResize = (dims, circleMax) => {
-		setLessM(dims)
-		setCircleRadiusRange([0, circleMax])
-		setBuffer(dims.w * .01)
-	}
-	
-	//load visible text string
+  const updateFromResize = (passedDims, circleMax) => {
+    setLessM(passedDims);
+    setCircleRadiusRange([0, circleMax]);
+    setBuffer(passedDims.w * 0.01);
+  };
+
+  // load visible text string
   const txtCtx = React.useContext(TextAreaContext);
-  const { displayText, textAreaDispatch, selectedAreaArr } = txtCtx
+  const {
+    displayText, textAreaDispatch, selectedAreaArr, wordLength,
+  } = txtCtx;
   const { calcWordsByLength, wordsByLength } = React.useContext(CirclesContext);
-  
-  React.useEffect(() => {
-  	if(displayText && wordsByLength.length < 1){
-  		calcWordsByLength(displayText)
-  	}
-  }, [displayText, wordsByLength, Object.values(txtCtx)])
 
   React.useEffect(() => {
-  	if(selectedAreaArr){
-  		calcWordsByLength(displayText)
-  	}
-  }, [selectedAreaArr])
-	
-	//Update state dimensions
-	React.useEffect(() => {
-		if(wordsByLength.length > 0){
-			
-			//check for first calculation
-			let firstCalc = (height && width && lessM['w'] == undefined)
-			let newDimsLessMargins ={};
-			let newRadiusRange = []
+    if (displayText && wordsByLength.length < 1) {
+      calcWordsByLength(displayText);
+    }
+  }, [displayText, wordsByLength, Object.values(txtCtx)]);
 
-			//check for resized-window
-			let newWidth = (width - m.l - m.r !== lessM.w)
-			let alreadyCalcdWidthOnce = lessM.w !== undefined
-			
+  React.useEffect(() => {
+    if (selectedAreaArr) {
+      calcWordsByLength(displayText);
+    }
+  }, [selectedAreaArr]);
 
-			let resized = newWidth && alreadyCalcdWidthOnce
-			let windowResized = firstCalc == false && resized == false && alreadyCalcdWidthOnce == true;
-			
-			if(resized || firstCalc){
-				newDimsLessMargins = makeDimsLessMargins(height,width, m)
-				let wDivision = wordsByLength.length + .5
-				let maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * .85
-				let maxCircleHeight = Math.min(maxCircleHeightByWidth, (newDimsLessMargins.h * .5))
-				updateFromResize(newDimsLessMargins, maxCircleHeight)
-			}
-		}
-	}, [ref, height, width, wordsByLength, selectedAreaArr])
+  // Update state dimensions
+  React.useEffect(() => {
+    if (wordsByLength.length > 0) {
+      // check for first calculation
+      const firstCalc = (height && width && lessM.w === undefined);
+      let newDimsLessMargins = {};
 
-	//sanity checking wordsByLength props
-	if(!(wordsByLength.length > 0)){
-		return <p style={{color: 'gray'}}>Loading Circle Data...</p>
-	}
+      // check for resized-window
+      const newWidth = (width - m.l - m.r !== lessM.w);
+      const alreadyCalcdWidthOnce = lessM.w !== undefined;
 
-	let maxO = a.max(wordsByLength, d => d.occurances)
-	
-	let rScale = s.scaleLinear()
-		.domain([0, maxO])
-		.range(circleRadiusRange)
-	
-	let withRadius = wordsByLength.map((c, idx) => {
-		let scaledR = rScale(c.occurances)
-		c.scaledR = scaledR 
-		c.scaledD = scaledR * 2
-		c.thisXWithBuffer = buffer + scaledR
-		c.prevX = idx === 0 ? 0 : wordsByLength[idx - 1].thisX
-		c.thisX = c.prevX + c.thisXWithBuffer;
-		return c
-	})
 
-	return(
-		<div id="circlesBox" ref={ref}>
-			<svg id="circle-svg" width={width} height={height}>
-				<g transform={`translate(${m.l}, ${m.t})`}>
-					{lessM && lessM.h && circleRadiusRange !== null &&
-						withRadius.map((c, idx) => {
-							let circleX = c.thisX + c.prevX
-							let circleY = lessM.h * .45
-							return(
-								<React.Fragment key={`${c.size}-${idx}`}>
-									<circle
-										className='word-circle'
-										r={rScale(c.occurances)}
-										stroke="black"
-										strokeWidth={3}
-										cx={circleX}
-										cy={circleY}
-										onClick={() => {textAreaDispatch({"type": "WORD_LENGTH", "payload": c.size})}} />
-									<text>
-										<tspan x={circleX} y={lessM.h - 18} className="circle-label">{c.size}-Letter</tspan>
-										<tspan x={circleX} y={lessM.h - 5} className="circle-label">Words</tspan>
-									</text>
-									<text>
-										<tspan x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
-									</text>
-								</React.Fragment>
-							)
+      const resized = newWidth && alreadyCalcdWidthOnce;
+
+      if (resized || firstCalc) {
+        newDimsLessMargins = makeDimsLessMargins(height, width, m);
+        const wDivision = wordsByLength.length + 0.5;
+        const maxCircleHeightByWidth = newDimsLessMargins.w / wDivision * 0.9;
+        const maxCircleHeight = Math.min(maxCircleHeightByWidth, (newDimsLessMargins.h * 0.45));
+        updateFromResize(newDimsLessMargins, maxCircleHeight);
+      }
+    }
+  }, [ref, height, width, wordsByLength, selectedAreaArr]);
+
+  // sanity checking wordsByLength props
+  if (!(wordsByLength.length > 0)) {
+    return <p style={{ color: 'gray' }}>Loading Circle Data...</p>;
+  }
+
+  const maxO = a.max(wordsByLength, (d) => d.occurances);
+
+  const rScale = s.scaleLinear()
+    .domain([0, maxO])
+    .range(circleRadiusRange);
+
+  const withRadius = wordsByLength.map((c, idx) => {
+    const scaledR = rScale(c.occurances);
+    c.scaledR = scaledR;
+    c.scaledD = scaledR * 2;
+    c.thisXWithBuffer = buffer + scaledR;
+    c.prevX = idx === 0 ? 0 : wordsByLength[idx - 1].thisX;
+    c.thisX = c.prevX + c.thisXWithBuffer;
+    return c;
+  });
+
+  return (
+    <div id="circlesBox-forUI" ref={ref}>
+      <svg id="circle-svg" width={width} height={height}>
+        <g transform={`translate(${m.l}, ${m.t})`}>
+          {lessM && lessM.h && circleRadiusRange !== null
+						&& withRadius.map((c, idx) => {
+						  const circleX = c.thisX + c.prevX;
+						  const circleY = lessM.h * 0.45;
+						  return (
+  <g
+  key={`${c.size}-${idx}`}
+  onClick={() => {
+										  if (wordLength === c.size) {
+										    textAreaDispatch({ type: 'WORD_LENGTH', payload: null });
+										  } else {
+										    textAreaDispatch({ type: 'WORD_LENGTH', payload: c.size });
+										  }
+						      }}
+						    >
+  <defs>
+  <filter id="glow">
+  <feGaussianBlur className="blur" stdDeviation="2.5" result="coloredBlur" />
+  <feMerge>
+  <feMergeNode in="coloredBlur" />
+  <feMergeNode in="SourceGraphic" />
+						          </feMerge>
+						        </filter>
+						      </defs>
+  <circle
+  className="word-circle"
+  r={rScale(c.occurances)}
+  stroke={wordLength == c.size ? 'rgb(125,125,0)' : hoveredCircle == idx ? 'rgb(85,85,30)' : 'rgb(125,125,125)'}
+  strokeWidth={2}
+  cx={circleX}
+  cy={circleY}
+  fill={wordLength == c.size ? 'rgb(25,25,0)' : 'rgb(25,25,25)'}
+  filter={hoveredCircle == idx ? 'url(#glow)' : null}
+  onMouseOver={() => { setHoveredCircle(idx); }}
+  onMouseOut={() => { setHoveredCircle(null); }}
+						      />
+  <text pointerEvents="none">
+  <tspan pointerEvents="none" x={circleX} y={lessM.h - 15} className="circle-label">
+  {c.size}
+  -Letter
+						        </tspan>
+  <tspan pointerEvents="none" x={circleX} y={lessM.h} className="circle-label">Words</tspan>
+						      </text>
+  <text pointerEvents="none">
+  <tspan pointerEvents="none" x={circleX} y={circleY} className="circle-label count">{c.occurances}</tspan>
+						      </text>
+						    </g>
+						  );
 						})}
-				</g>
-			</svg>
-		</div>
-	)
-}
+        </g>
+      </svg>
+    </div>
+  );
+};
 
 export default Circles;
