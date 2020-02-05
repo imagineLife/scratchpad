@@ -10,6 +10,7 @@ import TextDisplay from '../../components/TextDisplay';
 import AreaBox from '../../components/Area';
 import Circles from '../../components/Circles/ContextWrapper';
 import ThemeBox from '../../components/ThemeBox';
+import ImageBox from '../../components/ImageBox';
 
 const moved = () => console.log('moved');
 
@@ -74,15 +75,7 @@ const Together = () => {
 
         <div className="flex-row">
           <ThemeBox />
-          <div id="image-box">
-            <img alt="speakers face" className="face-image" src={trumpImg} />
-            <h2 className="section-text image-sub">
-              The President
-              <br />
-              {' '}
-              Addresses The Nation
-            </h2>
-          </div>
+          <ImageBox />
         </div>
 
         <div id="words-by-length-box">
