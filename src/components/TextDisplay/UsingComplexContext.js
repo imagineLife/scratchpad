@@ -24,8 +24,8 @@ const TextDisplay = () => {
   } = useContext(TextAreaContext);
 
   const { selectedWord } = useContext(WordListContext);
-  const [closingSentenceTag] = useState('</i>');
-  const [openingSentenceTag] = useState('<i class="theme-sentence">');
+  const [closingSentenceTag] = useState('</span>');
+  const [openingSentenceTag] = useState('<span class="theme-sentence">');
 
   if (!displayText) {
     return (<p>Loading Text Display...</p>);
@@ -34,60 +34,19 @@ const TextDisplay = () => {
   // if no selected word && no
   let resText = displayText;
 
-  /*
-    apply SELECTED WORD
-  */
-  if (selectedWord) {
-    resText = getQueriedWord(displayText, selectedWord, 'selected-text');
-  }
-
-  /*
-    apply WORD-LENGTH
-  */
-  if (wordLength) {
-    resText = getWordLength(resText, wordLength, 'word-length');
-  }
 
   /*
     calculate text-segment in-view
   */
   const inViewSentences = sentences.filter((s, i) => i >= selectedAreaArr[0] && i <= selectedAreaArr[1]);
 
-  // "Responsive" UI column divisions
-  let columnCount = Math.ceil(inViewSentences.length / 15);
-  columnCount = Math.min(columnCount, 4);
-
-  const columnStyle = {
-    columns: columnCount, // 10-sentence-columns,
-    overflowX: 'scroll',
-    columnRuleStyle: 'solid',
-    height: '450px',
-  };
-
-  /*
-    CALCULATE THEME data...
-  */
-
-
-  /*
-    from selected-theme to theme-sentence-underlined
-  */
-
-  // HELP FROM JACK
-  // PLACEHOLDER, MOVE THIS ELSEWHERE
-  const themeMappedObject = { };
-  themesData && themesData.forEach((t, idx) => {
-    // loop through the nested array element
-    t.forEach((nestedThemeWord) => {
-      themeMappedObject[nestedThemeWord] = themeMappedObject[nestedThemeWord]
-        ? [...themeMappedObject[nestedThemeWord], idx]
-        : [idx];
-    });
-  });
-
   /*
     Sentences + Themes
     Calulating, getting, && applying themes to sentences
+    - backwards Loop thru selected-sentences
+    - apply theme attrs
+      -... ending tag
+      -... beginning tag
   */
 
   const absoluteSentenceIndexesThatIncludeSelectedTheme = [];
@@ -102,9 +61,6 @@ const TextDisplay = () => {
     }
   }
 
-  /*
-    BACKWARDS Loop thru selected-sentences WITH matching themes...
-  */
   for (let i = absoluteSentenceIndexesThatIncludeSelectedTheme.length - 1; i >= 0; i--) {
     // @ each sentence, do some magic
     const currentSentenceTextWithTheme = inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[i].relativeI].text;
@@ -120,6 +76,48 @@ const TextDisplay = () => {
     resText = `${splitAtSpanBeginning[0]}${openingSentenceTag}${splitAtSpanBeginning[1]}`;
   }
 
+  /*
+    apply SELECTED WORD
+  */
+  if (selectedWord) {
+    resText = getQueriedWord(resText, selectedWord, 'selected-text');
+  }
+
+  /*
+    apply WORD-LENGTH
+  */
+  if (wordLength) {
+    resText = getWordLength(resText, wordLength, 'word-length');
+  }
+
+  // "Responsive" UI column divisions
+  let columnCount = Math.ceil(inViewSentences.length / 15);
+  columnCount = Math.min(columnCount, 4);
+
+  const columnStyle = {
+    columns: columnCount, // 10-sentence-columns,
+    overflowX: 'scroll',
+    columnRuleStyle: 'solid',
+    height: '450px',
+  };
+
+  /*
+    CALCULATE a theme data object...
+    {
+      ThemeWord: [2,3,4] //sentence numbers,
+      ThemeWordTwo: [2,4,5] //sentence numbers
+    }
+    ...MOVE THIS ELSEWHERE?
+  */
+  const themeMappedObject = { };
+  themesData && themesData.forEach((t, idx) => {
+    // loop through the nested array element
+    t.forEach((nestedThemeWord) => {
+      themeMappedObject[nestedThemeWord] = themeMappedObject[nestedThemeWord]
+        ? [...themeMappedObject[nestedThemeWord], idx]
+        : [idx];
+    });
+  });
 
   return <p className="display-text" style={columnStyle} dangerouslySetInnerHTML={{ __html: resText }} />;
 };
