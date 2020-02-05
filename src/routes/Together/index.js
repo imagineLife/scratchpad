@@ -4,16 +4,16 @@ import useDimensions from '../../lib/useDims';
 import trumpImg from '../../../data/trump.jpg';
 
 // Components
-import SelectableArea from '../../components/SelectableArea/dimsFromParent';
-import WordListPicker from '../../components/MultiWordPicker/UsingContextForUI';
-import TextDisplay from '../../components/TextDisplay/UsingComplexContext';
+import SelectableArea from '../../components/SelectableArea';
+import WordListPicker from '../../components/MultiWordPicker';
+import TextDisplay from '../../components/TextDisplay';
 import AreaBox from '../../components/Area';
-import Circles from '../../components/Circles/ContextWrapperForUI';
+import Circles from '../../components/Circles/ContextWrapper';
 import ThemeBox from '../../components/ThemeBox';
 
 const moved = () => console.log('moved');
 
-const FlexGrid = () => {
+const Together = () => {
   const [areaBoxRef, { width: areaBoxWidth, height: areaBoxHeight }] = useDimensions();
   const [focusAreaRef, { width: focusAreaW, height: focusAreaH }] = useDimensions();
 
@@ -25,7 +25,11 @@ const FlexGrid = () => {
           <div className="title-text-wrapper">
             <h1 className="title">The Slice-N-Dice Times</h1>
             <div className="corner-box">
-              <p>A Play on Newspapers, Text-Analysis, & Interaction. Some "Top" portions of this are interactive. The bottom shows the text of a speech, resposive to your interactions.</p>
+              <p>
+                A Play on Newspapers, Text-Analysis, & Interaction.
+                Some "Top" portions of this are interactive.
+                The bottom shows the text of a speech, resposive to your interactions.
+              </p>
             </div>
           </div>
           <ul className="title-data">
@@ -37,10 +41,7 @@ const FlexGrid = () => {
 
         <div id="area-box" ref={areaBoxRef}>
           <SelectableArea
-            dims={{
-            	width: areaBoxWidth,
-            	height: areaBoxHeight,
-            }}
+            dims={{ width: areaBoxWidth, height: areaBoxHeight }}
             onMove={moved}
           />
         </div>
@@ -54,19 +55,11 @@ const FlexGrid = () => {
             <span className="interaction-note">HOVER</span>
           </p>
           <div id="focus-area-hover" ref={focusAreaRef}>
-            <AreaBox dims={{ width: focusAreaW, height: focusAreaH * 0.8 }} setSentenceNumber />
+            <AreaBox dims={{ width: focusAreaW, height: focusAreaH * 0.8 }} />
           </div>
         </div>
 
-        <div id="words-of-interest-box">
-          <h2 className="section-text">Words Of Interest</h2>
-          <p className="explanatory-text">
-            Here are some various types of words that were spoken.
-            The word lists are toggle-able & the words are selectable.
-            <span className="interaction-note">SELECT.SELECT</span>
-          </p>
-          <WordListPicker />
-        </div>
+        <WordListPicker />
       </section>
 
       <section id="right-side">
@@ -82,7 +75,7 @@ const FlexGrid = () => {
         <div className="flex-row">
           <ThemeBox />
           <div id="image-box">
-            <img className="face-image" src={trumpImg} />
+            <img alt="speakers face" className="face-image" src={trumpImg} />
             <h2 className="section-text image-sub">
               The President
               <br />
@@ -115,4 +108,4 @@ const FlexGrid = () => {
     </main>
   );
 };
-export default FlexGrid;
+export default Together;
