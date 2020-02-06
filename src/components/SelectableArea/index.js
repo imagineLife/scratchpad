@@ -20,17 +20,13 @@ const SelectableArea = ({ onMove, dims }) => {
     setAreaData,
   } = React.useContext(TextAreaContext);
 
-  const [brushFn, setBrushFn] = React.useState(null);
   const [hoverArr, setHoverArr] = React.useState([0, 175]);
-  const [brushBoxG, setBrushBoxG] = React.useState(null);
-  const [brushed, setBrushed] = React.useState(false);
-  const [set, setSet] = React.useState(false);
   const brushRef = React.useRef();
 
   /*
 		called 'onBrush'
 	*/
-  function brushedFn() {
+  const brushedFn = () => {
     const selectedPixels = d3Select.event.selection;
     const scaledBegin = Math.floor(translateScale(selectedPixels[0]));
     const scaledEnd = Math.floor(translateScale(selectedPixels[1]));
@@ -40,7 +36,7 @@ const SelectableArea = ({ onMove, dims }) => {
     textAreaDispatch({ type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', payload: [scaledBegin, scaledEnd] });
 
     onMove([scaledBegin, scaledEnd]);
-  }
+  };
 
   /*
 		Set Area Context data 'initially',
@@ -78,7 +74,7 @@ const SelectableArea = ({ onMove, dims }) => {
         thisBrushFN.move(thisBrushBox, hoverArr);
       }, 10);
     }
-  }, [brushRef, areaData]);
+  }, [brushRef, areaData, dims]);
 
   // ////////////////////////// /////
   // // default loading return /////
