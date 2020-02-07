@@ -77,17 +77,18 @@ const TextDisplay = () => {
   }
 
   /*
+    apply WORD-LENGTH
+    ORDER of js is important, word-length is affected by <span>word-length</span>
+  */
+  if (wordLength) {
+    resText = getWordLength(resText, wordLength, 'word-length');
+  }
+
+  /*
     apply SELECTED WORD
   */
   if (selectedWord) {
     resText = getQueriedWord(resText, selectedWord, 'selected-text');
-  }
-
-  /*
-    apply WORD-LENGTH
-  */
-  if (wordLength) {
-    resText = getWordLength(resText, wordLength, 'word-length');
   }
 
   // "Responsive" UI column divisions
