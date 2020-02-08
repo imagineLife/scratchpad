@@ -11,7 +11,9 @@ const getQueriedWord = (text, hlText, classToUse) => {
   // update the text body
   const resText = text
     .replace(removeRegex, '$1')
-    .replace(newStyleRegex, `<em class="${classToUse}">$1</em>`);
+    // .replace(newStyleRegex, `<em class="${classToUse}">$1</em>`);
+    .replace(newStyleRegex, `~|${classToUse}~xz $1 zx~/${classToUse}|~`);
+
 
   return resText;
 };
