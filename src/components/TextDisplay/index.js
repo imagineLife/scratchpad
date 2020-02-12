@@ -91,6 +91,25 @@ const TextDisplay = () => {
     resText = getQueriedWord(resText, selectedWord, 'selected-text');
   }
 
+
+  // apply styles
+  // - update resText
+  // replace ~x content with html className
+
+  // SNIPPETS
+  // remove INTERNAL chars
+  resText = resText.replace(/~xz\s~\|/g, ' ')
+
+  // add opening html tag
+    .replace(/~\|/g, '<i class="')
+
+  // closing-opening, good luck
+    .replace(/~xz./g, '"> ')
+
+  // closing html tag
+    .replace(/.zx[\w-~\/]*\|~/g, ' </i>');
+
+
   // "Responsive" UI column divisions
   let columnCount = Math.ceil(inViewSentences.length / 15);
   columnCount = Math.min(columnCount, 4);
