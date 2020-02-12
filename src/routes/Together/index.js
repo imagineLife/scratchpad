@@ -1,14 +1,13 @@
 import React from 'react';
 import './index.css';
 import useDimensions from '../../lib/useDims';
-import trumpImg from '../../../data/trump.jpg';
 
 // Components
 import SelectableArea from '../../components/SelectableArea';
 import WordListPicker from '../../components/MultiWordPicker';
 import TextDisplay from '../../components/TextDisplay';
 import AreaBox from '../../components/Area';
-import Circles from '../../components/Circles/ContextWrapper';
+import Circles from '../../components/Circles/State/ContextWrapper';
 import ThemeBox from '../../components/ThemeBox';
 import ImageBox from '../../components/ImageBox';
 
