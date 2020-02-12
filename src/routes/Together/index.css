@@ -146,9 +146,6 @@ li.sub-title:nth-child(even){
 }
 
 .title-text-wrapper > h1{
-	/*width: 100%;*/
-  /*width: calc(100% - 291px);*/
-	/*margin: 10px 0;*/
   width: calc(100% - 291px);
   margin: 10px 0;
   padding-left: 210px;
@@ -328,4 +325,39 @@ footer{
   font-family: prata;
 }
 
-/*@media only screen and (min-width: 120)*/
+
+
+@media only screen and (max-width: 800px){
+  .title-text-wrapper > h1{
+    font-size: 24px;
+    width: auto;
+    padding-left: 30px;
+  }
+
+  .corner-box{
+    width: 375px;
+    position: absolute;
+    margin: 0;
+  }
+
+  li.sub-title{
+    font-size: .5em;
+    margin: 0 20px;
+  }
+
+  .image-subtext, .section-text{
+    font-size: 1.25em;
+  }
+
+  #left-side, #right-side{
+    margin-top: 0;
+  }
+
+  .flex-row{
+    margin-top: 10px;
+  }
+
+  #flex-grid-layout #image-box{
+    padding-top: 5px;
+  }
+}
