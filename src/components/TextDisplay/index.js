@@ -15,6 +15,7 @@ function splitStr(str, idx) {
 
 const TextDisplay = () => {
   const {
+    curColor,
     displayText,
     selectedAreaArr,
     sentences,
@@ -25,7 +26,6 @@ const TextDisplay = () => {
 
   const { selectedWord } = useContext(WordListContext);
   const [closingSentenceTag] = useState('</span>');
-  const [openingSentenceTag] = useState('<span class="theme-sentence">');
 
   if (!displayText) {
     return (<p>Loading Text Display...</p>);
@@ -62,6 +62,8 @@ const TextDisplay = () => {
   }
 
   for (let i = absoluteSentenceIndexesThatIncludeSelectedTheme.length - 1; i >= 0; i--) {
+    const openingSentenceTag = `<span class="theme-sentence" style="text-decoration-color: ${curColor}">`;
+
     // @ each sentence, do some magic
     const currentSentenceTextWithTheme = inViewSentences[absoluteSentenceIndexesThatIncludeSelectedTheme[i].relativeI].text;
     const openingTagIndex = resText.indexOf(currentSentenceTextWithTheme);
