@@ -41,7 +41,7 @@ const TextDisplay = () => {
   const inViewSentences = sentences.filter((s, i) => i >= selectedAreaArr[0] && i <= selectedAreaArr[1]);
 
   /*
-    Sentences + Themes
+    Theme calculations
     Calulating, getting, && applying themes to sentences
     - backwards Loop thru selected-sentences
     - apply theme attrs
@@ -56,7 +56,13 @@ const TextDisplay = () => {
     for (let i = selectedAreaArr[0]; i <= selectedAreaArr[1]; i++) {
       // check if the current sentence HAS the selected theme
       if (themesData[i].includes(theme)) {
-        absoluteSentenceIndexesThatIncludeSelectedTheme.push({ i, relativeI: i - selectedAreaArr[0], themes: themesData[i] });
+        absoluteSentenceIndexesThatIncludeSelectedTheme.push(
+          {
+            i,
+            relativeI: i - selectedAreaArr[0],
+            themes: themesData[i],
+          },
+        );
       }
     }
   }
