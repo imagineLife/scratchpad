@@ -35,10 +35,16 @@
 .word-list-option, .focus-word-option{
 	list-style-type: none;
 	cursor: pointer;
+	transition: all 250ms;
 }
 
 .word-list-option:hover, .focus-word-option:hover{
 	text-decoration: underline;
+}
+
+.word-list-option.selected{
+	text-shadow: rgba(0,0,0,.5) 0 8px 3px;
+	list-style-type: disc;
 }
 
 .selected-focus-word{
