@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+  createContext,
+  useReducer,
+  useContext,
+} from 'react';
 import {
   getWordsByCount,
   getLongestThirty,
@@ -9,7 +15,7 @@ import {
 } from '../../lib/stats';
 import { TextAreaContext } from '../TextArea';
 
-const WordListContext = React.createContext();
+const WordListContext = createContext();
 const { Provider, Consumer } = WordListContext;
 
 const CommonWordsProvider = (props) => {
@@ -18,6 +24,18 @@ const CommonWordsProvider = (props) => {
  		'Longest Words': [],
  		'Action Words': [],
  	};
+
+  const sortByWordAlpha = (a, b) => {
+    if (typeof a === 'string') {
+      if (a < b) { return -1; }
+      if (a > b) { return 1; }
+      return 0;
+    }
+
+    if (a.word < b.word) { return -1; }
+    if (a.word > b.word) { return 1; }
+    return 0;
+  };
 
  	const reducer = (state, action) => {
     let resText;
@@ -50,14 +68,14 @@ const CommonWordsProvider = (props) => {
   };
 
 
-  const [wordLists, setWordLists] = React.useReducer(reducer, initialState);
+  const [wordLists, setWordLists] = useReducer(reducer, initialState);
 
-  const txtVals = React.useContext(TextAreaContext);
+  const { displayText } = useContext(TextAreaContext);
 
-  const [selectedWord, setSelectedWord] = React.useState(null);
-  const [commonWords, setCommonWords] = React.useState([]);
-  const [longestNine, setLongestNine] = React.useState([]);
-  const [wordListFocus, selectWordList] = React.useState(null);
+  const [selectedWord, setSelectedWord] = useState(null);
+  const [commonWords, setCommonWords] = useState([]);
+  const [longestNine, setLongestNine] = useState([]);
+  const [wordListFocus, selectWordList] = useState(null);
   const makeCommonWords = (sentencesString) => {
     const arrayOfWords = convertStrToWordArr(sentencesString);
     setCommonWords(getWordsByCount(arrayOfWords).slice(0, 10));
@@ -77,6 +95,21 @@ const CommonWordsProvider = (props) => {
     });
   };
 
+  // MAKE common words after display-text gets added to context
+  useEffect(() => {
+    if (displayText) {
+      makeCommonWords(displayText);
+    }
+  }, [displayText]);
+
+  // AUTO-SELECT a word-list 'onLoad'
+  useEffect(() => {
+    if (displayText && wordLists && !wordListFocus) {
+      const lists = Object.keys(wordLists);
+      selectWordList(lists[0]);
+    }
+  }, [displayText, wordListFocus, wordLists]);
+
   return (
     <Provider value={{
       selectedWord,
@@ -86,6 +119,7 @@ const CommonWordsProvider = (props) => {
       longestNine,
       wordLists,
       selectWordList,
+      sortByWordAlpha,
       wordListFocus,
     }}
     >
