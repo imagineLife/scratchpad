@@ -69,6 +69,7 @@ const CommonWordsProvider = (props) => {
 
 
   const [wordLists, setWordLists] = useReducer(reducer, initialState);
+  const [wordListNames, setWordListNames] = useState([]);
 
   const { displayText } = useContext(TextAreaContext);
 
@@ -95,6 +96,11 @@ const CommonWordsProvider = (props) => {
     });
   };
 
+  // set list of word-list names (common words, longest words, etc...)
+  useEffect(() => {
+    setWordListNames(Object.keys(wordLists));
+  }, [wordLists]);
+
   // MAKE common words after display-text gets added to context
   useEffect(() => {
     if (displayText) {
@@ -110,17 +116,19 @@ const CommonWordsProvider = (props) => {
     }
   }, [displayText, wordListFocus, wordLists]);
 
+  // last-minute list-sorting
   return (
     <Provider value={{
-      selectedWord,
-      setSelectedWord,
-      makeCommonWords,
       commonWords,
       longestNine,
-      wordLists,
+      makeCommonWords,
       selectWordList,
+      selectedWord,
+      setSelectedWord,
       sortByWordAlpha,
+      wordLists,
       wordListFocus,
+      wordListNames,
     }}
     >
       {props.children}
