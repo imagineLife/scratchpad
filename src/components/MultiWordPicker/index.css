@@ -42,14 +42,16 @@
 	text-decoration: underline;
 }
 
+
+.focus-word-option.selected{
+	text-transform: uppercase;
+}
+
 .word-list-option.selected{
 	text-shadow: rgba(0,0,0,.5) 0 8px 3px;
 	list-style-type: disc;
 }
 
-.selected-focus-word{
-	text-transform: uppercase;
-}
 
 section#word-list{
 	border-right: var(--border);
