@@ -43,6 +43,10 @@
 }
 
 
+.focus-word-option{
+	padding-left: 5px;
+}
+
 .focus-word-option.selected{
 	text-transform: uppercase;
 }
