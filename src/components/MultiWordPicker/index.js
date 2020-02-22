@@ -61,7 +61,7 @@ const CommonWords = () => {
   					    	return (
                   <li
       key={`${thisWord}-${idx}`}
-      className={`focus-word-option ${selectedWord && selectedWord === thisWord ? ' selected-focus-word' : ''}`}
+      className={`focus-word-option ${selectedWord && selectedWord === thisWord && ' selected'}`}
       onClick={() => {
   						          if (selectedWord === thisWord) {
   						            setSelectedWord(null);
