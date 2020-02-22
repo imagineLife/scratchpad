@@ -11,21 +11,9 @@ const CommonWords = () => {
     selectWordList,
     setSelectedWord,
     selectedWord,
+    sortByWordAlpha,
     wordListFocus,
   } = React.useContext(WordListContext);
-
-  const sortByWordAlpha = (a, b) => {
-    if (a.word < b.word) { return -1; }
-    if (a.word > b.word) { return 1; }
-    return 0;
-  };
-
-  // MAKE common words after display-text gets added to context
-  React.useEffect(() => {
-    if (displayText) {
-      makeCommonWords(displayText);
-    }
-  }, [displayText]);
 
   // AUTO-SELECT a word-list 'onLoad'
   React.useEffect(() => {
