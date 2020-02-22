@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import { TextAreaContext } from '../../Contexts/TextArea';
 import { WordListContext } from '../../Contexts/CommonWords';
+import ListItem from '../ListItem';
 
 const CommonWords = () => {
   const { displayText } = React.useContext(TextAreaContext);
@@ -38,15 +39,15 @@ const CommonWords = () => {
           <h3 className="word-list-title">Word Lists</h3>
           <ul id="word-lists">
             {wordListNames && wordListNames.map((l, idx) => (
-              <li
+              <ListItem
                 key={`${l}-${idx}`}
-                className={`word-list-option${wordListFocus === l && ' selected'}`}
+                className="word-list-option"
                 onClick={() => {
                   selectWordList((l));
                 }}
-              >
-                {l}
-              </li>
+                selectedCondition={wordListFocus === l}
+                txt={l}
+              />
             ))}
           </ul>
         </section>
@@ -56,22 +57,22 @@ const CommonWords = () => {
           <h3 className="word-list-title">List Results</h3>
           {wordListFocus && (
             <ul id="focus-word-list">
-              {sortedWordList.map((l, idx) => {
+              {sortedWordList && sortedWordList.map((l, idx) => {
               	const thisWord = wordListFocus === 'Common Words' ? l.word : l;
   					    	return (
-                  <li
-      key={`${thisWord}-${idx}`}
-      className={`focus-word-option ${selectedWord && selectedWord === thisWord && ' selected'}`}
-      onClick={() => {
-  						          if (selectedWord === thisWord) {
-  						            setSelectedWord(null);
-  						          } else {
-  						            setSelectedWord(thisWord);
-  						          }
-  						        }}
-    > 
-      {thisWord}
-    </li>
+    <ListItem
+                    key={`list-res-${l}-${idx}`}
+                    className="focus-word-option"
+                    selectedCondition={selectedWord === thisWord}
+                    onClick={() => {
+                      if (selectedWord === thisWord) {
+                        setSelectedWord(null);
+                      } else {
+                        setSelectedWord(thisWord);
+                      }
+                    }}
+                    txt={thisWord}
+                  />
   						    );
   					    })}
             </ul>
