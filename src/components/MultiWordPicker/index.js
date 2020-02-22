@@ -14,6 +14,12 @@ const CommonWords = () => {
     wordListFocus,
   } = React.useContext(WordListContext);
 
+  const sortByWordAlpha = (a, b) => {
+    if (a.word < b.word) { return -1; }
+    if (a.word > b.word) { return 1; }
+    return 0;
+  };
+
   // MAKE common words after display-text gets added to context
   React.useEffect(() => {
     if (displayText) {
@@ -34,6 +40,8 @@ const CommonWords = () => {
   }
 
   const lists = Object.keys(wordLists);
+  const selectedWordList = wordLists[wordListFocus] || [];
+  const sortedWordList = selectedWordList.sort(sortByWordAlpha);
 
   return (
     <div id="words-of-interest-box">
@@ -67,7 +75,7 @@ const CommonWords = () => {
           <h3 className="word-list-title">List Results</h3>
           {wordListFocus && (
             <ul id="focus-word-list">
-              {wordLists[wordListFocus].map((l, idx) => {
+              {sortedWordList.map((l, idx) => {
               	const thisWord = wordListFocus === 'Common Words' ? l.word : l;
   					    	return (
                   <li
