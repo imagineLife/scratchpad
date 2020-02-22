@@ -124,7 +124,7 @@ const TextDisplay = () => {
 
   const columnStyle = {
     columns: columnCount, // 10-sentence-columns,
-    overflowX: 'scroll',
+    overflowX: 'auto',
     columnRuleStyle: 'solid',
     height: '450px',
   };
