@@ -8,6 +8,7 @@ const CommonWords = () => {
   const {
     makeCommonWords,
     wordLists,
+    wordListNames,
     selectWordList,
     setSelectedWord,
     selectedWord,
@@ -15,20 +16,12 @@ const CommonWords = () => {
     wordListFocus,
   } = React.useContext(WordListContext);
 
-  // AUTO-SELECT a word-list 'onLoad'
-  React.useEffect(() => {
-    if (displayText && wordLists && !wordListFocus) {
-      const lists = Object.keys(wordLists);
-      selectWordList(lists[0]);
-    }
-  }, [displayText, wordListFocus, wordLists]);
-
   if (!wordLists) {
     return <p>Missing Word Lists</p>;
   }
 
-  const lists = Object.keys(wordLists);
   const selectedWordList = wordLists[wordListFocus] || [];
+
   const sortedWordList = selectedWordList.sort(sortByWordAlpha);
 
   return (
@@ -44,7 +37,7 @@ const CommonWords = () => {
         <section id="word-list">
           <h3 className="word-list-title">Word Lists</h3>
           <ul id="word-lists">
-            {lists.map((l, idx) => (
+            {wordListNames && wordListNames.map((l, idx) => (
               <li
                 key={`${l}-${idx}`}
                 className={`word-list-option${wordListFocus === l ? ' selected' : ''}`}
