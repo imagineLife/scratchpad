@@ -40,7 +40,7 @@ const CommonWords = () => {
             {wordListNames && wordListNames.map((l, idx) => (
               <li
                 key={`${l}-${idx}`}
-                className={`word-list-option${wordListFocus === l :: ' selected'}`}
+                className={`word-list-option${wordListFocus === l && ' selected'}`}
                 onClick={() => {
                   selectWordList((l));
                 }}
