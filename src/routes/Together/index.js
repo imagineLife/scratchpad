@@ -55,7 +55,10 @@ const Together = () => {
             <span className="interaction-note">HOVER</span>
           </p>
           <div id="focus-area-hover" ref={focusAreaRef}>
-            <AreaBox dims={{ width: focusAreaW, height: focusAreaH * 0.8 }} />
+            <AreaBox
+              dims={{ width: focusAreaW, height: focusAreaH * 0.8 }}
+              hoverLine
+            />
           </div>
         </div>
 
