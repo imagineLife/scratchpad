@@ -2,13 +2,22 @@ import React, { useState, useContext } from 'react';
 import './index.css';
 import * as scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
-import * as arr from 'd3-array';
+// import * as arr from 'd3-array';
 import { TextAreaContext } from '../../Contexts/TextArea';
 
 const Area = ({ dims, hoverLine }) => {
-  const { sentences, selectedAreaArr, maxWordsPerSentence } = useContext(TextAreaContext);
+  const {
+    sentences,
+    selectedAreaArr,
+    maxWordsPerSentence,
+  } = useContext(TextAreaContext);
   const [curSentence, setCurSentence] = useState(null);
   const [curSentenceObj, setCurSentenceObj] = useState(null);
+  const [sentenceNumber, setSentenceNumber] = useState(null);
+  const [xOffset, setXOffset] = useState(null);
+  const [showLine, setShowLine] = useState(null);
+  const [offestSentenceNumber, setOffsetSentenceNumber] = useState(null);
+
   // sanity checking
   if (!sentences || !selectedAreaArr || !dims) {
     return <p>loading area...</p>;
@@ -48,45 +57,53 @@ const Area = ({ dims, hoverLine }) => {
 
     const xPos = d.pageX - areaSVGXOffset;
 
-    if (xPos > xScale.range()[0]) {
-      const sentenceNumber = Math.ceil(xScale.invert(xPos)) + selectedAreaArr[0];
-
-      if (sentenceNumber > -1) {
-      	setCurSentenceObj(sentences[sentenceNumber - 1]);
-        setCurSentence(sentences[sentenceNumber - 1].text);
+    if (xPos >= (xScale.range()[0] - 5)) {
+      const thisSentence = Math.ceil(xScale.invert(xPos)) + selectedAreaArr[0];
+      const sentenceWOffset = thisSentence - selectedAreaArr[0];
+      if (thisSentence > -1) {
+      	setCurSentenceObj(sentences[thisSentence]);
+        setCurSentence(sentences[thisSentence].text);
+        setSentenceNumber(thisSentence);
+        setOffsetSentenceNumber(sentenceWOffset);
+        setShowLine(true);
+        setXOffset(areaSVGXOffset);
       }
     }
   };
 
-  const stoppedMoving = () => setCurSentence(null);
+  const stoppedMoving = () => {
+  	setCurSentence(null);
+  	setSentenceNumber(null);
+    setOffsetSentenceNumber(null);
+  	setShowLine(false);
+  };
 
   /*
     Hover-line
   */
+  const scaledX = xScale(offestSentenceNumber);
+
   const optHoverLine = !hoverLine
-    || sentenceNumber < 0
-    || !sentenceNumber
-    || sentenceNumber > xScale.domain()[1]
+    || offestSentenceNumber < 0
+    || offestSentenceNumber > xScale.domain()[1]
     || !showLine ? null : (
       <line
         pointerEvents="none"
         strokeWidth="1"
         stroke="rgb(150,150,150)"
         strokeDasharray="5 15"
-        x1={xScale(sentenceNumber) - xOffset}
-        x2={xScale(sentenceNumber) - xOffset}
+        x1={scaledX}
+        x2={scaledX}
         y1={yScale(0)}
-        y2={yScale(Math.max(...remappedData.map((d) => d.y)) * 1.05)}
+        y2={yScale(Math.max(...selectedSentences.map((d) => d.wordCount)) * 1.05)}
       />
     );
-
 
   /*
     Hover-circle
   */
   const hoverCircle = !hoverLine
-    || sentenceNumber < 0
-    || !sentenceNumber
+    || offestSentenceNumber < 0
     || !showLine ? null : (
       <circle
         pointerEvents="none"
@@ -94,15 +111,11 @@ const Area = ({ dims, hoverLine }) => {
         fill="rgba(255,255,255,.3)"
         stroke="white"
         strokeWidth="1"
-        strokeDasharray="2 3"
-        cx={xScale(sentenceNumber) - xOffset}
-        cy={yScale(remappedData[sentenceNumber - 1].y)}
+        strokeDasharray="2 6"
+        cx={scaledX}
+        cy={yScale(selectedSentences[offestSentenceNumber].wordCount)}
       />
     );
-
-  console.log('curSentenceObj');
-  console.log(curSentenceObj);
-
 
   return (
     <>
@@ -120,11 +133,18 @@ const Area = ({ dims, hoverLine }) => {
             <stop offset="95%" stopColor="rgba(147,147,147,.05)" />
           </linearGradient>
         </defs>
+
         {/* Area Path */}
         <path
           d={pathD}
           fill="rgba(147,147,147,.25)"
         />
+
+        {/* Optional hovered-line */}
+        {optHoverLine}
+
+        {/* Optional hovered-circle */}
+        {hoverCircle}
       </svg>
       <div className="explanation-wrapper">
         <p className="explanatory-text">
