@@ -13,13 +13,24 @@ const Area = () => {
     maxWordsPerSentence,
   } = useContext(TextAreaContext);
 
-  const { dims, hoverLine } = useContext(AreaContext);
-  const [curSentence, setCurSentence] = useState(null);
-  const [curSentenceObj, setCurSentenceObj] = useState(null);
-  const [sentenceNumber, setSentenceNumber] = useState(null);
-  const [xOffset, setXOffset] = useState(null);
-  const [showLine, setShowLine] = useState(null);
-  const [offestSentenceNumber, setOffsetSentenceNumber] = useState(null);
+  const {
+    dims,
+    hoverLine,
+    curSentence,
+    curSentenceObj,
+    moused,
+    offestSentenceNumber,
+    setCurSentence,
+    setCurSentenceObj,
+    sentenceNumber,
+    setSentenceNumber,
+    setXOffset,
+    showLine,
+    setShowLine,
+    setOffsetSentenceNumber,
+    stoppedMoving,
+    xOffset,
+  } = useContext(AreaContext);
 
   // sanity checking
   if (!sentences || !selectedAreaArr || !dims) {
@@ -50,36 +61,6 @@ const Area = () => {
   // .curve(d3Shape.curveCatmullRom)
 
   const pathD = areaFn(selectedSentences);
-
-  // mousedOver && mouseMove
-  const moused = (d) => {
-    const areaSVG = document.getElementsByClassName('area-svg')[0];
-
-    // $FlowSVGBug
-    const areaSVGXOffset = areaSVG.getBoundingClientRect().x;
-
-    const xPos = d.pageX - areaSVGXOffset;
-
-    if (xPos >= (xScale.range()[0] - 5)) {
-      const thisSentence = Math.ceil(xScale.invert(xPos)) + selectedAreaArr[0];
-      const sentenceWOffset = thisSentence - selectedAreaArr[0];
-      if (thisSentence > -1) {
-      	setCurSentenceObj(sentences[thisSentence]);
-        setCurSentence(sentences[thisSentence].text);
-        setSentenceNumber(thisSentence);
-        setOffsetSentenceNumber(sentenceWOffset);
-        setShowLine(true);
-        setXOffset(areaSVGXOffset);
-      }
-    }
-  };
-
-  const stoppedMoving = () => {
-  	setCurSentence(null);
-  	setSentenceNumber(null);
-    setOffsetSentenceNumber(null);
-  	setShowLine(false);
-  };
 
   /*
     Hover-line
@@ -126,9 +107,9 @@ const Area = () => {
         id="area"
         style={dims}
         className="area-svg"
-        onMouseOver={moused}
-        onFocus={moused}
-        onMouseMove={moused}
+        onMouseOver={(d) => moused(d, xScale, selectedAreaArr, sentences)}
+        onFocus={(d) => moused(d, xScale, selectedAreaArr, sentences)}
+        onMouseMove={(d) => moused(d, xScale, selectedAreaArr, sentences)}
         onMouseOut={stoppedMoving}
         onBlur={stoppedMoving}
       >
