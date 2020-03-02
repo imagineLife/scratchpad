@@ -62,6 +62,10 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "<rootDir>/src/enzyme.setup.js"]
+      "<rootDir>/src/enzyme.setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|svg|jpg)$":"<rootDir>/src/__mocks__/styleMock.js"
+    }
   }
 }
