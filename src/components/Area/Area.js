@@ -20,15 +20,15 @@ const Area = () => {
     curSentenceObj,
     moused,
     offestSentenceNumber,
+    showLine,
+    stoppedMoving,
     setCurSentence,
     setCurSentenceObj,
     sentenceNumber,
     setSentenceNumber,
     setXOffset,
-    showLine,
     setShowLine,
     setOffsetSentenceNumber,
-    stoppedMoving,
     xOffset,
   } = useContext(AreaContext);
 
@@ -107,9 +107,9 @@ const Area = () => {
         id="area"
         style={dims}
         className="area-svg"
-        onMouseOver={(d) => moused(d, xScale, selectedAreaArr, sentences)}
-        onFocus={(d) => moused(d, xScale, selectedAreaArr, sentences)}
-        onMouseMove={(d) => moused(d, xScale, selectedAreaArr, sentences)}
+        onMouseOver={(d) => moused(d, xScale)}
+        onFocus={(d) => moused(d, xScale)}
+        onMouseMove={(d) => moused(d, xScale)}
         onMouseOut={stoppedMoving}
         onBlur={stoppedMoving}
       >
