@@ -1,10 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
+import { TextAreaContext } from '../../../Contexts/TextArea';
 
 const AreaContext = createContext();
 
 const { Provider } = AreaContext;
 
 const AreaProvider = ({ children, dims, hoverLine }) => {
+  const { selectedAreaArr, sentences } = useContext(TextAreaContext);
+
   const [curSentence, setCurSentence] = useState(null);
   const [curSentenceObj, setCurSentenceObj] = useState(null);
   const [sentenceNumber, setSentenceNumber] = useState(null);
@@ -20,7 +23,7 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
   };
 
   // mousedOver && mouseMove
-  const moused = (d, xScale, selectedAreaArr, sentences) => {
+  const moused = (d, xScale) => {
     const areaSVG = document.getElementsByClassName('area-svg')[0];
 
     // $FlowSVGBug
