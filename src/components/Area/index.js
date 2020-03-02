@@ -118,14 +118,16 @@ const Area = ({ dims, hoverLine }) => {
     );
 
   return (
-    <>
+    <Fragment>
       <svg
         id="area"
         style={dims}
         className="area-svg"
         onMouseOver={moused}
+        onFocus={moused}
         onMouseMove={moused}
         onMouseOut={stoppedMoving}
+        onBlur={stoppedMoving}
       >
         <defs>
           <linearGradient id="areaGradient" gradientTransform="rotate(90)">
@@ -154,7 +156,7 @@ const Area = ({ dims, hoverLine }) => {
           {curSentence && curSentence}
         </p>
       </div>
-    </>
+    </Fragment>
   );
 };
 
