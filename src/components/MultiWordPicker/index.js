@@ -5,7 +5,6 @@ import { WordListContext } from '../../Contexts/CommonWords';
 import ListItem from '../ListItem';
 
 const CommonWords = () => {
-  const { displayText } = React.useContext(TextAreaContext);
   const {
     makeCommonWords,
     wordLists,
