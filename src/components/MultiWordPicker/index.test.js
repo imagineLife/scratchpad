@@ -56,10 +56,18 @@ describe('<MultiWordPicker />', () => {
       </WordListContext.Provider>,
     );
 
-    it('builds word-lists from "wordListNames" prop', () => {
-    	const wlChoices = thisWrapper.find('#word-lists');
-    	const listItems = wlChoices.find('ListItem');
-    	expect(listItems).toHaveLength(3);
-    });
+  	describe('word-list choices', () => {
+  		it('builds word-lists from "wordListNames" prop', () => {
+	    	const wlChoices = thisWrapper.find('#word-lists');
+	    	const listItems = wlChoices.find('ListItem');
+	    	expect(listItems).toHaveLength(3);
+	    });
+	    it('auto-selects word-list from wordListFocus prop', () => {
+	    	const wlChoices = thisWrapper.find('#word-lists');
+	    	const listItems = wlChoices.find('ListItem');
+	    	const selectedItem = listItems.find('.word-list-option.selected');
+	    	expect(selectedItem.text()).toBe('Common Words');
+	    });
+  	});
   });
 });
