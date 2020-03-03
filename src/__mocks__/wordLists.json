@@ -1,0 +1,36 @@
+{
+  "Common Words": [
+    {
+      "word": "people",
+      "occurances": 7
+    },
+    {
+      "word": "president",
+      "occurances": 5
+    },
+    {
+      "word": "your",
+      "occurances": 6
+    }
+  ],
+  "Longest Words": [
+    "administration",
+    "establishment",
+    "transferring",
+    "magnificent",
+    "politicians",
+    "celebration",
+    "challenges",
+    "throughout",
+    "transition",
+    "washington"
+  ],
+  "Action Words": [
+    "meaning",
+    "transferring",
+    "giving",
+    "struggling",
+    "starting",
+    "watching"
+  ]
+}
