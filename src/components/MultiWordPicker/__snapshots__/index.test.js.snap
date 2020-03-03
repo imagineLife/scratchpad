@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultiWordPicker /> matches snap 1`] = `
+<CommonWords>
+  <p>
+    Missing Word Lists
+  </p>
+</CommonWords>
+`;
