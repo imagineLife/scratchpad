@@ -47,7 +47,7 @@ describe('<MultiWordPicker />', () => {
   	expect(pTag).toBe('Missing Word Lists');
   });
 
-  describe('handles props', () => {
+  describe('passes props', () => {
   	const thisWrapper = mount(
     <WordListContext.Provider
         value={{ ...theseProps, wordLists: mockWordLists }}
@@ -62,12 +62,43 @@ describe('<MultiWordPicker />', () => {
 	    	const listItems = wlChoices.find('ListItem');
 	    	expect(listItems).toHaveLength(3);
 	    });
+
 	    it('auto-selects word-list from wordListFocus prop', () => {
 	    	const wlChoices = thisWrapper.find('#word-lists');
 	    	const listItems = wlChoices.find('ListItem');
 	    	const selectedItem = listItems.find('.word-list-option.selected');
 	    	expect(selectedItem.text()).toBe('Common Words');
 	    });
+  	});
+
+  	describe('selected-words content', () => {
+  		it('builds word-lists from "wordListNames" prop', () => {
+	    	const wlChoices = thisWrapper.find('#focus-word-list');
+	    	const listItems = wlChoices.find('ListItem');
+	    	expect(listItems).toHaveLength(3);
+	    });
+
+	    it('no selected word', () => {
+	    	const wlChoices = thisWrapper.find('#focus-word-list');
+	    	const listItems = wlChoices.find('ListItem');
+	    	const selectedItem = listItems.find('.focus-word-option.selected');
+	    	expect(selectedItem.length).toBe(0);
+	    });
+
+      it('selected word from prop', () => {
+        const thisWrapper = mount(
+          <WordListContext.Provider
+            value={{ ...theseProps, wordLists: mockWordLists, selectedWord: 'president' }}
+          >
+            <CommonWords />
+          </WordListContext.Provider>,
+        );
+        const wlChoices = thisWrapper.find('#focus-word-list');
+        const listItems = wlChoices.find('ListItem');
+        const selectedItem = listItems.find('.focus-word-option.selected');
+        expect(selectedItem.length).toBe(1);
+        expect(selectedItem.text()).toBe('president');
+      });
   	});
   });
 });
