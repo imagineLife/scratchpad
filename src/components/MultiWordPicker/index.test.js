@@ -101,4 +101,44 @@ describe('<MultiWordPicker />', () => {
       });
   	});
   });
+
+  describe('triggers onClick callbacks', () => {
+    const thisWrapper = mount(
+      <WordListContext.Provider
+        value={{ ...theseProps, wordLists: mockWordLists }}
+      >
+        <CommonWords />
+      </WordListContext.Provider>,
+    );
+
+    it('word-list click', () => {
+      const wlChoices = thisWrapper.find('#word-lists');
+      const listItem = wlChoices.find('ListItem').first();
+      listItem.simulate('click');
+      expect(mockFn4).toHaveBeenCalledTimes(1);
+    });
+
+    it('word-list click 2 more times', () => {
+      const wlChoices = thisWrapper.find('#word-lists');
+      const listItem = wlChoices.find('ListItem').first();
+      listItem.simulate('click');
+      listItem.simulate('click');
+      expect(mockFn4).toHaveBeenCalledTimes(3);
+    });
+
+    it('focus-word click', () => {
+      const wlChoices = thisWrapper.find('#focus-word-list');
+      const listItem = wlChoices.find('ListItem').first();
+      listItem.simulate('click');
+      expect(mockFn2).toHaveBeenCalledTimes(1);
+    });
+
+    it('word-list click 2 more times', () => {
+      const wlChoices = thisWrapper.find('#focus-word-list');
+      const listItem = wlChoices.find('ListItem').first();
+      listItem.simulate('click');
+      listItem.simulate('click');
+      expect(mockFn2).toHaveBeenCalledTimes(3);
+    });
+  });
 });
