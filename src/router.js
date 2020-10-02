@@ -4,7 +4,7 @@ import { Router, Redirect } from "@reach/router";
 import './index.css';
 
 const Together = React.lazy(() =>  import('./routes/Together/ContextWrapper'))
-const DashboardUI = React.lazy(() =>  import('./routes/Together/ContextWrapper'))
+const DashboardUI = React.lazy(() =>  import('./routes/DashboardUI/ContextWrapper'))
 
 const ThisRouter = () => {
   let [themeClass, setThemeClass] = React.useState('dark'); //light
