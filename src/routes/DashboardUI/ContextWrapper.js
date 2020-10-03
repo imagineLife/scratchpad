@@ -1,5 +1,5 @@
 import React from 'react';
-import Together from './'
+import DashboardUI from './'
 
 import {TextAreaProvider} from '../../Contexts/TextArea'
 import {CommonWordsProvider} from '../../Contexts/CommonWords'
@@ -8,7 +8,7 @@ const Wrapped = () => {
 	return (
 		<TextAreaProvider>
 			<CommonWordsProvider>
-				<Together />
+				<DashboardUI />
 			</CommonWordsProvider>
 		</TextAreaProvider>
 	)

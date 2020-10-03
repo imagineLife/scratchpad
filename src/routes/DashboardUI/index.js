@@ -13,7 +13,7 @@ import ImageBox from '../../components/ImageBox';
 
 const moved = () => console.log('moved');
 
-const Together = () => {
+const DashboardUI = () => {
   const [areaBoxRef, { width: areaBoxWidth, height: areaBoxHeight }] = useDimensions();
   const [focusAreaRef, { width: focusAreaW, height: focusAreaH }] = useDimensions();
 
@@ -103,4 +103,4 @@ const Together = () => {
     </main>
   );
 };
-export default Together;
+export default DashboardUI;
