@@ -43,12 +43,21 @@ describe('stats fns', () => {
   describe('ingWords', () => {
     //@TODO: make this SKIP words that ONLY have 4 letters and end ing 'ing' maybe?!
     describe('ing words return successfully', () => {
-      const correctWords = ['sing','walking', 'ring', 'dancing'];
-      correctWords.forEach(matchingWord => {
-        let fnRes = ingWords(matchingWord)
-        it(`${matchingWord}`, () => {
-          expect(fnRes[0]).toBe(matchingWord)
+      describe('from arr of strings', () => {
+        const correctWords = ['sing','walking', 'ring', 'dancing'];
+        correctWords.forEach(matchingWord => {
+          let fnRes = ingWords(matchingWord)
+          it(`${matchingWord}`, () => {
+            expect(fnRes[0]).toBe(matchingWord)
+          })
         })
+      })
+
+      it('found ALL "ing" words in a sentence', () => {
+         const wordSentence = 'Singing warned the sinking ship about living.';
+        let foundEdWords = [ 'Singing', 'sinking', 'living' ];
+        let fnRes = ingWords(wordSentence)
+        expect(fnRes.toString()).toBe(foundEdWords.toString())
       })
     })
     describe('non-ing words return null', () => {
@@ -59,12 +68,18 @@ describe('stats fns', () => {
           expect(fnRes).toBe(null)
         })
       })
+
+      it('found NO "ing" words in a sentence', () => {
+        const wordSentence = 'Sink warned the sink ship about liv.';
+        let fnRes = ingWords(wordSentence)
+        expect(fnRes).toBe(null)
+      })
     })
   })
 
   describe('edWords', () => {
     //@TODO: make this SKIP words that ONLY have 4 letters and end ing 'ing' maybe?!
-    describe('returns matching edWords successfully', () => {
+    describe('returns matching edWords successfully from arr of words', () => {
       let edWordsArr = ['walked', 'banked', 'qwertyed','instantiated']
       edWordsArr.forEach(matchingWord => {
         let fnRes = edWords(matchingWord)
@@ -74,7 +89,7 @@ describe('stats fns', () => {
       })
     })
 
-    describe('returns null on non-matching words', () => {
+    describe('returns null on non-matching words from arr of words', () => {
       let nonMatchingEds = ['walk', 'bank', 'qwerty','instantiate']
       nonMatchingEds.forEach(badMatch => {
         let fnRes = edWords(badMatch)
