@@ -8,7 +8,7 @@ const convertStrToWordArr = (str) => {
   const puncRegEx = /[.,-]/g;
 
   // apply regex
-  const regexTxt = str.replace(newReg, ' ').replace(puncRegEx, '');
+  const regexTxt = str.replace(newReg, '').replace(puncRegEx, '');
 
   // split txt into arr of words
   return regexTxt.split(' ');
