@@ -156,4 +156,19 @@ describe('stats fns', () => {
       expect(stockRes.toString()).toBe(stockExpectation.toString())
     })
   })
+
+  describe('getWordsByLength', () => {
+    it('works with string', () => {
+      let s = 'A aa aaa aaaa B bb bbb C cc D';
+      let exampleRes = [{"occurances": 4, "size": 1}, {"occurances": 3, "size": 2}, {"occurances": 2, "size": 3}, {"occurances": 1, "size": 4}]
+      let res = getWordsByLength(s)
+      expect(res.toString()).toBe(exampleRes.toString())
+    })
+    it('works with arr', () => {
+      let s = ['A', 'aa', 'aaa', 'aaaa', 'B', 'bb', 'bbb', 'C', 'cc', 'D'];
+      let exampleRes = [{"occurances": 4, "size": 1}, {"occurances": 3, "size": 2}, {"occurances": 2, "size": 3}, {"occurances": 1, "size": 4}]
+      let res = getWordsByLength(s)
+      expect(res.toString()).toBe(exampleRes.toString())
+    })
+  })
 })
