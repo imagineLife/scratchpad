@@ -2,10 +2,12 @@ import convertStrToWordArr from './convertStrToWordArr'
 import ingWords from './ingWords'
 import edWords from './edWords'
 import getWordsByCount from './getWordsByCount'
+import getWordsByLength from './getWordsByLength'
+
 import {
   getLongestThirty,
   getSentences,
-  getWordsByLength
+  
 } from './stats';
 
 export {
