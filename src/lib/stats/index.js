@@ -2,11 +2,11 @@ import {
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
-  ingWords,
   edWords,
   getSentences,
 } from './stats';
 import convertStrToWordArr from './convertStrToWordArr'
+import ingWords from './ingWords'
 export {
   convertStrToWordArr,
   getLongestThirty,

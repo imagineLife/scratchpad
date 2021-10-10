@@ -1,3 +1,6 @@
+const convertStrToWordArr = require('./convertStrToWordArr').default;
+
+
 // creates an object of the most-frequent words occuring
 function getWordsByCount(srcWordArr) {
   const startingArr = (typeof srcWordArr === 'string') ? convertStrToWordArr(srcWordArr) : srcWordArr;
@@ -77,12 +80,6 @@ function getLongestThirty(arr) {
   return topTewnty;
 }
 
-function ingWords(str) {
-  const findEnding = /\w*ing\b/g;
-  const res = str.match(findEnding);
-  return res;
-}
-
 function edWords(str) {
   const findEnding = /\w*ed\b/g;
   const res = str.match(findEnding).sort();
@@ -115,7 +112,6 @@ module.exports = {
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
-  ingWords,
   edWords,
   getSentences,
 };
