@@ -38,4 +38,26 @@ describe('stats fns', () => {
       })
     })
   })
+
+  describe('ingWords', () => {
+    //@TODO: make this SKIP words that ONLY have 4 letters and end ing 'ing' maybe?!
+    describe('ing words return successfully', () => {
+      const correctWords = ['sing','walking', 'ring', 'dancing'];
+      correctWords.forEach(matchingWord => {
+        let fnRes = ingWords(matchingWord)
+        it(`${matchingWord}`, () => {
+          expect(fnRes[0]).toBe(matchingWord)
+        })
+      })
+    })
+    describe('non-ing words return null', () => {
+      const incorrectWords = ['sung', 'brought', 'hinges', 'bingbong'];
+      incorrectWords.forEach(nonMatchingWord => {
+        let fnRes = ingWords(nonMatchingWord)
+        it(`${nonMatchingWord}`, () => {
+          expect(fnRes).toBe(null)
+        })
+      })
+    })
+  })
 })

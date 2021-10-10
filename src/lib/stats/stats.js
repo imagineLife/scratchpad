@@ -1,5 +1,4 @@
-const convertStrToWordArr = require('./convertStrToWordArr').default;
-
+const convertStrToWordArr = require('./convertStrToWordArr');
 
 // creates an object of the most-frequent words occuring
 function getWordsByCount(srcWordArr) {
