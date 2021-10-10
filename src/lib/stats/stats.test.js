@@ -107,4 +107,53 @@ describe('stats fns', () => {
       })
     })
   })
+
+  describe('getWordsByCount', () => {
+    it('First sentence of Trump Inauguration', () => {
+      const testSentence = 'Chief Justice Roberts, President Carter, President Clinton, President Bush, President Obama, fellow Americans, and people of the world, thank you.';
+      const expectedOutput = [
+        { word: 'president', occurances: 4 },
+        { word: 'chief', occurances: 1 },
+        { word: 'justice', occurances: 1 },
+        { word: 'roberts', occurances: 1 },
+        { word: 'carter', occurances: 1 },
+        { word: 'clinton', occurances: 1 },
+        { word: 'bush', occurances: 1 },
+        { word: 'obama', occurances: 1 },
+        { word: 'fellow', occurances: 1 },
+        { word: 'americans', occurances: 1 },
+        { word: 'people', occurances: 1 },
+        { word: 'world', occurances: 1 },
+        { word: 'thank', occurances: 1 }
+      ]
+      let testRes = getWordsByCount(testSentence)
+      expect(testRes.toString()).toBe(expectedOutput.toString())
+    })
+    it('mock words', () => {
+      const stock = 'First second second third third third fourth fourth fourth fourth fifth fifth fifth fifth fifth';
+      const stockExpectation = [
+        {word: 'First', occurances: 1},
+        {word: 'second', occurances: 2},
+        {word: 'third', occurances: 3},
+        {word: 'fourth', occurances: 4},
+        {word: 'fifth', occurances: 5},
+      ]
+      let stockRes = getWordsByCount(stock);
+
+      expect(stockRes.toString()).toBe(stockExpectation.toString())
+    })
+    it('takes ARRAY too', () => {
+      const stock = ['First','second','second','third','third','third','fourth','fourth','fourth','fourth','fifth','fifth','fifth','fifth','fifth'];
+      const stockExpectation = [
+        {word: 'First', occurances: 1},
+        {word: 'second', occurances: 2},
+        {word: 'third', occurances: 3},
+        {word: 'fourth', occurances: 4},
+        {word: 'fifth', occurances: 5},
+      ]
+      let stockRes = getWordsByCount(stock);
+
+      expect(stockRes.toString()).toBe(stockExpectation.toString())
+    })
+  })
 })
