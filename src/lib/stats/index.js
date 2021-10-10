@@ -1,5 +1,4 @@
 import {
-  convertStrToWordArr,
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
@@ -7,7 +6,7 @@ import {
   edWords,
   getSentences,
 } from './stats';
-
+import convertStrToWordArr from './convertStrToWordArr'
 export {
   convertStrToWordArr,
   getLongestThirty,

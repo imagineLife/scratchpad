@@ -1,19 +1,3 @@
-const convertStrToWordArr = (str) => {
-  // gets rid of line-break or whatever
-  const newReg = /(^)?\s*$/gm;
-
-  // const uniqueWordRegex = /([a-z]\w+)(?![\s\S]*\1)/gi;
-
-  // remove some punc
-  const puncRegEx = /[.,-]/g;
-
-  // apply regex
-  const regexTxt = str.replace(newReg, '').replace(puncRegEx, '');
-
-  // split txt into arr of words
-  return regexTxt.split(' ');
-};
-
 // creates an object of the most-frequent words occuring
 function getWordsByCount(srcWordArr) {
   const startingArr = (typeof srcWordArr === 'string') ? convertStrToWordArr(srcWordArr) : srcWordArr;
@@ -128,7 +112,6 @@ function getSentences(srcTxt) {
 }
 
 module.exports = {
-  convertStrToWordArr,
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
