@@ -1,12 +1,13 @@
+import convertStrToWordArr from './convertStrToWordArr'
+import ingWords from './ingWords'
+import edWords from './edWords'
 import {
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
-  edWords,
   getSentences,
 } from './stats';
-import convertStrToWordArr from './convertStrToWordArr'
-import ingWords from './ingWords'
+
 export {
   convertStrToWordArr,
   getLongestThirty,

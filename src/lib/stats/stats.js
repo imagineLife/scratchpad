@@ -79,12 +79,6 @@ function getLongestThirty(arr) {
   return topTewnty;
 }
 
-function edWords(str) {
-  const findEnding = /\w*ed\b/g;
-  const res = str.match(findEnding).sort();
-  return res;
-}
-
 function getSentences(srcTxt) {
   const twoWhiteSpaces = /(\s{2})/gm;
   const sentRegex = /(~~)\s/g;
@@ -111,6 +105,5 @@ module.exports = {
   getLongestThirty,
   getWordsByCount,
   getWordsByLength,
-  edWords,
   getSentences,
 };

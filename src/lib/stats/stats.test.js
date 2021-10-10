@@ -4,9 +4,10 @@ import {
   getWordsByCount,
   getWordsByLength,
   ingWords,
+  getSentences,
   edWords,
-  getSentences
 } from './'
+
 describe('stats fns', () => {
   describe('convertStrToWordArr', () => {
     let testSentenceOne = 'the quick brown fox jumps over the lazy dog.'
@@ -55,6 +56,29 @@ describe('stats fns', () => {
       incorrectWords.forEach(nonMatchingWord => {
         let fnRes = ingWords(nonMatchingWord)
         it(`${nonMatchingWord}`, () => {
+          expect(fnRes).toBe(null)
+        })
+      })
+    })
+  })
+
+  describe('edWords', () => {
+    //@TODO: make this SKIP words that ONLY have 4 letters and end ing 'ing' maybe?!
+    describe('returns matching edWords successfully', () => {
+      let edWordsArr = ['walked', 'banked', 'qwertyed','instantiated']
+      edWordsArr.forEach(matchingWord => {
+        let fnRes = edWords(matchingWord)
+        it(`${matchingWord}`, () => {
+          expect(fnRes[0]).toBe(matchingWord)
+        })
+      })
+    })
+
+    describe('returns null on non-matching words', () => {
+      let nonMatchingEds = ['walk', 'bank', 'qwerty','instantiate']
+      nonMatchingEds.forEach(badMatch => {
+        let fnRes = edWords(badMatch)
+        it(`${badMatch}`, () => {
           expect(fnRes).toBe(null)
         })
       })
