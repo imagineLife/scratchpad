@@ -34,7 +34,7 @@ describe('stats fns', () => {
         expect(fnRes.length).toBe(9);
       })
       it('matches expected array', () => {
-        expect(fnRes).toBe(expectedArrOutput);
+        expect(fnRes.toString()).toBe(expectedArrOutput.toString());
       })
     })
   })
