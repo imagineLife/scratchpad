@@ -4,7 +4,7 @@ import edWords from './edWords'
 import getWordsByCount from './getWordsByCount'
 import getWordsByLength from './getWordsByLength'
 import getSentences from './getSentences'
-import { getLongestThirty } from './stats';
+import getLongestThirty from './getLongestThirty';
 
 export {
   convertStrToWordArr,

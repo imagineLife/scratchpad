@@ -184,4 +184,15 @@ describe('stats fns', () => {
       expect(res[2].text).toBe(sThree);
     })
   })
+
+  describe('getLongestThirty', () => {
+    it('gets longest words', () => {
+      let sOne = "The Bible tells us, how good and pleasant it is when God's people live together in unity."
+      let sTwo = "We must speak our minds openly, debate our disagreements, but always pursue solidarity." 
+      let sThree = "When America is united, America is totally unstoppable.";
+      let expectedRes = ["disagreements", "unstoppable", "solidarity", "pleasant", "together", "america", "totally", "people", "openly", "debate", "always", "pursue", "united", "bible", "tells", "god's", "unity", "speak", "minds", "good", "when", "live", "must", "the", "how", "and", "our", "but", "us", "it"]
+      let res = getLongestThirty(`${sOne} ${sTwo} ${sThree}`);
+      expect(res.toString()).toBe(expectedRes.toString())
+    })
+  })
 })
