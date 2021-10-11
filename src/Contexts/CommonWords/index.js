@@ -54,7 +54,6 @@ const CommonWordsProvider = (props) => {
     setLongestNine(getLongestThirty(arrayOfWords).slice(0, 10));
     setWordLists({ type: 'COMMON_WORDS', payload: getWordsByCount(arrayOfWords).slice(0, 10) });
     setWordLists({ type: 'LONGEST_WORDS', payload: getLongestThirty(arrayOfWords).slice(0, 10) });
-    setWordLists({ type: 'WORDS_BY_LENGTH', payload: getWordsByLength(arrayOfWords) });
     setWordLists({
       type: 'ACTION_WORDS',
       payload: (function getINGWords() {
