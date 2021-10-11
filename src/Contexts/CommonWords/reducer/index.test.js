@@ -10,27 +10,32 @@ describe('CommonWords Reducer', () => {
       expect(rr['Longest Words']).toBe('watermelon')
     })
   })
+  describe('COMMON_WORDS sets Longest Words', () => {
+    let a = {};
+    let rr = reducer(a, {type: "COMMON_WORDS", payload: 'juiceBox'}) 
+    it('updates 1 state var', () => {
+      expect(Object.keys(rr).length).toBe(1)
+    })
+    it('updates "Common Words" key', () => {
+      expect(rr['Common Words']).toBe('juiceBox')
+    })
+  })
+  describe('ACTION_WORDS sets Longest Words', () => {
+    let a = {};
+    let rr = reducer(a, {type: "ACTION_WORDS", payload: 'kitchenSink'}) 
+    it('updates 1 state var', () => {
+      expect(Object.keys(rr).length).toBe(1)
+    })
+    it('updates "Action Words" key', () => {
+      expect(rr['Action Words']).toBe('kitchenSink')
+    })
+  })
+  describe('default throws err', () => {
+    let a = {ice: 'box'}
+    it('throws', () => {
+      expect(() => {
+        reducer(a, {type: 'BAD_TYPE', payload: 'sauce'})
+      }).toThrow(`CALLED COMMON-WORDS REDUCER WITH BAD TYPE: BAD_TYPE`)
+    })
+  })
 })
-
-/*
-  it('LONGEST_WORDS',() => {})
-    return {
-      ...state,
-      'Longest Words': action.payload,
-    };
-    break;
-
-  it('COMMON_WORDS',() => {})
-    return {
-      ...state,
-      'Common Words': action.payload,
-    };
-    break;
-
-  it('ACTION_WORDS',() => {})
-    return {
-      ...state,
-      'Action Words': action.payload,
-    };
-    break;
-*/

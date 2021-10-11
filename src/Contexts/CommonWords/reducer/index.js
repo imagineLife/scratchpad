@@ -1,28 +1,28 @@
-const reducer = (state, action) => {
-  switch (action.type) {
+const reducer = (state, {type, payload}) => {
+  switch (type) {
   case 'LONGEST_WORDS':
     return {
       ...state,
-      'Longest Words': action.payload,
+      'Longest Words': payload,
     };
     break;
 
   case 'COMMON_WORDS':
     return {
       ...state,
-      'Common Words': action.payload,
+      'Common Words': payload,
     };
     break;
 
   case 'ACTION_WORDS':
     return {
       ...state,
-      'Action Words': action.payload,
+      'Action Words': payload,
     };
     break;
 
   default:
-    return { ...state };
+    throw new Error(`CALLED COMMON-WORDS REDUCER WITH BAD TYPE: ${type}`);
     break;
   }
 };
