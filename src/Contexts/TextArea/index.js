@@ -4,21 +4,12 @@ import React, {
 import * as arr from 'd3-array';
 import { getQueriedWord } from '../../lib/getQueriedWord';
 import { getSentences } from '../../lib/stats';
-
+import reducer from './reducer'
 const TextAreaContext = createContext();
 const { Provider, Consumer } = TextAreaContext;
 
-const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
-  let resString = '';
-  let curIdx = selectedSentenceArr[0];
-  while (curIdx < selectedSentenceArr[1]) {
-    resString += `${sentenceArr[curIdx++].text} `;
-  }
-  return resString;
-};
-
 const TextAreaProvider = (props) => {
-  const initialContext = { text: '' };
+  const initialContext = { text: '', curColor: null };
   const [themeColors] = useState([
     'rgb(166,206,227)',
     'rgb(31,120,180)',
@@ -33,66 +24,6 @@ const TextAreaProvider = (props) => {
     'rgb(255,255,153)',
     'rgb(177,89,40)',
   ]);
-
-  const [curColor, setCurColor] = useState(null);
-
-  const reducer = (state, action) => {
-    let resText;
-
-    switch (action.type) {
-    case 'SENTENCES':
-      return {
-        ...state,
-        sentences: action.payload,
-      };
-      break;
-
-    case 'UPDATE_DISPLAY_TEXT_FROM_AREA':
-      return {
-        ...state,
-        selectedAreaArr: action.payload,
-        displayText: updateDisplayText(state.sentences, action.payload),
-      };
-      break;
-
-    case 'WORD_LENGTH':
-      return {
-        ...state,
-        wordLength: action.payload,
-      };
-      break;
-
-    case 'TEXT':
-      return {
-        ...state,
-        text: action.payload,
-      };
-
-    case 'MAX_WORDS':
-      return {
-        ...state,
-        maxWordsPerSentence: action.payload,
-      };
-
-    case 'THEME':
-      const randLength = Math.floor(Math.random() * themeColors.length);
-      let randClr = null;
-      if (action.payload) {
-        randClr = themeColors[randLength];
-      }
-
-      setCurColor(randClr);
-      return {
-        ...state,
-        theme: action.payload,
-      };
-
-    default:
-      return { ...state, text: action.payload };
-      break;
-    }
-  };
-
 
   const [textAnalyticsStore, textAreaDispatch] = useReducer(reducer, initialContext);
   const [areaData, setAreaData] = useState(null);
@@ -122,17 +53,11 @@ const TextAreaProvider = (props) => {
 	      }));
   }, []);
 
-  console.log('%c PROVIDER', 'background-color: blue; color: white;');
-
-  console.log('curColor');
-  console.log(curColor);
-
-
   return (
     <Provider value={{
       textAreaDispatch,
       areaData,
-      curColor,
+      curColor: textAnalyticsStore.curColor,
       setAreaData,
       themesData,
       ...textAnalyticsStore,
