@@ -31,56 +31,59 @@ const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
   return resString;
 };
 
-const reducer = (state, action) => {
+const reducer = (state, {type, payload}) => {
   let resText;
-
-  switch (action.type) {
+  if(type === UPDATE_DISPLAY_TEXT_FROM_AREA){
+    console.log({type,payload, curState: state.sentences})
+    
+  }
+  
+  switch (type) {
   case SENTENCES:
     return {
       ...state,
-      sentences: action.payload,
+      sentences: payload,
     };
 
   case UPDATE_DISPLAY_TEXT_FROM_AREA:
     return {
       ...state,
-      selectedAreaArr: action.payload,
-      displayText: updateDisplayText(state.sentences, action.payload),
+      selectedAreaArr: payload,
+      displayText: updateDisplayText(state.sentences, payload),
     };
 
   case WORD_LENGTH:
     return {
       ...state,
-      wordLength: action.payload,
+      wordLength: payload,
     };
 
   case TEXT:
     return {
       ...state,
-      text: action.payload,
+      text: payload,
     };
 
   case MAX_WORDS:
     return {
       ...state,
-      maxWordsPerSentence: action.payload,
+      maxWordsPerSentence: payload,
     };
 
   case THEME:
     let randClr = null;
-    if (action.payload) {
+    if (payload) {
       const randLength = Math.floor(Math.random() * themeColors.length);
       randClr = themeColors[randLength];
     }
     return {
       ...state,
-      theme: action.payload,
+      theme: payload,
       curColor: randClr
     };
 
   default:
-    return { ...state, text: action.payload };
-    break;
+    throw new Error(`CALLED TEXT-AREA REDUCER WITH BAD TYPE: ${type}`);
   }
 };
 

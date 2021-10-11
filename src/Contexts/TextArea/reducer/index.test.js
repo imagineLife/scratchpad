@@ -68,31 +68,25 @@ describe('TextArea reducer', () => {
       })
     })
   })
+  describe('UPDATE_DISPLAY_TEXT_FROM_AREA', () => {
+    let stateSentences = ['Apple Pie is delicious','Second Sentence Here.', 'Third sentence is third.'];
+    let initState = { sentences: stateSentences}
+    
+    let rr = reducer(initState, {
+      type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', 
+      payload:[1,2]
+    })
+    it('returns 3 state items', () => {
+      expect(Object.keys(rr).length).toBe(3);
+    })
+    it('sets selectedAreaArr from payload', () => {
+      expect(rr.selectedAreaArr.toString()).toBe([1,2].toString())
+    })
+  })
+  it('throws err by default with bad type', () => {
+    let a ={}
+    expect(() => {
+      reducer(a, {type: 'sauce'})
+    }).toThrow(`CALLED COMMON-WORDS REDUCER WITH BAD TYPE: sauce`)
+  })
 })
-
-/*
-  case UPDATE_DISPLAY_TEXT_FROM_AREA:
-    return {
-      ...state,
-      selectedAreaArr: action.payload,
-      displayText: updateDisplayText(state.sentences, action.payload),
-    };
-
-  case THEME:
-    const randLength = Math.floor(Math.random() * themeColors.length);
-    let randClr = null;
-    if (action.payload) {
-      randClr = themeColors[randLength];
-    }
-    return {
-      ...state,
-      theme: action.payload,
-      curColor: randClr
-    };
-
-  default:
-    return { ...state, text: action.payload };
-    break;
-  }
-};
-*/
