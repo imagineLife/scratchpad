@@ -171,4 +171,17 @@ describe('stats fns', () => {
       expect(res.toString()).toBe(exampleRes.toString())
     })
   })
+
+  describe('getSentences', () => {
+    it('gets 3 sentences', () => {
+      let sOne = "The Bible tells us, how good and pleasant it is when God's people live together in unity."
+      let sTwo = "We must speak our minds openly, debate our disagreements, but always pursue solidarity." 
+      let sThree = "When America is united, America is totally unstoppable.";
+      let res = getSentences(`${sOne} ${sTwo} ${sThree}`);
+      expect(res.length).toBe(3)
+      expect(res[1].text).toBe(sTwo);
+      expect(res[0].text).toBe(sOne);
+      expect(res[2].text).toBe(sThree);
+    })
+  })
 })
