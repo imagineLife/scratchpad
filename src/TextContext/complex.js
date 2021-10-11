@@ -1,25 +1,23 @@
+/*
+
+	Currently not used
+
+*/
+
 import React from 'react';
 let TextContext = React.createContext(); 
 let {Provider, Consumer} = TextContext
 import {getQueriedWord} from '../lib/getQueriedWord'
 import { getSentences } from '../lib/stats'
+import reducer from './reducer';
+import initialState from './reducer/initialState';
 
 let TextProvider = (props) => {
 	/*
 			State management
 	*/
-	const initialContext = {text: ''};
+	
 
-	const reducer = (state, action) => {
-			let resText;
-		switch(action.type){
-			case "SENTENCES": {
-				return {...state, sentences: action.payload}
-			}
-			default:
-				return {...state, text: action.payload}	
-		}
-	}
 
 	let [textStore, textDispatch] = React.useReducer(reducer, initialContext)
 
@@ -27,7 +25,6 @@ let TextProvider = (props) => {
 		load the text from textFile 'on load'
 	*/
 	React.useEffect(() => {
-		console.log('LOADING TEXT in textProvider');
 		fetch('../../data/fullText.txt')
 			.then(res => res.text().then(textRes => {
 				console.log('Fetched Data');
