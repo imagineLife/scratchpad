@@ -1,16 +1,22 @@
-const reducer = (state, {type, payload}) => {
+import {
+  LONGEST_WORDS,
+  COMMON_WORDS,
+  ACTION_WORDS
+} from './types';
+
+const commonWordsReducer = (state, {type, payload}) => {
   switch (type) {
-  case 'LONGEST_WORDS':
+  case LONGEST_WORDS:
     return {
       ...state,
       'Longest Words': payload,
     };
-  case 'COMMON_WORDS':
+  case COMMON_WORDS:
     return {
       ...state,
       'Common Words': payload,
     };
-  case 'ACTION_WORDS':
+  case ACTION_WORDS:
     return {
       ...state,
       'Action Words': payload,
@@ -19,4 +25,5 @@ const reducer = (state, {type, payload}) => {
     throw new Error(`CALLED COMMON-WORDS REDUCER WITH BAD TYPE: ${type}`);
   }
 };
-module.exports = reducer;
+
+export default commonWordsReducer;
