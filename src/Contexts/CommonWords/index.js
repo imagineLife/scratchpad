@@ -15,6 +15,8 @@ import {
 } from '../../lib/stats';
 import { TextAreaContext } from '../TextArea';
 
+import reducer from './reducer';
+
 const WordListContext = createContext();
 const { Provider, Consumer } = WordListContext;
 
@@ -36,37 +38,6 @@ const CommonWordsProvider = (props) => {
     if (a.word > b.word) { return 1; }
     return 0;
   };
-
- 	const reducer = (state, action) => {
-    let resText;
-    switch (action.type) {
-    case 'LONGEST_WORDS':
-      return {
-        ...state,
-        'Longest Words': action.payload,
-      };
-      break;
-
-    case 'COMMON_WORDS':
-      return {
-        ...state,
-        'Common Words': action.payload,
-      };
-      break;
-
-    case 'ACTION_WORDS':
-      return {
-        ...state,
-        'Action Words': action.payload,
-      };
-      break;
-
-    default:
-      return { ...state };
-      break;
-    }
-  };
-
 
   const [wordLists, setWordLists] = useReducer(reducer, initialState);
   const [wordListNames, setWordListNames] = useState([]);
