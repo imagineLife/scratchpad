@@ -87,6 +87,6 @@ describe('TextArea reducer', () => {
     let a ={}
     expect(() => {
       reducer(a, {type: 'sauce'})
-    }).toThrow(`CALLED COMMON-WORDS REDUCER WITH BAD TYPE: sauce`)
+    }).toThrow(`CALLED TEXT-AREA REDUCER WITH BAD TYPE: sauce`)
   })
 })
