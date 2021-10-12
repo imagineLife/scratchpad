@@ -16,7 +16,7 @@ function AreaReducer(state, {type,payload}){
         sentenceNumber: payload.sentenceNumber,
         offsetSentenceNumber: payload.offsetSentenceNumber,
         showLine: payload.showLine,
-        xOffset: payload.xtXOffset
+        xOffset: payload.xOffset
       }
     default:
       throw new Error(`Called Area Reducer with bad type ${type}`)
