@@ -19,7 +19,7 @@ const Area = () => {
     curSentence,
     curSentenceObj,
     moused,
-    offestSentenceNumber,
+    offsetSentenceNumber,
     showLine,
     stoppedMoving,
     setCurSentence,
@@ -65,11 +65,11 @@ const Area = () => {
   /*
     Hover-line
   */
-  const scaledX = xScale(offestSentenceNumber);
+  const scaledX = xScale(offsetSentenceNumber);
 
   const optHoverLine = !hoverLine
-    || offestSentenceNumber < 0
-    || offestSentenceNumber > xScale.domain()[1]
+    || offsetSentenceNumber < 0
+    || offsetSentenceNumber > xScale.domain()[1]
     || !showLine ? null : (
       <line
         pointerEvents="none"
@@ -87,7 +87,7 @@ const Area = () => {
     Hover-circle
   */
   const hoverCircle = !hoverLine
-    || offestSentenceNumber < 0
+    || offsetSentenceNumber < 0
     || !showLine ? null : (
       <circle
         pointerEvents="none"
@@ -97,7 +97,7 @@ const Area = () => {
         strokeWidth="1"
         strokeDasharray="2 6"
         cx={scaledX}
-        cy={yScale(selectedSentences[offestSentenceNumber].wordCount)}
+        cy={yScale(selectedSentences[offsetSentenceNumber].wordCount)}
       />
     );
 
