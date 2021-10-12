@@ -1,25 +1,28 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { TextAreaContext } from '../../../Contexts/TextArea';
 
-const AreaContext = createContext();
+// STATE
+import initialState from './reducer/initialState';
+import reducer from './reducer';
 
+const AreaContext = createContext();
 const { Provider } = AreaContext;
 
 const AreaProvider = ({ children, dims, hoverLine }) => {
   const { selectedAreaArr, sentences } = useContext(TextAreaContext);
-
-  const [curSentence, setCurSentence] = useState(null);
-  const [curSentenceObj, setCurSentenceObj] = useState(null);
-  const [sentenceNumber, setSentenceNumber] = useState(null);
-  const [xOffset, setXOffset] = useState(null);
-  const [showLine, setShowLine] = useState(null);
-  const [offestSentenceNumber, setOffsetSentenceNumber] = useState(null);
+  
+  const [{
+    curSentence,
+    curSentenceObj,
+    sentenceNumber,
+    xOffset,
+    showLine,
+    offsetSentenceNumber
+  }, dispatch] = useReducer(reducer, initialState);
 
   const stoppedMoving = () => {
-  	setCurSentence(null);
-  	setSentenceNumber(null);
-    setOffsetSentenceNumber(null);
-  	setShowLine(false);
+    // @TODO: Payload is useless here
+  	dispatch({type: "STOP_MOVING", payload: true})
   };
 
   // mousedOver && mouseMove
@@ -35,12 +38,18 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
       const thisSentence = Math.ceil(xScale.invert(xPos)) + selectedAreaArr[0];
       const sentenceWOffset = thisSentence - selectedAreaArr[0];
       if (thisSentence > -1) {
-      	setCurSentenceObj(sentences[thisSentence]);
-        setCurSentence(sentences[thisSentence].text);
-        setSentenceNumber(thisSentence);
-        setOffsetSentenceNumber(sentenceWOffset);
-        setShowLine(true);
-        setXOffset(areaSVGXOffset);
+        
+        dispatch({
+          type: "SET_CUR_SENTENCE", 
+          payload: {
+            curSentenceObj: sentences[thisSentence],
+            curSentence: sentences[thisSentence].text,
+            sentenceNumber: thisSentence,
+            offsetSentenceNumber: sentenceWOffset,
+            showLine: true,
+            xOffset: areaSVGXOffset
+          }
+        })
       }
     }
   };
@@ -52,15 +61,9 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
       curSentence,
       curSentenceObj,
       moused,
-      offestSentenceNumber,
-      setCurSentence,
-      setCurSentenceObj,
+      offsetSentenceNumber,
       sentenceNumber,
-      setSentenceNumber,
-      setXOffset,
       showLine,
-      setShowLine,
-      setOffsetSentenceNumber,
       stoppedMoving,
       xOffset,
     }}
