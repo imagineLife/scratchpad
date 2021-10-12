@@ -33,10 +33,6 @@ const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
 
 const reducer = (state, {type, payload}) => {
   let resText;
-  if(type === UPDATE_DISPLAY_TEXT_FROM_AREA){
-    console.log({type,payload, curState: state.sentences})
-    
-  }
   
   switch (type) {
   case SENTENCES:

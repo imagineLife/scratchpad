@@ -22,7 +22,6 @@ const TextAreaProvider = (props) => {
     const textFileURL = process.env.NODE_ENV == 'development' ? '../../data/fullText.txt' : './data/fullText.txt';
     const themesURL = process.env.NODE_ENV == 'development' ? '../../data/themesArrSlim.json' : './data/themesArrSlim.json';
 
-    // console.log('LOADING TEXT in textAreaProvider');
     fetch(textFileURL)
       .then((textFileRes) => textFileRes.text()
       	.then((textRes) => {
