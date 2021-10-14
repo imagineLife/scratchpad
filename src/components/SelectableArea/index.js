@@ -16,8 +16,7 @@ const SelectableArea = ({ onMove, dims }) => {
   const {
     sentences,
     textAreaDispatch,
-    areaData,
-    setAreaData,
+    areaData
   } = React.useContext(TextAreaContext);
 
   const [hoverArr, setHoverArr] = React.useState([0, 175]);
@@ -49,7 +48,7 @@ const SelectableArea = ({ onMove, dims }) => {
         preppedAreaData.push({ y: s.wordCount });
       });
 
-      setAreaData(preppedAreaData);
+      textAreaDispatch({type: 'SET_AREA_DATA', payload: preppedAreaData});
     }
   }, [sentences]);
 
