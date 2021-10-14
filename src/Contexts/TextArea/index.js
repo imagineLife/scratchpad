@@ -28,16 +28,20 @@ const TextAreaProvider = (props) => {
 	        const sentences = getSentences(textRes);
 	        const maxWordCount = arr.max(sentences, (d) => d.wordCount);
 
-	        // update Provider state, triggering reducer with dispatched actions
-	        textAreaDispatch({ type: 'TEXT', payload: textRes });
-	        textAreaDispatch({ type: 'SENTENCES', payload: sentences });
-	        textAreaDispatch({ type: 'MAX_WORDS', payload: maxWordCount });
 
+	        // update Provider state, triggering reducer with dispatched actions
+	        textAreaDispatch({type: "DONE_FETCHING_TEXT", payload: {
+            text: textRes,
+            sentences,
+            maxWords: maxWordCount
+          }})
 	        fetch(themesURL)
 	          .then((themeRes) => themeRes.json().then(setThemesData));
 	      }));
   }, []);
 
+  console.log('%c TextArea Provider', 'background-color: pink; color: black;')
+  
   return (
     <Provider value={{
       textAreaDispatch,
