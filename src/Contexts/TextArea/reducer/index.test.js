@@ -1,6 +1,29 @@
 import reducer from './';
 
 describe('TextArea reducer', () => {
+  describe('DONE_FETCHING_TEXT', () => {
+    let rr = reducer({}, {type: 'DONE_FETCHING_TEXT', payload: {
+      text: 'ace',
+      sentences: 'bronto',
+      maxWords: 'cart',
+      themes: 'dont'
+    }})
+    it('updates 4 state keys', () => {
+      expect(Object.keys(rr).length).toBe(4)
+    })
+    it('sets text state from payload', () => {
+      expect(rr.text).toBe('ace');
+    })
+    it('sets sentences state from payload', () => {
+      expect(rr.sentences).toBe('bronto');
+    })
+    it('sets maxWordsPerSentence state from payload', () => {
+      expect(rr.maxWordsPerSentence).toBe('cart');
+    })
+    it('sets themes state from payload', () => {
+      expect(rr.themes).toBe('dont');
+    })
+  })
   describe('SENTENCES', () => {
     let a = {};
     let rr = reducer(a, {type: 'SENTENCES', payload: 'mock payload here'})

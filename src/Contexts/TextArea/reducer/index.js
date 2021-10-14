@@ -42,6 +42,7 @@ const reducer = (state, {type, payload}) => {
       text: payload.text,
       sentences: payload.sentences,
       maxWordsPerSentence: payload.maxWords,
+      themes: payload.themes
     }
   case SENTENCES:
     return {
