@@ -5,7 +5,8 @@ import {
   TEXT,
   MAX_WORDS,
   THEME,
-  DONE_FETCHING_TEXT
+  DONE_FETCHING_TEXT,
+  SET_AREA_DATA
 } from './types';
 
 const themeColors = [
@@ -49,7 +50,11 @@ const reducer = (state, {type, payload}) => {
       ...state,
       sentences: payload,
     };
-
+  case SET_AREA_DATA:
+    return {
+      ...state,
+      areaData: payload
+    }
   case UPDATE_DISPLAY_TEXT_FROM_AREA:
     return {
       ...state,

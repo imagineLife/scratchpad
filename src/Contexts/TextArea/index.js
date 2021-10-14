@@ -12,7 +12,6 @@ const TextAreaProvider = (props) => {
   const initialContext = { text: '', curColor: null };
 
   const [textAnalyticsStore, textAreaDispatch] = useReducer(reducer, initialContext);
-  const [areaData, setAreaData] = useState(null);
 
   /*
 		load the text from textFile 'on load'
@@ -42,9 +41,8 @@ const TextAreaProvider = (props) => {
   return (
     <Provider value={{
       textAreaDispatch,
-      areaData,
+      areaData: textAnalyticsStore.areaData,
       curColor: textAnalyticsStore.curColor,
-      setAreaData,
       themesData: textAnalyticsStore.themes,
       ...textAnalyticsStore,
     }}

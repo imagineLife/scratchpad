@@ -5,6 +5,7 @@ const TEXT = 'TEXT';
 const MAX_WORDS = 'MAX_WORDS';
 const THEME = 'THEME';
 const DONE_FETCHING_TEXT = 'DONE_FETCHING_TEXT';
+const SET_AREA_DATA = 'SET_AREA_DATA';
 
 export {
   SENTENCES,
@@ -13,5 +14,6 @@ export {
   TEXT,
   MAX_WORDS,
   THEME,
-  DONE_FETCHING_TEXT
+  DONE_FETCHING_TEXT,
+  SET_AREA_DATA
 }
