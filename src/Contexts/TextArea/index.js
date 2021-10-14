@@ -13,7 +13,6 @@ const TextAreaProvider = (props) => {
 
   const [textAnalyticsStore, textAreaDispatch] = useReducer(reducer, initialContext);
   const [areaData, setAreaData] = useState(null);
-  const [themesData, setThemesData] = useState(null);
 
   /*
 		load the text from textFile 'on load'
@@ -27,20 +26,18 @@ const TextAreaProvider = (props) => {
       	.then((textRes) => {
 	        const sentences = getSentences(textRes);
 	        const maxWordCount = arr.max(sentences, (d) => d.wordCount);
-
-
-	        // update Provider state, triggering reducer with dispatched actions
-	        textAreaDispatch({type: "DONE_FETCHING_TEXT", payload: {
-            text: textRes,
-            sentences,
-            maxWords: maxWordCount
-          }})
 	        fetch(themesURL)
-	          .then((themeRes) => themeRes.json().then(setThemesData));
+	          .then((themeRes) => themeRes.json().then(fetchedThemeData => {
+              // update Provider state, triggering reducer with dispatched actions
+              textAreaDispatch({type: "DONE_FETCHING_TEXT", payload: {
+                text: textRes,
+                sentences,
+                maxWords: maxWordCount,
+                themes: fetchedThemeData
+              }})
+            }));
 	      }));
   }, []);
-
-  console.log('%c TextArea Provider', 'background-color: pink; color: black;')
   
   return (
     <Provider value={{
@@ -48,7 +45,7 @@ const TextAreaProvider = (props) => {
       areaData,
       curColor: textAnalyticsStore.curColor,
       setAreaData,
-      themesData,
+      themesData: textAnalyticsStore.themes,
       ...textAnalyticsStore,
     }}
     >
