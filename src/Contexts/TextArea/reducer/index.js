@@ -4,7 +4,8 @@ import {
   WORD_LENGTH,
   TEXT,
   MAX_WORDS,
-  THEME
+  THEME,
+  DONE_FETCHING_TEXT
 } from './types';
 
 const themeColors = [
@@ -35,6 +36,13 @@ const reducer = (state, {type, payload}) => {
   let resText;
   
   switch (type) {
+    case DONE_FETCHING_TEXT: 
+    return{
+      ...state,
+      text: payload.text,
+      sentences: payload.sentences,
+      maxWordsPerSentence: payload.maxWords,
+    }
   case SENTENCES:
     return {
       ...state,

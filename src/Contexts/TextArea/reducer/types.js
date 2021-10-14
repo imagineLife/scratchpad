@@ -4,6 +4,7 @@ const WORD_LENGTH = 'WORD_LENGTH';
 const TEXT = 'TEXT';
 const MAX_WORDS = 'MAX_WORDS';
 const THEME = 'THEME';
+const DONE_FETCHING_TEXT = 'DONE_FETCHING_TEXT';
 
 export {
   SENTENCES,
@@ -11,5 +12,6 @@ export {
   WORD_LENGTH,
   TEXT,
   MAX_WORDS,
-  THEME
+  THEME,
+  DONE_FETCHING_TEXT
 }
