@@ -228,9 +228,12 @@ footer{
 
 #flex-grid-layout div#text-display-box p.text-content{
 	line-height: 2.3;
-	columns: 2;
-	column-rule: 1px solid rgb(130, 130, 130);
-	column-gap: 20px;
+	-moz-columns: 2;
+	     columns: 2;
+	-moz-column-rule: 1px solid rgb(130, 130, 130);
+	     column-rule: 1px solid rgb(130, 130, 130);
+	-moz-column-gap: 20px;
+	     column-gap: 20px;
 	overflow-x: scroll;
 	max-height: 480px;
 }
@@ -238,6 +241,6 @@ footer{
 #parent-div{
 	max-width: 1250px;
 	margin: 0 auto;
-	background-color: rgb(29,34,41);
-	box-shadow: 3px 3px 3px;
+	/* background-color: rgb(29,34,41); */
+	/* box-shadow: 3px 3px 3px; */
 }
