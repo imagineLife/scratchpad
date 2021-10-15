@@ -38,13 +38,23 @@ const Together = () => {
             <li className="sub-title">Gives his 1400+ word address to the nation</li>
           </ul>
         </div>
-
+        
         <div id="area-box" ref={areaBoxRef}>
           <SelectableArea
             dims={{ width: areaBoxWidth, height: areaBoxHeight }}
             onMove={moved}
           />
         </div>
+        
+        <section id="text-wrapper">
+          <div id="divider-box">
+            <p className="explanatory-text">The text content of the speech is responsive to interactions below.</p>
+          </div>
+
+          <div id="text-display-box">
+            <TextDisplay />
+          </div>
+        </section>
       </header>
 
       <section id="left-side">
@@ -90,15 +100,9 @@ const Together = () => {
         </div>
       </section>
 
-      <footer>
-        <div id="divider-box">
-          <p className="explanatory-text">The text content of the speech, below, is responsive to interactions above.</p>
-        </div>
-
-        <div id="text-display-box">
-          <TextDisplay />
-        </div>
-      </footer>
+      {/* <footer> */}
+        
+      {/* </footer> */}
 
     </main>
   );
