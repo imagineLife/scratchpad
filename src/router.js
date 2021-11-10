@@ -7,7 +7,7 @@ const Together = React.lazy(() =>  import('./routes/Together/ContextWrapper'))
 const DashboardUI = React.lazy(() =>  import('./routes/DashboardUI/ContextWrapper'))
 
 const ThisRouter = () => {
-  let [themeClass, setThemeClass] = React.useState('dark'); //light
+  let [themeClass] = React.useState('dark'); //light
 
   return(
     <React.Suspense fallback={<div>loading...</div>}>
