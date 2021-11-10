@@ -42,11 +42,6 @@ describe('<MultiWordPicker />', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('handles no wordLists', () => {
-  	const pTag = wrapper.find('p').text();
-  	expect(pTag).toBe('Missing Word Lists');
-  });
-
   describe('passes props', () => {
   	const thisWrapper = mount(
     <WordListContext.Provider
