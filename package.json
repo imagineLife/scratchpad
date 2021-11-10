@@ -8,6 +8,7 @@
     "eslint": "eslint",
     "start": "webpack-dev-server --mode development",
     "test": "jest",
+    "td": "jest --watch --verbose --coverage",
     "webpack": "webpack"
   },
   "repository": {
@@ -69,6 +70,13 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less|svg|jpg)$": "<rootDir>/src/__mocks__/styleMock.js"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 10,
+        "functions": 10,
+        "lines": 10
+      }
     }
   }
 }
