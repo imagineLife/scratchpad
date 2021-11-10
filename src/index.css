@@ -135,6 +135,7 @@ h1.title{
 
 header{
 	grid-area: top;
+	border-bottom: var(--border);
 }
 
 #left-side{
