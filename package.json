@@ -8,7 +8,7 @@
     "eslint": "eslint",
     "start": "webpack-dev-server --mode development",
     "test": "jest",
-    "td": "jest --watch --verbose --coverage",
+    "td": "jest --verbose --coverage --watchAll",
     "webpack": "webpack"
   },
   "repository": {
