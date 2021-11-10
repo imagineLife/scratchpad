@@ -15,11 +15,7 @@ const CommonWords = () => {
     sortByWordAlpha,
     wordListFocus,
   } = React.useContext(WordListContext);
-
-  if (!wordLists) {
-    return <p>Missing Word Lists</p>;
-  }
-
+  
   const selectedWordList = wordLists[wordListFocus] || [];
 
   const sortedWordList = selectedWordList.sort(sortByWordAlpha);
