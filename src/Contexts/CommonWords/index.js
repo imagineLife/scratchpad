@@ -16,17 +16,14 @@ import {
 import { TextAreaContext } from '../TextArea';
 
 import reducer from './reducer';
+import initialState from './reducer/initialState.json'
 
 const WordListContext = createContext();
 const { Provider, Consumer } = WordListContext;
 
 const CommonWordsProvider = (props) => {
- 	const initialState = {
- 		'Common Words': [],
- 		'Longest Words': [],
- 		'Action Words': [],
- 	};
-
+  console.log('CommonWords Provider')
+  
   const sortByWordAlpha = (a, b) => {
     if (typeof a === 'string') {
       if (a < b) { return -1; }
