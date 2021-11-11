@@ -22,14 +22,8 @@ const Area = () => {
     offsetSentenceNumber,
     showLine,
     stoppedMoving,
-    setCurSentence,
-    setCurSentenceObj,
     sentenceNumber,
-    setSentenceNumber,
-    setXOffset,
-    setShowLine,
-    setOffsetSentenceNumber,
-    xOffset,
+    xOffset
   } = useContext(AreaContext);
 
   // sanity checking
