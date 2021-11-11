@@ -17,12 +17,10 @@ const Area = () => {
     dims,
     hoverLine,
     curSentence,
-    curSentenceObj,
     moused,
     offsetSentenceNumber,
     showLine,
     stoppedMoving,
-    sentenceNumber,
     xOffset
   } = useContext(AreaContext);
 
