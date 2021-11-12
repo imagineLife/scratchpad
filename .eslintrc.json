@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -15,21 +16,17 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 11,
         "sourceType": "module"
     },
-    "parser": "babel-eslint",
     "plugins": [
         "react"
     ],
     "rules": {
-        "indent": ["error", 2],
-        "no-console": 0,
-        "react/prop-types": 0,
-        "react/jsx-filename-extension": 0,
-        "react/no-array-index-key": 0,
-        "jsx-a11y/click-events-have-key-events": 0,
-        "jsx-a11y/no-noninteractive-element-interactions": 0,
-        "no-tabs": 0
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/function-component-definition": [true, {
+            "namedComponents": "function-declaration" ,
+            "unnamedComponents": "function-expression"
+        }]
     }
 }
