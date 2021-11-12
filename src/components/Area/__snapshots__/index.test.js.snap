@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Area/> matches snapshot 1`] = `
-<AreaProvider>
-  <Area />
-</AreaProvider>
+<Area>
+  <p>
+    loading area...
+  </p>
+</Area>
 `;
