@@ -1,8 +1,7 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import './index.css';
 import * as scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
-// import * as arr from 'd3-array';
 import { TextAreaContext } from '../../Contexts/TextArea';
 import { AreaContext } from './State/Context';
 
@@ -20,8 +19,7 @@ const Area = () => {
     moused,
     offsetSentenceNumber,
     showLine,
-    stoppedMoving,
-    xOffset
+    stoppedMoving
   } = useContext(AreaContext);
 
   // sanity checking
@@ -29,11 +27,13 @@ const Area = () => {
     return <p>loading area...</p>;
   }
 
+  // calc xScale
   const howManySentences = selectedAreaArr[1] - selectedAreaArr[0];
   const xScale = scale.scaleLinear()
     .domain([0, howManySentences])
     .range([0, dims.width]);
 
+  // calc currently selected sentences
   const selectedSentences = sentences.reduce((acc, curVal, curIdx) => {
     if (curIdx >= selectedAreaArr[0] && curIdx <= selectedAreaArr[1]) {
       return acc.concat(curVal);
@@ -49,9 +49,10 @@ const Area = () => {
   const areaFn = d3Shape.area()
     .x((d, i) => xScale(i))
     .y0(yScale(0))
-    .y1((d) => yScale(d.wordCount));
-  // .curve(d3Shape.curveCatmullRom)
+    .y1((d) => yScale(d.wordCount))
+    .curve(d3Shape.curveCatmullRom)
 
+  // calc path
   const pathD = areaFn(selectedSentences);
 
   /*
@@ -126,9 +127,7 @@ const Area = () => {
       </svg>
       <div className="explanation-wrapper">
         <p className="explanatory-text">
-          {!curSentence && `Hover over this area chart to highlight the sentence 
-						that was spoken at the specific point in time during the 
-						president’s address.  HOVER`}
+          {!curSentence && 'Hover over this area chart to highlight the sentence that was spoken at the specific point in time during the president’s address.  HOVER'}
           {curSentence && curSentence}
         </p>
       </div>
