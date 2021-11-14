@@ -28,6 +28,7 @@
             "namedComponents": "function-declaration" ,
             "unnamedComponents": "function-expression"
         }],
-        "comma-dangle": ["error", "never"]
+        "comma-dangle": ["error", "never"],
+        "prefer-default-export": 0
     }
 }
