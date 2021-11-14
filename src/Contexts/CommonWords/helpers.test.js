@@ -2,7 +2,7 @@ import { sortByWordAlpha } from './helpers';
 import wordList from './mock-word-list-arr.json';
 describe('CommonWords Context -> sortByWordsAlpha helper', () => {
   let res = wordList.sort(sortByWordAlpha);
-  it('works', () => {
+  it('with arr of objs { word: water, count: 4 }', () => {
     expect(JSON.stringify(res)).toBe(JSON.stringify([
       { word: 'all', occurances: 4 },
       { word: 'america', occurances: 3 },
@@ -15,5 +15,10 @@ describe('CommonWords Context -> sortByWordsAlpha helper', () => {
       { word: 'will', occurances: 4 },
       { word: 'your', occurances: 4 }
     ]))
+  })
+  it('with arr of words [ice,box,forever]', () => {
+    const inputArr = ['ice','box','forever'];
+    const res = inputArr.sort(sortByWordAlpha)
+    expect(JSON.stringify(res)).toBe('["box","forever","ice"]');
   })
 })
