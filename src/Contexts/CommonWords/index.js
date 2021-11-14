@@ -3,55 +3,42 @@ import React, {
   useState,
   createContext,
   useReducer,
-  useContext,
+  useContext
 } from 'react';
+
+// helper fns
 import {
   getWordsByCount,
   getLongestThirty,
   convertStrToWordArr,
-  ingWords,
-  arrayOfWords,
-  getWordsByLength,
+  ingWords
 } from '../../lib/stats';
-import { TextAreaContext } from '../TextArea';
+import { sortByWordAlpha } from './helpers'
 
+// State
 import reducer from './reducer';
 import initialState from './reducer/initialState.json'
+import { TextAreaContext } from '../TextArea';
 
 const WordListContext = createContext();
 const { Provider, Consumer } = WordListContext;
 
 const CommonWordsProvider = (props) => {
-  console.log('CommonWords Provider')
-  
-  const sortByWordAlpha = (a, b) => {
-    if (typeof a === 'string') {
-      if (a < b) { return -1; }
-      if (a > b) { return 1; }
-      return 0;
-    }
-
-    if (a.word < b.word) { return -1; }
-    if (a.word > b.word) { return 1; }
-    return 0;
-  };
-
-  const [wordLists, setWordLists] = useReducer(reducer, initialState);
-  const [wordListNames, setWordListNames] = useState([]);
+  const [wordLists, dispatch] = useReducer(reducer, initialState);
 
   const { displayText } = useContext(TextAreaContext);
-
   const [selectedWord, setSelectedWord] = useState(null);
   const [commonWords, setCommonWords] = useState([]);
   const [longestNine, setLongestNine] = useState([]);
   const [wordListFocus, selectWordList] = useState(null);
+  
   const makeCommonWords = (sentencesString) => {
     const arrayOfWords = convertStrToWordArr(sentencesString);
     setCommonWords(getWordsByCount(arrayOfWords).slice(0, 10));
     setLongestNine(getLongestThirty(arrayOfWords).slice(0, 10));
-    setWordLists({ type: 'COMMON_WORDS', payload: getWordsByCount(arrayOfWords).slice(0, 10) });
-    setWordLists({ type: 'LONGEST_WORDS', payload: getLongestThirty(arrayOfWords).slice(0, 10) });
-    setWordLists({
+    dispatch({ type: 'COMMON_WORDS', payload: getWordsByCount(arrayOfWords).slice(0, 10) });
+    dispatch({ type: 'LONGEST_WORDS', payload: getLongestThirty(arrayOfWords).slice(0, 10) });
+    dispatch({
       type: 'ACTION_WORDS',
       payload: (function getINGWords() {
         const words = ingWords(sentencesString);
@@ -63,14 +50,10 @@ const CommonWordsProvider = (props) => {
     });
   };
 
-  // set list of word-list names (common words, longest words, etc...)
-  useEffect(() => {
-    setWordListNames(Object.keys(wordLists));
-  }, [wordLists]);
-
   // MAKE common words after display-text gets added to context
   useEffect(() => {
     if (displayText) {
+      console.log('A uE')
       makeCommonWords(displayText);
     }
   }, [displayText]);
@@ -78,12 +61,13 @@ const CommonWordsProvider = (props) => {
   // AUTO-SELECT a word-list 'onLoad'
   useEffect(() => {
     if (displayText && wordLists && !wordListFocus) {
+      console.log('B uE')
       const lists = Object.keys(wordLists);
       selectWordList(lists[0]);
+    
     }
   }, [displayText, wordListFocus, wordLists]);
 
-  // last-minute list-sorting
   return (
     <Provider value={{
       commonWords,
@@ -95,7 +79,7 @@ const CommonWordsProvider = (props) => {
       sortByWordAlpha,
       wordLists,
       wordListFocus,
-      wordListNames,
+      wordListNames: Object.keys(wordLists)
     }}
     >
       {props.children}
