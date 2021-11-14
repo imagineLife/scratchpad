@@ -70,13 +70,23 @@ describe('<Area/>', () => {
     })
 
     describe('calls callback fns', () => {
-      it('calls moused onMouseOver', () => {
-        areaSvg.simulate('mouseover');
-        expect(mousedFn).toHaveBeenCalledTimes(1);
+      describe('calls moused', () => {
+        it('onMouseOver', () => {
+          areaSvg.simulate('mouseover');
+          expect(mousedFn).toHaveBeenCalledTimes(1);
+        })
+        it('again onMouseMove', () => {
+          areaSvg.simulate('mousemove');
+          expect(mousedFn).toHaveBeenCalledTimes(2);
+        })
       })
-      it('calls moused again onMouseMove', () => {
-        areaSvg.simulate('mousemove');
-        expect(mousedFn).toHaveBeenCalledTimes(2);
+      describe('calls moused THEN calls stoppedMoving cb', () => {
+        it('onMouseOver then onMouseOut', () => {
+          areaSvg.simulate('mouseover');
+          expect(mousedFn).toHaveBeenCalledTimes(3);
+          areaSvg.simulate('mouseout');
+          expect(stopMovingFn).toHaveBeenCalledTimes(1);
+        })
       })
     })
   })
