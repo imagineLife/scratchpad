@@ -5,11 +5,13 @@ import * as d3Shape from 'd3-shape';
 import { TextAreaContext } from '../../Contexts/TextArea';
 import { AreaContext } from './State/Context';
 
+import { getSelectedSentences } from './helpers';
+
 const Area = () => {
   const {
     sentences,
     selectedAreaArr,
-    maxWordsPerSentence,
+    maxWordsPerSentence
   } = useContext(TextAreaContext);
 
   const {
@@ -21,7 +23,22 @@ const Area = () => {
     showLine,
     stoppedMoving
   } = useContext(AreaContext);
-
+  // console.log('%c Area', 'background-color: blue; color: white;')
+  
+  
+  // console.log({sentences,
+  //   selectedAreaArr,
+  //   maxWordsPerSentence})
+    // console.log({dims,
+    // hoverLine,
+    // curSentence,
+    // moused,
+    // offsetSentenceNumber,
+    // showLine,
+    // stoppedMoving})
+    // console.log('%c ---', 'background-color: blue; color: white;')
+    
+  
   // sanity checking
   if (!sentences || !selectedAreaArr || !dims) {
     return <p>loading area...</p>;
@@ -34,12 +51,7 @@ const Area = () => {
     .range([0, dims.width]);
 
   // calc currently selected sentences
-  const selectedSentences = sentences.reduce((acc, curVal, curIdx) => {
-    if (curIdx >= selectedAreaArr[0] && curIdx <= selectedAreaArr[1]) {
-      return acc.concat(curVal);
-    }
-    return acc;
-  }, []);
+  const selectedSentences = getSelectedSentences({sentences, selectedAreaArr});
 
   const yScale = scale.scaleLinear()
     .domain([0, maxWordsPerSentence])// arr.max(selectedSentences, d => d.wordCount)])
@@ -50,7 +62,7 @@ const Area = () => {
     .x((d, i) => xScale(i))
     .y0(yScale(0))
     .y1((d) => yScale(d.wordCount))
-    .curve(d3Shape.curveCatmullRom)
+    .curve(d3Shape.curveCatmullRom);
 
   // calc path
   const pathD = areaFn(selectedSentences);
@@ -101,7 +113,6 @@ const Area = () => {
         style={dims}
         className="area-svg"
         onMouseOver={(d) => moused(d, xScale)}
-        onFocus={(d) => moused(d, xScale)}
         onMouseMove={(d) => moused(d, xScale)}
         onMouseOut={stoppedMoving}
         onBlur={stoppedMoving}
