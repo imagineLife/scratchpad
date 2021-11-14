@@ -7,23 +7,10 @@ import Area from './Area';
 import { TextAreaContext } from '../../Contexts/TextArea';
 import { AreaContext } from './State/Context';
 
-/*
-    const {
-    sentences,
-    selectedAreaArr,
-    maxWordsPerSentence
-  } = useContext(TextAreaContext);
+// mockData
+import mockTextAreaContext from './mockData/text-area-state.json';
+import mockAreaContext from './mockData/area-context-state.json';
 
-  const {
-    dims,
-    hoverLine,
-    curSentence,
-    moused,
-    offsetSentenceNumber,
-    showLine,
-    stoppedMoving
-  } = useContext(AreaContext);
-*/
 describe('<Area/>', () => {
   const mousedFn = jest.fn()
   const textAreaState = {
@@ -56,4 +43,41 @@ describe('<Area/>', () => {
   it('shows "loading area..." with no data', () => {
     expect(compNoProps.find('p').text()).toBe('loading area...')
   });
+
+  describe('renders with mock state', () => {
+    const mousedFn = jest.fn()
+    const stopMovingFn = jest.fn()
+    
+    const areaWithProps = mount(
+    <TextAreaContext.Provider value={mockTextAreaContext}>
+        <AreaContext.Provider value={{
+          ...mockAreaContext, 
+          moused: mousedFn, 
+          stoppedMoving: stopMovingFn
+        }}>
+          <Area />
+        </AreaContext.Provider>
+      </TextAreaContext.Provider>
+    );
+
+    const areaSvg = areaWithProps.find('svg#area')
+
+    it('renders area svg', () => {
+      expect(areaSvg.length).toBe(1)
+    })
+    it('renders a path inside the svg', () => {
+      expect(areaSvg.find('path').length).toBe(1)
+    })
+
+    describe('calls callback fns', () => {
+      it('calls moused onMouseOver', () => {
+        areaSvg.simulate('mouseover');
+        expect(mousedFn).toHaveBeenCalledTimes(1);
+      })
+      it('calls moused again onMouseMove', () => {
+        areaSvg.simulate('mousemove');
+        expect(mousedFn).toHaveBeenCalledTimes(2);
+      })
+    })
+  })
 });
