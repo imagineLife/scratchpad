@@ -23,22 +23,7 @@ const Area = () => {
     showLine,
     stoppedMoving
   } = useContext(AreaContext);
-  // console.log('%c Area', 'background-color: blue; color: white;')
-  
-  
-  // console.log({sentences,
-  //   selectedAreaArr,
-  //   maxWordsPerSentence})
-    // console.log({dims,
-    // hoverLine,
-    // curSentence,
-    // moused,
-    // offsetSentenceNumber,
-    // showLine,
-    // stoppedMoving})
-    // console.log('%c ---', 'background-color: blue; color: white;')
-    
-  
+
   // sanity checking
   if (!sentences || !selectedAreaArr || !dims) {
     return <p>loading area...</p>;
