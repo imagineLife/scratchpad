@@ -15,17 +15,20 @@ describe('CommonWords Context', () => {
   
   const ChildBox = () => {
     const { commonWords, wordLists, ...ctxVals } = useContext(WordListContext);
-    console.log('wordLists');
-    console.log(wordLists);
+    // console.log('CHILD BOX : wordLists');
+    // console.log(wordLists);
+    // console.log('commonWords')
+    // console.log(commonWords)
+    
     return (<div id="child">
       <section id="common-words">
-        {commonWords.map((d,idx) => <p key={`common-word-${idx}`} className="common-word">{d}</p>)}
+        {commonWords.map((d,idx) => <p key={`common-word-${idx}`} className="common-word">{d.word}</p>)}
       </section>
       <section id="word-lists">
         {Object.keys(wordLists).map(wordListName => (
           <div className="word-list" id={wordListName} key={wordListName}>
             {wordLists[wordListName].map((wlData, wlDataIdx) => (
-              <p key={`${wordListName}-${wlData}`}>{wlDataIdx}</p>
+              <p key={`${wordListName}-${wlDataIdx}`}>{wlDataIdx}</p>
             ))}
           </div>
         ))}
@@ -41,6 +44,8 @@ describe('CommonWords Context', () => {
         </CommonWordsProvider>
       </TextAreaContext.Provider>
     );
+    waitForComponentToPaint(emptyComponent);
+
     it('no common-words',() => {
       expect(emptyComponent.find('p.common-word').length).toBe(0);
     })
@@ -52,11 +57,36 @@ describe('CommonWords Context', () => {
       })
 
       describe('renders no words in each wordlist', () => {
-        console.log('Here?!')
-        
-        console.log(renderedWordLists.debug())
-        expect(firstWordList.length).toBe(3)
+        // <div className="word-list" id="Action Words" />
+        it('empty "Common Words" div', () => {
+          let divStr = '<div className="word-list" id="Common Words" />'
+          expect(renderedWordLists.at(0).debug()).toBe(divStr)
+        })
+        it('empty "Longest Words" div', () => {
+          let divStr = '<div className="word-list" id="Longest Words" />'
+          expect(renderedWordLists.at(1).debug()).toBe(divStr)
+        })
+        it('empty "Action Words" div', () => {
+          let divStr = '<div className="word-list" id="Action Words" />'
+          expect(renderedWordLists.at(2).debug()).toBe(divStr)
+        })
       })
+    })
+  })
+  describe('with displayText', () => {
+    const thisInstance = mount(
+      <TextAreaContext.Provider value={{ displayText: mockDisplayText }}>
+        <CommonWordsProvider>
+          <ChildBox />
+        </CommonWordsProvider>
+      </TextAreaContext.Provider>
+    );
+    waitForComponentToPaint(thisInstance);
+    it('renders 10 common words', () => {
+      thisInstance.setProps({})
+      waitForComponentToPaint(thisInstance);
+      let commonWordsPs = thisInstance.find('p.common-word')
+      expect(commonWordsPs.length).toBe(10)
     })
   })
 })
