@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Area Context matches snapshot 1`] = `
+<ChildBox>
+  <div
+    id="child-box"
+  >
+    <p
+      id="selectedAreaArr"
+    >
+      [0,20]
+    </p>
+  </div>
+</ChildBox>
+`;
