@@ -15,10 +15,6 @@ describe('CommonWords Context', () => {
   
   const ChildBox = () => {
     const { commonWords, wordLists, ...ctxVals } = useContext(WordListContext);
-    // console.log('CHILD BOX : wordLists');
-    // console.log(wordLists);
-    // console.log('commonWords')
-    // console.log(commonWords)
     
     return (<div id="child">
       <section id="common-words">
