@@ -1,12 +1,10 @@
 import React from 'react';
 import './index.css';
-import { TextAreaContext } from '../../Contexts/TextArea';
 import { WordListContext } from '../../Contexts/CommonWords';
 import ListItem from '../ListItem';
 
 const CommonWords = () => {
   const {
-    makeCommonWords,
     wordLists,
     wordListNames,
     selectWordList,
@@ -16,8 +14,7 @@ const CommonWords = () => {
     wordListFocus,
   } = React.useContext(WordListContext);
 
-  const selectedWordList = wordLists && wordLists[wordListFocus] || [];
-
+  const selectedWordList = wordLists && wordListFocus ? wordLists[wordListFocus] : [];
   const sortedWordList = selectedWordList.sort(sortByWordAlpha);
 
   return (
@@ -53,9 +50,9 @@ const CommonWords = () => {
           {wordListFocus && (
             <ul id="focus-word-list">
               {sortedWordList && sortedWordList.map((l, idx) => {
-              	const thisWord = wordListFocus === 'Common Words' ? l.word : l;
-  					    	return (
-    <ListItem
+                const thisWord = wordListFocus === 'Common Words' ? l.word : l;
+                return (
+                  <ListItem
                     key={`list-res-${l}-${idx}`}
                     className="focus-word-option"
                     selectedCondition={selectedWord === thisWord}
@@ -68,8 +65,8 @@ const CommonWords = () => {
                     }}
                     txt={thisWord}
                   />
-  						    );
-  					    })}
+                );
+              })}
             </ul>
           )}
         </section>
