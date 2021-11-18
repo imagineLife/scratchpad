@@ -11,7 +11,7 @@ import Circles from '../../components/Circles/State/ContextWrapper';
 import ThemeBox from '../../components/ThemeBox';
 import ImageBox from '../../components/ImageBox';
 
-const moved = () => console.log('moved');
+// const moved = () => console.log('moved');
 
 const Together = () => {
   const [areaBoxRef, { width: areaBoxWidth, height: areaBoxHeight }] = useDimensions();
@@ -42,7 +42,7 @@ const Together = () => {
         <div id="area-box" ref={areaBoxRef}>
           <SelectableArea
             dims={{ width: areaBoxWidth, height: areaBoxHeight }}
-            onMove={moved}
+            // onMove={moved}
           />
         </div>
         
