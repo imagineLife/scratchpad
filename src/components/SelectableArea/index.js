@@ -34,7 +34,7 @@ const SelectableArea = ({ onMove, dims }) => {
     // dispatch Context-updater
     textAreaDispatch({ type: 'UPDATE_DISPLAY_TEXT_FROM_AREA', payload: [scaledBegin, scaledEnd] });
 
-    onMove([scaledBegin, scaledEnd]);
+    // onMove([scaledBegin, scaledEnd]);
   };
 
   /*
