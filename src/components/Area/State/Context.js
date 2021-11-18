@@ -27,6 +27,7 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
 
   // mousedOver && mouseMove
   const moused = (d, xScale) => {
+    
     const areaSVG = document.getElementsByClassName('area-svg')[0];
 
     // $FlowSVGBug
@@ -53,7 +54,7 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
       }
     }
   };
-
+  
   return (
     <Provider value={{
       dims,
@@ -65,7 +66,7 @@ const AreaProvider = ({ children, dims, hoverLine }) => {
       sentenceNumber,
       showLine,
       stoppedMoving,
-      xOffset,
+      xOffset
     }}
     >
       {children}
