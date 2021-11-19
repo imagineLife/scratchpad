@@ -11,7 +11,6 @@ const xprsStatic = express.static(staticPath);
 
 app.use(xprsStatic);
 
-// eslint-disable-next-line flowtype/require-parameter-type
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
