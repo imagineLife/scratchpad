@@ -1,18 +1,18 @@
-/*
-  To serve the app in production
-*/
-
+// Production dependencies
 const express = require('express');
 const path = require('path');
+const compress = require('compression');
+
+// server config
 const app = express();
-const targetPort = process.env.PORT || 9006;
-let staticPath = path.join(__dirname, 'dist')
+const PORT = process.env.PORT || 9006;
+const staticPath = path.join(__dirname, 'dist')
 const xprsStatic = express.static(staticPath);
 
+app.use(compress()); 
 app.use(xprsStatic);
 
-app.use(function(req, res) {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+app.listen(PORT, () => {
+  console.log(`Application listening on ${PORT}`);
+  console.table({ staticPath })
 });
-app.listen(targetPort);
-console.log(`Application listening on ${targetPort}`);
