@@ -53,7 +53,6 @@ const CommonWordsProvider = (props) => {
   // MAKE common words after display-text gets added to context
   useEffect(() => {
     if (displayText) {
-      console.log('A uE')
       makeCommonWords(displayText);
     }
   }, [displayText]);
@@ -61,7 +60,6 @@ const CommonWordsProvider = (props) => {
   // AUTO-SELECT a word-list 'onLoad'
   useEffect(() => {
     if (displayText && wordLists && !wordListFocus) {
-      console.log('B uE')
       const lists = Object.keys(wordLists);
       selectWordList(lists[0]);
     
